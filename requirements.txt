@@ -1,0 +1,2 @@
+# -r packages/packages/deepfake_detection/requirements.txt
+# -r packages/notebooks/deepfake_detection/requirements.txt
