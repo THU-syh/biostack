@@ -1,1 +1,3 @@
 cookiecutter
+tensorflow
+torch
