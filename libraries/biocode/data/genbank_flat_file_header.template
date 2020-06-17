@@ -1,0 +1,13 @@
+LOCUS       {{ locus }}     {{ molecule_size }} bp    {{ molecule_type }}             {{ division }}       {{ modification_date }}
+DEFINITION  {{ definition }}
+ACCESSION   {{ accession }}
+VERSION     {{ version }}
+KEYWORDS    .
+SOURCE      {{ source }}
+  ORGANISM  {{ organism }}
+            {{ lineage }}.
+REFERENCE   1  (bases 1 to {{ molecule_size }})
+  AUTHORS   .
+  TITLE     .
+  JOURNAL   .
+  PUBMED    .
