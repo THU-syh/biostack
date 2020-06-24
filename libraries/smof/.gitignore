@@ -1,0 +1,12 @@
+.ropeproject/
+*.pdf
+*.faa
+*.fasta
+*.fa
+*.fna
+*.gff
+*.gff3
+build/
+dist/
+smof.egg-info/
+__pycache__/
