@@ -1,0 +1,14 @@
+numpy
+scipy
+matplotlib
+seaborn
+pandas
+statsmodels
+sympy
+ipywidgets
+detecta
+optcutfreq
+psd2
+pyversions
+tnorma
+jupyter_contrib_nbextensions
