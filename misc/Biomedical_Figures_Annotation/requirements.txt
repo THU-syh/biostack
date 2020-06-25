@@ -1,6 +1,6 @@
 absl-py==0.4.1
 astor==0.7.1
-bleach==1.5.0
+bleach==3.1.4
 cloudpickle==0.5.3
 cycler==0.10.0
 dask==0.18.0
@@ -35,8 +35,8 @@ sip==4.19.8
 six==1.11.0
 sklearn==0.0
 tensorboard==1.10.0
-tensorflow-gpu==1.4.0
+tensorflow-gpu==1.15.2
 tensorflow-tensorboard==0.4.0
 termcolor==1.1.0
 toolz==0.9.0
-Werkzeug==0.14.1
+Werkzeug==0.15.3
