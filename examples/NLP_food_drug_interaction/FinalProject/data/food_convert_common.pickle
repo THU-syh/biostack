@@ -1,0 +1,3630 @@
+(dp0
+S'Oregon yampah'
+p1
+S'Perideridia oregana'
+p2
+sS'Okra'
+p3
+S'Abelmoschus esculentus'
+p4
+sS'Snail'
+p5
+S'Gastropoda'
+p6
+sS'Black mulberry'
+p7
+S'Morus nigra'
+p8
+sS'Avocado'
+p9
+S'Persea americana'
+p10
+sS'Parsley'
+p11
+S'Petroselinum crispum'
+p12
+sS'Elderberry'
+p13
+S'Sambucus'
+p14
+sS'Sugar'
+p15
+S'NULL'
+p16
+sS'Sweet bay'
+p17
+S'Laurus nobilis'
+p18
+sS'Common bean'
+p19
+S'Phaseolus vulgaris'
+p20
+sS'Fig'
+p21
+S'Ficus carica'
+p22
+sS'Lard'
+p23
+S'NULL'
+p24
+sS'Common mushroom'
+p25
+S'Agaricus bisporus'
+p26
+sS'Gin'
+p27
+S'NULL'
+p28
+sS'Prickly pear'
+p29
+S'Opuntia'
+p30
+sS'Rice bread'
+p31
+S'NULL'
+p32
+sS'Norway pout'
+p33
+S'Trisopterus esmarkii'
+p34
+sS'Turbot'
+p35
+S'Scophthalmus maximus'
+p36
+sS'Cloves'
+p37
+S'Syzygium aromaticum'
+p38
+sS'Vaccinium (Blueberry, Cranberry, Huckleberry)'
+p39
+S'Vaccinium'
+p40
+sS'Walrus'
+p41
+S'Odobenus rosmarus'
+p42
+sS'Tarragon'
+p43
+S'Artemisia dracunculus'
+p44
+sS'Kohlrabi'
+p45
+S'Brassica oleracea var. gongylodes'
+p46
+sS'Other cereal product'
+p47
+S'NULL'
+p48
+sS'Cardamom'
+p49
+S'Elettaria cardamomum'
+p50
+sS'Coffee substitute'
+p51
+S'NULL'
+p52
+sS'Polar bear'
+p53
+S'Ursus maritimus'
+p54
+sS'Stew'
+p55
+S'NULL'
+p56
+sS'Cream substitute'
+p57
+S'NULL'
+p58
+sS'Sweet basil'
+p59
+S'Ocimum basilicum'
+p60
+sS'White sucker'
+p61
+S'Catostomus commersonii'
+p62
+sS'Cichlidae (Tilapia)'
+p63
+S'Cichlidae'
+p64
+sS'Coriander'
+p65
+S'Coriandrum sativum'
+p66
+sS'Greenthread tea'
+p67
+S'Thelesperma'
+p68
+sS'Bluefish'
+p69
+S'Pomatomus saltatrix'
+p70
+sS'European anchovy'
+p71
+S'Engraulis encrasicolus'
+p72
+sS'Burdock'
+p73
+S'Arctium lappa'
+p74
+sS'Apricot'
+p75
+S'Prunus armeniaca'
+p76
+sS'Carp bream'
+p77
+S'Abramis brama'
+p78
+sS'Tostada'
+p79
+S'NULL'
+p80
+sS'Haddock'
+p81
+S'Melanogrammus aeglefinus'
+p82
+sS'Bison'
+p83
+S'Bison bison'
+p84
+sS'Small-leaf linden'
+p85
+S'Tilia cordata'
+p86
+sS'Butter substitute'
+p87
+S'NULL'
+p88
+sS'Sorghum'
+p89
+S'Sorghum bicolor'
+p90
+sS'Multigrain bread'
+p91
+S'NULL'
+p92
+sS'Squashberry'
+p93
+S'Viburnum edule'
+p94
+sS'Skipjack tuna'
+p95
+S'Katsuwonus pelamis'
+p96
+sS'Channel catfish'
+p97
+S'Ictalurus punctatus'
+p98
+sS'Kale'
+p99
+S'Brassica napus var. pabularia'
+p100
+sS'Sheefish'
+p101
+S'Stenodus leucichthys'
+p102
+sS'Cocoa butter'
+p103
+S'NULL'
+p104
+sS'Animal foods'
+p105
+S'NULL'
+p106
+sS'Annual wild rice'
+p107
+S'Zizania aquatica'
+p108
+sS'Nutritional drink'
+p109
+S'NULL'
+p110
+sS'Fennel'
+p111
+S'Foeniculum vulgare'
+p112
+sS'Garfish'
+p113
+S'Belone belone'
+p114
+sS'Pili nut'
+p115
+S'Canarium ovatum'
+p116
+sS'Turkey'
+p117
+S'Meleagris gallopavo'
+p118
+sS'Pikeperch'
+p119
+S'Sander lucioperca'
+p120
+sS'Northern bluefin tuna'
+p121
+S'Thunnus thynnus'
+p122
+sS'Chinese cinnamon'
+p123
+S'Cinnamomum aromaticum'
+p124
+sS'Shortening'
+p125
+S'NULL'
+p126
+sS'Chicory'
+p127
+S'Cichorium intybus'
+p128
+sS'Bowhead whale'
+p129
+S'Balaena mysticetus'
+p130
+sS'Eastern oyster'
+p131
+S'Crassostrea virginica'
+p132
+sS'Alaska pollock'
+p133
+S'Theragra chalcogramma'
+p134
+sS'Rice'
+p135
+S'Oryza sativa'
+p136
+sS'Sweet orange'
+p137
+S'Citrus sinensis'
+p138
+sS'Toffee'
+p139
+S'NULL'
+p140
+sS'Other soy product'
+p141
+S'NULL'
+p142
+sS'Lemon balm'
+p143
+S'Melissa officinalis'
+p144
+sS'Spread'
+p145
+S'NULL'
+p146
+sS'Beverages'
+p147
+S'NULL'
+p148
+sS'Snapper'
+p149
+S'Lutjanidae'
+p150
+sS'Red algae'
+p151
+S'Rhodophyta'
+p152
+sS'Pepper (C. frutescens)'
+p153
+S'Capsicum annuum var. annuum'
+p154
+sS'Sweet cherry'
+p155
+S'Prunus avium'
+p156
+sS'Other snack food'
+p157
+S'NULL'
+p158
+sS'Yardlong bean'
+p159
+S'Vigna unguiculata ssp. sesquipedalis'
+p160
+sS'Japanese chestnut'
+p161
+S'Castanea crenata'
+p162
+sS'Soy milk'
+p163
+S'NULL'
+p164
+sS'Jostaberry'
+p165
+S'Ribes \xc3\x97 nidigrolaria'
+p166
+sS'Common grape'
+p167
+S'Vitis vinifera'
+p168
+sS'Skunk currant'
+p169
+S'Ribes glandulosum'
+p170
+sS'Biscuit'
+p171
+S'NULL'
+p172
+sS'Alaska blueberry'
+p173
+S'Vaccinium alaskaense'
+p174
+sS'Mountain hare'
+p175
+S'Lepus timidus'
+p176
+sS'Ostrich'
+p177
+S'Struthio camelus'
+p178
+sS'Fox grape'
+p179
+S'Vitis labrusca'
+p180
+sS'Meringue'
+p181
+S'NULL'
+p182
+sS'Mung bean'
+p183
+S'Vigna radiata'
+p184
+sS'Cocoa liquor'
+p185
+S'NULL'
+p186
+sS'Scrapple'
+p187
+S'NULL'
+p188
+sS'Winter savory'
+p189
+S'Satureja montana'
+p190
+sS'Bivalvia (Clam, Mussel, Oyster)'
+p191
+S'Bivalvia'
+p192
+sS'Chocolate spread'
+p193
+S'NULL'
+p194
+sS'Other fish product'
+p195
+S'NULL'
+p196
+sS'Mixed nuts'
+p197
+S'NULL'
+p198
+sS'Sour cherry'
+p199
+S'Prunus cerasus'
+p200
+sS'Lotus'
+p201
+S'Nelumbo'
+p202
+sS'Piki bread'
+p203
+S'NULL'
+p204
+sS'Liquor'
+p205
+S'NULL'
+p206
+sS'Almond'
+p207
+S'Prunus dulcis'
+p208
+sS'Cupua\xc3\xa7u'
+p209
+S'Theobroma grandiflorum'
+p210
+sS'Ginger'
+p211
+S'Zingiber officinale'
+p212
+sS'Crisp bread'
+p213
+S'NULL'
+p214
+sS'Lettuce'
+p215
+S'Lactuca sativa'
+p216
+sS'Cherry tomato'
+p217
+S'Solanum lycopersicum var. cerasiforme'
+p218
+sS'Chum salmon'
+p219
+S'Oncorhynchus keta'
+p220
+sS'Pastry'
+p221
+S'NULL'
+p222
+sS'Garden tomato (var.)'
+p223
+S'Solanum lycopersicum var. lycopersicum'
+p224
+sS'Rocket salad (ssp.)'
+p225
+S'Eruca vesicaria ssp. sativa'
+p226
+sS'Passion fruit'
+p227
+S'Passiflora edulis'
+p228
+sS'Common beet'
+p229
+S'Beta vulgaris'
+p230
+sS'Florida pompano'
+p231
+S'Trachinotus carolinus'
+p232
+sS'Spinach'
+p233
+S'Spinacia oleracea'
+p234
+sS'Lima bean'
+p235
+S'Phaseolus lunatus'
+p236
+sS'Snack bar'
+p237
+S'NULL'
+p238
+sS'Pepper (C. baccatum)'
+p239
+S'Capsicum baccatum var. baccatum'
+p240
+sS'Amaranth'
+p241
+S'Amaranthus'
+p242
+sS'Blackcurrant'
+p243
+S'Ribes nigrum'
+p244
+sS'Quince'
+p245
+S'Cydonia oblonga'
+p246
+sS'Whey'
+p247
+S'NULL'
+p248
+sS'Pleuronectidae (Dab, Halibut, Plaice)'
+p249
+S'Pleuronectidae'
+p250
+sS'Chicory roots'
+p251
+S'Cichorium intybus var. sativum'
+p252
+sS'Pacific jack mackerel'
+p253
+S'Trachurus symmetricus'
+p254
+sS'Papaya'
+p255
+S'Carica papaya'
+p256
+sS'Green turtle'
+p257
+S'Chelonia mydas'
+p258
+sS'Garden cress'
+p259
+S'Lepidium sativum'
+p260
+sS'Corn'
+p261
+S'Zea mays'
+p262
+sS'Pear'
+p263
+S'Pyrus communis'
+p264
+sS'Unclassified food or beverage'
+p265
+S'NULL'
+p266
+sS'Yellow zucchini'
+p267
+S'Cucurbita pepo var. cylindrica'
+p268
+sS'Arrowroot'
+p269
+S'Maranta arundinacea'
+p270
+sS'Milk (Human)'
+p271
+S'NULL'
+p272
+sS'Steller sea lion'
+p273
+S'Eumetopias jubatus'
+p274
+sS'Canada blueberry'
+p275
+S'Vaccinium myrtilloides'
+p276
+sS'Smelt'
+p277
+S'Osmeridae'
+p278
+sS'Nopal'
+p279
+S'Opuntia cochenillifera'
+p280
+sS'Jackfruit'
+p281
+S'Artocarpus heterophyllus'
+p282
+sS'Black cabbage'
+p283
+S'Brassica oleracea var. viridis'
+p284
+sS'Acerola'
+p285
+S'Malpighia emarginata'
+p286
+sS'Soursop'
+p287
+S'Annona muricata'
+p288
+sS'Opium poppy'
+p289
+S'Papaver somniferum'
+p290
+sS'Salmonidae (Salmon, Trout)'
+p291
+S'Salmonidae'
+p292
+sS'Common hazelnut'
+p293
+S'Corylus avellana'
+p294
+sS'Other bread'
+p295
+S'NULL'
+p296
+sS'Pie filling'
+p297
+S'NULL'
+p298
+sS'Chinese broccoli'
+p299
+S'Brassica alboglabra'
+p300
+sS'Atlantic pollock'
+p301
+S'Pollachius pollachius'
+p302
+sS'Cheese'
+p303
+S'NULL'
+p304
+sS'Mugwort'
+p305
+S'Artemisia vulgaris'
+p306
+sS'Energy drink'
+p307
+S'NULL'
+p308
+sS'Drag\xc3\xa9e'
+p309
+S'NULL'
+p310
+sS'Chervil'
+p311
+S'Anthriscus cerefolium'
+p312
+sS'Milkfish'
+p313
+S'Chanos chanos'
+p314
+sS'Tofu'
+p315
+S'NULL'
+p316
+sS'Atlantic herring'
+p317
+S'Clupea harengus harengus'
+p318
+sS'Oat'
+p319
+S'Avena sativa'
+p320
+sS'Pulses'
+p321
+S'NULL'
+p322
+sS'Striped mullet'
+p323
+S'Mugil cephalus'
+p324
+sS'Wax apple'
+p325
+S'Eugenia'
+p326
+sS'Horseradish tree'
+p327
+S'Moringa oleifera'
+p328
+sS'Pumpkinseed sunfish'
+p329
+S'Lepomis gibbosus'
+p330
+sS'Common ling'
+p331
+S'Molva molva'
+p332
+sS'Orange roughy'
+p333
+S'Hoplostethus atlanticus'
+p334
+sS'Sacred lotus'
+p335
+S'Nelumbo nucifera'
+p336
+sS'Moth bean'
+p337
+S'Vigna aconitifolia'
+p338
+sS'Rowal'
+p339
+S'Pangium edule'
+p340
+sS'Giant butterbur'
+p341
+S'Petasites japonicus'
+p342
+sS'Fudge'
+p343
+S'NULL'
+p344
+sS'Tunicate'
+p345
+S'Tunicata'
+p346
+sS'Banana'
+p347
+S'Musa acuminata'
+p348
+sS'Pizza'
+p349
+S'NULL'
+p350
+sS'Mushrooms'
+p351
+S'NULL'
+p352
+sS'American cranberry'
+p353
+S'Vaccinium macrocarpon'
+p354
+sS'Processed cheese'
+p355
+S'NULL'
+p356
+sS'Mustard'
+p357
+S'NULL'
+p358
+sS'Cauliflower'
+p359
+S'Brassica oleracea var. botrytis'
+p360
+sS'Sheep (Mutton, Lamb)'
+p361
+S'Ovis aries'
+p362
+sS'Wild rice'
+p363
+S'Zizania'
+p364
+sS'Cloud ear fungus'
+p365
+S'Auricularia polytricha'
+p366
+sS'Brown bear'
+p367
+S'Ursus arctos'
+p368
+sS'Acorn'
+p369
+S'Quercus'
+p370
+sS'Hazelnut'
+p371
+S'Corylus'
+p372
+sS'Cabbage'
+p373
+S'Brassica oleracea var. capitata'
+p374
+sS'Veggie burger'
+p375
+S'NULL'
+p376
+sS'Pitanga'
+p377
+S'Eugenia uniflora'
+p378
+sS'Swiss chard'
+p379
+S'Beta vulgaris ssp. cicla'
+p380
+sS'Beluga whale'
+p381
+S'Delphinapterus leucas'
+p382
+sS'Spiny lobster'
+p383
+S'Palinuridae'
+p384
+sS'Scup'
+p385
+S'Stenotomus chrysops'
+p386
+sS'Fruit salad'
+p387
+S'NULL'
+p388
+sS'Italian sweet red pepper'
+p389
+S'Capsicum annuum'
+p390
+sS'Prairie turnip'
+p391
+S'Pediomelum esculentum'
+p392
+sS'Baby food'
+p393
+S'NULL'
+p394
+sS'Pie crust'
+p395
+S'NULL'
+p396
+sS'True frog'
+p397
+S'Ranidae'
+p398
+sS'Moose'
+p399
+S'Alces alces'
+p400
+sS'Peppermint'
+p401
+S'Mentha X piperita'
+p402
+sS'Sago palm'
+p403
+S'Metroxylon sagu'
+p404
+sS'Sockeye salmon'
+p405
+S'Oncorhynchus nerka'
+p406
+sS'Persimmon'
+p407
+S'Diospyros'
+p408
+sS'Milkshake'
+p409
+S'NULL'
+p410
+sS'Enokitake'
+p411
+S'Flammulina velutipes'
+p412
+sS'Cake'
+p413
+S'NULL'
+p414
+sS'Egg substitute'
+p415
+S'NULL'
+p416
+sS'Radish (var.)'
+p417
+S'Raphanus sativus var. sativus'
+p418
+sS'Dill'
+p419
+S'Anethum graveolens'
+p420
+sS'Ohelo berry'
+p421
+S'Vaccinium reticulatum'
+p422
+sS'Mule deer'
+p423
+S'Odocoileus'
+p424
+sS'Apple'
+p425
+S'Malus pumila'
+p426
+sS'Breadfruit'
+p427
+S'Artocarpus altilis'
+p428
+sS'Mandarin orange (Clementine, Tangerine)'
+p429
+S'Citrus reticulata'
+p430
+sS'Ginseng'
+p431
+S'Panax'
+p432
+sS'Deer'
+p433
+S'Cervidae'
+p434
+sS'Whelk'
+p435
+S'Buccinidae'
+p436
+sS'Chinese water chestnut'
+p437
+S'Eleocharis dulcis'
+p438
+sS'Carrot'
+p439
+S'Daucus carota ssp. sativus'
+p440
+sS'Dough'
+p441
+S'NULL'
+p442
+sS'Chewing gum'
+p443
+S'NULL'
+p444
+sS'Percoidei (Bass and others)'
+p445
+S'Percoidei'
+p446
+sS'Scombridae (Bonito, Mackerel, Tuna)'
+p447
+S'Scombridae'
+p448
+sS'Corn salad'
+p449
+S'Valerianella locusta'
+p450
+sS'Horse'
+p451
+S'Equus caballus'
+p452
+sS'Hummus'
+p453
+S'NULL'
+p454
+sS'Empanada'
+p455
+S'NULL'
+p456
+sS'Lemon verbena'
+p457
+S'Aloysia triphylla'
+p458
+sS'Hedge mustard'
+p459
+S'Sisymbrium'
+p460
+sS'Parsnip'
+p461
+S'Pastinaca sativa'
+p462
+sS'Common carp'
+p463
+S'Cyprinus carpio'
+p464
+sS'European plum'
+p465
+S'Prunus domestica'
+p466
+sS'Bulgur'
+p467
+S'NULL'
+p468
+sS'Gefilte fish'
+p469
+S'NULL'
+p470
+sS'Bitter gourd'
+p471
+S'Momordica charantia'
+p472
+sS'Red king crab'
+p473
+S'Paralithodes camtschaticus'
+p474
+sS'Star fruit'
+p475
+S'Averrhoa carambola'
+p476
+sS'Wild boar'
+p477
+S'Sus scrofa'
+p478
+sS'Phyllo dough'
+p479
+S'NULL'
+p480
+sS'Sugar substitute'
+p481
+S'NULL'
+p482
+sS'Greater sturgeon'
+p483
+S'Acipenser'
+p484
+sS'Grapefruit/Pummelo hybrid'
+p485
+S'Citrus paradisi X Citrus maxima'
+p486
+sS'Rambutan'
+p487
+S'Nephelium lappaceum'
+p488
+sS'Northern pike'
+p489
+S'Esox lucius'
+p490
+sS'Sherry'
+p491
+S'NULL'
+p492
+sS'Enchilada'
+p493
+S'NULL'
+p494
+sS'Black crowberry'
+p495
+S'Empetrum nigrum'
+p496
+sS'Muskmelon'
+p497
+S'Cucumis melo'
+p498
+sS'Tronchuda cabbage'
+p499
+S'Brassica oleracea var. costata'
+p500
+sS'Calabash'
+p501
+S'Lagenaria siceraria'
+p502
+sS'Soy cream'
+p503
+S'NULL'
+p504
+sS'Broccoli'
+p505
+S'Brassica oleracea var. italica'
+p506
+sS'Natto'
+p507
+S'NULL'
+p508
+sS'Fruit preserve'
+p509
+S'NULL'
+p510
+sS'Atlantic halibut'
+p511
+S'Hippoglossus hippoglossus'
+p512
+sS'Cracker'
+p513
+S'NULL'
+p514
+sS'Soy bean'
+p515
+S'Glycine max'
+p516
+sS'Black radish'
+p517
+S'Raphanus sativus var. niger'
+p518
+sS'Pasta'
+p519
+S'NULL'
+p520
+sS'Pacific rockfish'
+p521
+S'Sebastes'
+p522
+sS'Hamburger'
+p523
+S'NULL'
+p524
+sS'Nachos'
+p525
+S'NULL'
+p526
+sS'Catjang pea'
+p527
+S'Vigna unguiculata ssp. cylindrica'
+p528
+sS'Soft drink'
+p529
+S'NULL'
+p530
+sS'Turmeric'
+p531
+S'Curcuma longa'
+p532
+sS'Coconut'
+p533
+S'Cocos nucifera'
+p534
+sS'Beefalo'
+p535
+S'Bos taurus X Bison bison'
+p536
+sS'Chayote'
+p537
+S'Sechium edule'
+p538
+sS'name'
+p539
+S'name_scientific'
+p540
+sS'Canola'
+p541
+S'NULL'
+p542
+sS'Irish moss'
+p543
+S'Chondrus crispus'
+p544
+sS'Groundcherry'
+p545
+S'Physalis'
+p546
+sS'Squid'
+p547
+S'Teuthida'
+p548
+sS'Adobo'
+p549
+S'NULL'
+p550
+sS'Pollock'
+p551
+S'Pollachius'
+p552
+sS'Chicory leaves'
+p553
+S'Cichorium intybus var. foliosum'
+p554
+sS'Malabar plum'
+p555
+S'Syzygium jambos'
+p556
+sS'Quail'
+p557
+S'Phasianidae'
+p558
+sS'Leather chiton'
+p559
+S'Katharina tunicata'
+p560
+sS'Chanterelle'
+p561
+S'Cantharellus cibarius'
+p562
+sS'Mamey sapote'
+p563
+S'Pouteria sapota'
+p564
+sS'Persian lime'
+p565
+S'Citrus latifolia'
+p566
+sS'Corn chip'
+p567
+S'NULL'
+p568
+sS'Spotted seal'
+p569
+S'Phoca largha'
+p570
+sS'Java plum'
+p571
+S'Syzygium cumini'
+p572
+sS'Gooseberry'
+p573
+S'Ribes uva-crispa'
+p574
+sS'Narrowleaf cattail'
+p575
+S'Typha angustifolia'
+p576
+sS'Sea-buckthornberry'
+p577
+S'Hippophae rhamnoides'
+p578
+sS'Painted comber'
+p579
+S'Serranus scriba'
+p580
+sS'Perciformes (Perch-like fishes)'
+p581
+S'Perciformes'
+p582
+sS'Dungeness crab'
+p583
+S'Cancer magister'
+p584
+sS'Vodka'
+p585
+S'NULL'
+p586
+sS'Pepper (C. pubescens)'
+p587
+S'Capsicum pubescens'
+p588
+sS'Couscous'
+p589
+S'NULL'
+p590
+sS'Pacific herring'
+p591
+S'Clupea pallasii'
+p592
+sS'Sunflower'
+p593
+S'Helianthus annuus'
+p594
+sS'Tartary buckwheat'
+p595
+S'Fagopyrum tataricum'
+p596
+sS'Wheat'
+p597
+S'Triticum'
+p598
+sS'Endive'
+p599
+S'Cichorium endivia'
+p600
+sS'Fruit gum'
+p601
+S'NULL'
+p602
+sS'Sauce'
+p603
+S'NULL'
+p604
+sS'Black walnut'
+p605
+S'Juglans nigra'
+p606
+sS'Wheat bread'
+p607
+S'NULL'
+p608
+sS'Molasses'
+p609
+S'NULL'
+p610
+sS'Watermelon'
+p611
+S'Citrullus lanatus'
+p612
+sS'Rabbit'
+p613
+S'Leporidae'
+p614
+sS'Fruit juice'
+p615
+S'NULL'
+p616
+sS'Blue whiting'
+p617
+S'Micromesistius poutassou'
+p618
+sS'Fireweed'
+p619
+S'Chamerion angustifolium'
+p620
+sS'Pot pie'
+p621
+S'NULL'
+p622
+sS'Adzuki bean'
+p623
+S'Vigna angularis'
+p624
+sS'Ostrich fern'
+p625
+S'Matteuccia struthiopteris'
+p626
+sS'Domestic goat'
+p627
+S'Capra aegagrus hircus'
+p628
+sS'Lovage'
+p629
+S'Levisticum officinale'
+p630
+sS'Burrito'
+p631
+S'NULL'
+p632
+sS'Gadiformes (Cod, Hake)'
+p633
+S'Gadiformes'
+p634
+sS'Green bean'
+p635
+S'Phaseolus vulgaris'
+p636
+sS'Pummelo'
+p637
+S'Citrus maxima'
+p638
+sS'Medlar'
+p639
+S'Mespilus germanica'
+p640
+sS'Other fruit product'
+p641
+S'NULL'
+p642
+sS'Pistachio'
+p643
+S'Pistacia vera'
+p644
+sS'Oat bread'
+p645
+S'NULL'
+p646
+sS'Nutmeg'
+p647
+S'Myristica fragrans'
+p648
+sS'Chocolate mousse'
+p649
+S'NULL'
+p650
+sS'Italian oregano'
+p651
+S'Origanum X majoricum'
+p652
+sS'Oil-seed Camellia'
+p653
+S'Camellia oleifera'
+p654
+sS'Rice cake'
+p655
+S'NULL'
+p656
+sS'Tallow'
+p657
+S'NULL'
+p658
+sS'Buffalo'
+p659
+S'Bubalus bubalis'
+p660
+sS'Common octopus'
+p661
+S'Octopus vulgaris'
+p662
+sS'Chicken (Cock, Hen, Rooster)'
+p663
+S'Gallus gallus'
+p664
+sS'Lemon grass'
+p665
+S'Cymbopogon citratus'
+p666
+sS'Plains prickly pear'
+p667
+S'Opuntia macrorhiza'
+p668
+sS'Soup'
+p669
+S'NULL'
+p670
+sS'Kai-lan'
+p671
+S'Brassica oleracea var. alboglabra'
+p672
+sS'Anatidae (Duck, Goose, Swan)'
+p673
+S'Anatidae'
+p674
+sS'Wakame'
+p675
+S'Undaria pinnatifida'
+p676
+sS'Agave'
+p677
+S'Agave'
+p678
+sS'Climbing bean'
+p679
+S'Vigna umbellata'
+p680
+sS'Hushpuppy'
+p681
+S'NULL'
+p682
+sS'Guava'
+p683
+S'Psidium guajava'
+p684
+sS'Butternut'
+p685
+S'Juglans cinerea'
+p686
+sS'Orange mint'
+p687
+S'Mentha aquatica'
+p688
+sS'Liquorice'
+p689
+S'NULL'
+p690
+sS'Yellow wax bean'
+p691
+S'Phaseolus vulgaris'
+p692
+sS'Wild celery'
+p693
+S'Apium graveolens'
+p694
+sS'Mountain yam'
+p695
+S'Dioscorea pentaphylla'
+p696
+sS'True oyster'
+p697
+S'Ostreidae'
+p698
+sS'Summer savory'
+p699
+S'Satureja hortensis'
+p700
+sS'Black chokeberry'
+p701
+S'Photinia melanocarpa'
+p702
+sS'Yam'
+p703
+S'Dioscorea'
+p704
+sS'Popcorn'
+p705
+S'NULL'
+p706
+sS'Ravioli'
+p707
+S'NULL'
+p708
+sS'Burbot'
+p709
+S'Lota lota'
+p710
+sS'Other sandwich'
+p711
+S'NULL'
+p712
+sS'Milk (Cow)'
+p713
+S''
+p714
+sS'Cocktail'
+p715
+S'NULL'
+p716
+sS'Feijoa'
+p717
+S'Feijoa sellowiana'
+p718
+sS'Milk (Other mammals)'
+p719
+S'NULL'
+p720
+sS'Cold cut'
+p721
+S'NULL'
+p722
+sS'Grouper'
+p723
+S'Epinephelus'
+p724
+sS'Swordfish'
+p725
+S'Xiphias gladius'
+p726
+sS'White cabbage'
+p727
+S'Brassica oleracea L. var. capitata L. f. alba DC.'
+p728
+sS'Vinegar'
+p729
+S'NULL'
+p730
+sS'Cloudberry'
+p731
+S'Rubus chamaemorus'
+p732
+sS'Garlic'
+p733
+S'Allium sativum'
+p734
+sS'Other cocoa product'
+p735
+S'NULL'
+p736
+sS'Date'
+p737
+S'Phoenix dactylifera'
+p738
+sS'Bearded seal'
+p739
+S'Erignathus barbatus'
+p740
+sS'Allium (Onion)'
+p741
+S'Allium'
+p742
+sS'Watercress'
+p743
+S'Rorippa nasturtium-aquaticum'
+p744
+sS'Common buckwheat'
+p745
+S'Fagopyrum esculentum'
+p746
+sS'Hot chocolate'
+p747
+S'NULL'
+p748
+sS'Yellowfin tuna'
+p749
+S'Thunnus albacares'
+p750
+sS'American pokeweed'
+p751
+S'Phytolacca americana'
+p752
+sS'Japanese walnut'
+p753
+S'Juglans ailanthifolia'
+p754
+sS'Shrimp'
+p755
+S'Caridea'
+p756
+sS'Borage'
+p757
+S'Borago officinalis'
+p758
+sS'Ymer'
+p759
+S'NULL'
+p760
+sS'Cinnamon'
+p761
+S'Cinnamomum'
+p762
+sS'Eggplant'
+p763
+S'Solanum melongena'
+p764
+sS'Whiting'
+p765
+S'Merlangius merlangus'
+p766
+sS'Marine mussel'
+p767
+S'Mytilidae'
+p768
+sS'Epazote'
+p769
+S'Dysphania ambrosioides'
+p770
+sS'Gelatin'
+p771
+S'NULL'
+p772
+sS'True seal'
+p773
+S'Phocidae'
+p774
+sS'Baked potato'
+p775
+S'NULL'
+p776
+sS'Radish'
+p777
+S'Raphanus sativus'
+p778
+sS'Ketchup'
+p779
+S'NULL'
+p780
+sS'Chickpea'
+p781
+S'Cicer arietinum'
+p782
+sS'Black salsify'
+p783
+S'Scorzonera hispanica'
+p784
+sS'Arctic ground squirrel'
+p785
+S'Urocitellus parryii'
+p786
+sS'Cucurbita (Gourd)'
+p787
+S'Cucurbita'
+p788
+sS'Garland chrysanthemum'
+p789
+S'Chrysanthemum coronarium'
+p790
+sS'Zwieback'
+p791
+S'NULL'
+p792
+sS'Lime'
+p793
+S'Citrus aurantiifolia'
+p794
+sS'Lentils'
+p795
+S'Lens culinaris'
+p796
+sS'Sausage'
+p797
+S'NULL'
+p798
+sS'Hyssop'
+p799
+S'Hyssopus officinalis'
+p800
+sS'Peach'
+p801
+S'Prunus persica'
+p802
+sS'Dulce de leche'
+p803
+S'NULL'
+p804
+sS'Shiitake'
+p805
+S'Lentinus edodes'
+p806
+sS'Saffron'
+p807
+S'Crocus sativus'
+p808
+sS'Baked beans'
+p809
+S'NULL'
+p810
+sS'Winter squash'
+p811
+S'Cucurbita maxima'
+p812
+sS'Kombu'
+p813
+S'Saccharina japonica'
+p814
+sS'Crab'
+p815
+S'Brachyura'
+p816
+sS'Alcoholic beverages'
+p817
+S'NULL'
+p818
+sS'Curry powder'
+p819
+S'NULL'
+p820
+sS'Strawberry guava'
+p821
+S'Psidium cattleianum'
+p822
+sS'Chives'
+p823
+S'Allium schoenoprasum'
+p824
+sS'Pineappple sage'
+p825
+S'Salvia elegans'
+p826
+sS'Gadus (Common cod)'
+p827
+S'Gadus'
+p828
+sS'Mollusks'
+p829
+S'NULL'
+p830
+sS'Dolphin fish'
+p831
+S'Coryphaena hippurus'
+p832
+sS'Relish'
+p833
+S'NULL'
+p834
+sS'Pomegranate'
+p835
+S'Punica granatum'
+p836
+sS'Other fermented milk'
+p837
+S'NULL'
+p838
+sS'Common dab'
+p839
+S'Limanda limanda'
+p840
+sS'Rose hip'
+p841
+S'Rosa'
+p842
+sS'Bog bilberry'
+p843
+S'Vaccinium uliginosum'
+p844
+sS'Rye bread'
+p845
+S'NULL'
+p846
+sS'Dock'
+p847
+S'Rumex'
+p848
+sS'Cherimoya'
+p849
+S'Annona cherimola'
+p850
+sS'Sheepshead'
+p851
+S'Archosargus probatocephalus'
+p852
+sS'Swede'
+p853
+S'Brassica napus'
+p854
+sS'Spirit'
+p855
+S'NULL'
+p856
+sS'Prunus (Cherry, Plum)'
+p857
+S'Prunus'
+p858
+sS'Blue mussel'
+p859
+S'Mytilus edulis'
+p860
+sS'Linden'
+p861
+S'Tilia'
+p862
+sS'Clupeinae (Herring, Sardine, Sprat)'
+p863
+S'Clupeinae'
+p864
+sS'Common verbena'
+p865
+S'Verbena officinalis'
+p866
+sS'Sea cucumber'
+p867
+S'Parastichopus californicus'
+p868
+sS'Root vegetables'
+p869
+S'NULL'
+p870
+sS'Scarlet bean'
+p871
+S'Phaseolus coccineus'
+p872
+sS'Soy sauce'
+p873
+S'NULL'
+p874
+sS'Sesame'
+p875
+S'Sesamum orientale'
+p876
+sS'Strawberry'
+p877
+S'Fragaria X ananassa'
+p878
+sS'Coffee mocha'
+p879
+S'NULL'
+p880
+sS'Nuttall cockle'
+p881
+S'Clinocardium nuttallii'
+p882
+sS'German camomile'
+p883
+S'Matricaria recutita'
+p884
+sS'Malus (Crab apple)'
+p885
+S'Malus'
+p886
+sS'Other wine'
+p887
+S'NULL'
+p888
+sS'Rosemary'
+p889
+S'Rosmarinus officinalis'
+p890
+sS'Coffee and coffee products'
+p891
+S'NULL'
+p892
+sS'Cattle (Beef, Veal)'
+p893
+S'Bos taurus'
+p894
+sS'Star anise'
+p895
+S'Illicium verum'
+p896
+sS'Teff'
+p897
+S'Eragrostis tef'
+p898
+sS'Ice cream cone'
+p899
+S'NULL'
+p900
+sS'Mexican groundcherry'
+p901
+S'Physalis philadelphica var. immaculata'
+p902
+sS'Chinese bayberry'
+p903
+S'Myrica rubra'
+p904
+sS'Red huckleberry'
+p905
+S'Vaccinium parvifolium'
+p906
+sS'Dripping'
+p907
+S'NULL'
+p908
+sS'Anguilliformes (Eel)'
+p909
+S'Anguilliformes'
+p910
+sS'Scallop'
+p911
+S'Pectinidae'
+p912
+sS'Asian pear'
+p913
+S'Pyrus pyrifolia'
+p914
+sS'Milk and milk products'
+p915
+S'NULL'
+p916
+sS'Buffalo currant'
+p917
+S'Ribes aureum var. villosum'
+p918
+sS'Welsh onion'
+p919
+S'Allium fistulosum'
+p920
+sS'European chestnut'
+p921
+S'Castanea sativa'
+p922
+sS'Atlantic cod'
+p923
+S'Gadus morhua'
+p924
+sS'Grass pea'
+p925
+S'Lathyrus sativus'
+p926
+sS'Egg roll'
+p927
+S'NULL'
+p928
+sS'Shea tree'
+p929
+S'Vitellaria paradoxa'
+p930
+sS'Muskrat'
+p931
+S'Ondatra zibethicus'
+p932
+sS'Japanese persimmon'
+p933
+S'Diospyros kaki'
+p934
+sS'Taro'
+p935
+S'Colocasia esculenta'
+p936
+sS'Savoy cabbage'
+p937
+S'Brassica oleracea var. sabauda'
+p938
+sS'Pacific salmon'
+p939
+S'Oncorhynchus'
+p940
+sS'Pecan nut'
+p941
+S'Carya illinoinensis'
+p942
+sS'Quesadilla'
+p943
+S'NULL'
+p944
+sS'Daikon radish'
+p945
+S'Raphanus sativus var. longipinnatus'
+p946
+sS'Sablefish'
+p947
+S'Anoplopoma fimbria'
+p948
+sS'Ascidians'
+p949
+S'Ascidiacea'
+p950
+sS'Kumquat'
+p951
+S'Fortunella'
+p952
+sS'Herbs and Spices'
+p953
+S'NULL'
+p954
+sS'Breakfast cereal'
+p955
+S'NULL'
+p956
+sS'White lupine'
+p957
+S'Lupinus albus'
+p958
+sS'Anchovy'
+p959
+S'Engraulidae'
+p960
+sS'Yautia'
+p961
+S'Xanthosoma sagittifolium'
+p962
+sS'Dandelion'
+p963
+S'Taraxacum officinale'
+p964
+sS'Common walnut'
+p965
+S'Juglans regia'
+p966
+sS'Black elderberry'
+p967
+S'Sambucus nigra'
+p968
+sS'Pectin'
+p969
+S'NULL'
+p970
+sS'Apple cider'
+p971
+S'NULL'
+p972
+sS'Pan dulce'
+p973
+S'NULL'
+p974
+sS'Fishes'
+p975
+S'NULL'
+p976
+sS'Mexican oregano'
+p977
+S'Lippia graveolens'
+p978
+sS'Capers'
+p979
+S'Capparis spinosa'
+p980
+sS'Boysenberry'
+p981
+S'Rubus ursinus X idaeus'
+p982
+sS'Grape wine'
+p983
+S'NULL'
+p984
+sS'Spearmint'
+p985
+S'Mentha spicata'
+p986
+sS'Atlantic croaker'
+p987
+S'Micropogonias undulatus'
+p988
+sS'Sweet custard'
+p989
+S'NULL'
+p990
+sS'Arctic blackberry'
+p991
+S'Rubus arcticus'
+p992
+sS'Greylag goose'
+p993
+S'Anser anser'
+p994
+sS'Macadamia nut (M. tetraphylla)'
+p995
+S'Macadamia tetraphylla'
+p996
+sS'Butterfat'
+p997
+S'NULL'
+p998
+sS'Oriental wheat'
+p999
+S'Triticum turanicum'
+p1000
+sS'Saskatoon berry'
+p1001
+S'Amelanchier alnifolia'
+p1002
+sS'Salt'
+p1003
+S'NULL'
+p1004
+sS'French toast'
+p1005
+S'NULL'
+p1006
+sS'Yellow bell pepper'
+p1007
+S'Capsicum annuum'
+p1008
+sS'Caraway'
+p1009
+S'Carum carvi'
+p1010
+sS'Fortified wine'
+p1011
+S'NULL'
+p1012
+sS'Nanking cherry'
+p1013
+S'Prunus tomentosa'
+p1014
+sS'Sweet marjoram'
+p1015
+S'Origanum majorana'
+p1016
+sS'Ginkgo nuts'
+p1017
+S'Ginkgo biloba'
+p1018
+sS'Crayfish'
+p1019
+S'Astacidea'
+p1020
+sS'Cusk'
+p1021
+S'Brosme brosme'
+p1022
+sS'Other alcoholic beverage'
+p1023
+S'NULL'
+p1024
+sS'Madeira wine'
+p1025
+S'NULL'
+p1026
+sS'Vegetable juice'
+p1027
+S'NULL'
+p1028
+sS'Purple mangosteen'
+p1029
+S'Garcinia mangostana'
+p1030
+sS'Hard wheat'
+p1031
+S'Triticum durum'
+p1032
+sS'Striped bass'
+p1033
+S'Morone saxatilis'
+p1034
+sS'Pheasant'
+p1035
+S'Phasianus colchicus'
+p1036
+sS'Celeriac'
+p1037
+S'Apium graveolens var. rapaceum'
+p1038
+sS'Brazil nut'
+p1039
+S'Bertholletia excelsa'
+p1040
+sS'Falafel'
+p1041
+S'NULL'
+p1042
+sS'Edible shell'
+p1043
+S'NULL'
+p1044
+sS'Triticale'
+p1045
+S'X Triticosecale rimpaui'
+p1046
+sS'Pink salmon'
+p1047
+S'Oncorhynchus gorbuscha'
+p1048
+sS'Maitake'
+p1049
+S'Grifola frondosa'
+p1050
+sS'Chinese chestnut'
+p1051
+S'Castanea mollissima'
+p1052
+sS'Lemon sole'
+p1053
+S'Microstomus kitt'
+p1054
+sS'Walleye'
+p1055
+S'Sander vitreus'
+p1056
+sS'Buttermilk'
+p1057
+S'NULL'
+p1058
+sS'Chinese cabbage'
+p1059
+S'Brassica rapa'
+p1060
+sS'Bayberry'
+p1061
+S'Myrica'
+p1062
+sS'Focaccia'
+p1063
+S'NULL'
+p1064
+sS'Trail mix'
+p1065
+S'NULL'
+p1066
+sS'Highbush blueberry'
+p1067
+S'Vaccinium corymbosum'
+p1068
+sS'Celery leaves'
+p1069
+S'Apium graveolens var. secalinum'
+p1070
+sS'Kiwi'
+p1071
+S'Actinidia chinensis'
+p1072
+sS'Butternut squash'
+p1073
+S'Cucurbita moschata'
+p1074
+sS'Other beverage'
+p1075
+S'NULL'
+p1076
+sS'Velvet duck'
+p1077
+S'Melanitta fusca'
+p1078
+sS'Rum'
+p1079
+S'NULL'
+p1080
+sS'Raisin bread'
+p1081
+S'NULL'
+p1082
+sS'Cetacea (Dolphin, Porpoise, Whale)'
+p1083
+S'Cetacea'
+p1084
+sS'Cow milk, pasteurized, vitamin A + D added, 1% fat'
+p1085
+g714
+sS'Fruit-flavor drink'
+p1086
+S'NULL'
+p1087
+sS'Water'
+p1088
+S'NULL'
+p1089
+sS'Freshwater eel'
+p1090
+S'Anguilla'
+p1091
+sS'Hyacinth bean'
+p1092
+S'Lablab purpureus'
+p1093
+sS'Sparkleberry'
+p1094
+S'Vaccinium arboreum'
+p1095
+sS'Jellyfish'
+p1096
+S'Scyphozoa'
+p1097
+sS'Port wine'
+p1098
+S'NULL'
+p1099
+sS'Ocean pout'
+p1100
+S'Zoarces americanus'
+p1101
+sS'Mustard spinach'
+p1102
+S'Brassica perviridis'
+p1103
+sS'Pudding'
+p1104
+S'NULL'
+p1105
+sS'Tea leaf willow'
+p1106
+S'Salix pulchra'
+p1107
+sS'Meatball'
+p1108
+S'NULL'
+p1109
+sS'Tortilla'
+p1110
+S'NULL'
+p1111
+sS'Caribou'
+p1112
+S'Rangifer tarandus'
+p1113
+sS'Komatsuna'
+p1114
+S'Brassica rapa var. perviridis'
+p1115
+sS'Hickory nut'
+p1116
+S'Carya'
+p1117
+sS'Beech nut'
+p1118
+S'Fagus'
+p1119
+sS'Fats and oils'
+p1120
+S'NULL'
+p1121
+sS'Horchata'
+p1122
+S'NULL'
+p1123
+sS'Allspice'
+p1124
+S'Pimenta dioica'
+p1125
+sS'Yellowtail amberjack'
+p1126
+S'Seriola lalandi'
+p1127
+sS'Bilberry'
+p1128
+S'Vaccinium myrtillus'
+p1129
+sS'Cowpea'
+p1130
+S'Vigna unguiculata'
+p1131
+sS'Brussel sprouts'
+p1132
+S'Brassica oleracea var. gemmifera'
+p1133
+sS'Atlantic menhaden'
+p1134
+S'Brevoortia tyrannus'
+p1135
+sS'Pomes'
+p1136
+S'NULL'
+p1137
+sS'Lichee'
+p1138
+S'Litchi chinensis'
+p1139
+sS'Beaver'
+p1140
+S'Castor canadensis'
+p1141
+sS'Chia'
+p1142
+S'Salvia hispanica'
+p1143
+sS'Ucuhuba'
+p1144
+S'Virola surinamensis'
+p1145
+sS'Purple laver'
+p1146
+S'Porphyra laciniata'
+p1147
+sS'Margarine'
+p1148
+S'NULL'
+p1149
+sS'Custard apple'
+p1150
+S'Annona reticulata'
+p1151
+sS'Abiyuch'
+p1152
+S'Crateva religiosa'
+p1153
+sS'Other pasta dish'
+p1154
+S'NULL'
+p1155
+sS'Arabica coffee'
+p1156
+S'Coffea arabica'
+p1157
+sS'Opossum'
+p1158
+S'Didelphis virginiana'
+p1159
+sS'Other meat product'
+p1160
+S'NULL'
+p1161
+sS'Jujube'
+p1162
+S'Ziziphus zizyphus'
+p1163
+sS'Lingcod'
+p1164
+S'Ophiodon elongatus'
+p1165
+sS'Redcurrant'
+p1166
+S'Ribes rubrum'
+p1167
+sS'Candy bar'
+p1168
+S'NULL'
+p1169
+sS'Black huckleberry'
+p1170
+S'Gaylussacia baccata'
+p1171
+sS'Sunburst squash (pattypan squash)'
+p1172
+S'Cucurbita pepo var. clypeata'
+p1173
+sS'Shallot'
+p1174
+S'Allium ascalonicum'
+p1175
+sS'Margarine-like spread'
+p1176
+S'NULL'
+p1177
+sS'Cashew nut'
+p1178
+S'Anacardium occidentale'
+p1179
+sS'Rainbow trout'
+p1180
+S'Oncorhynchus mykiss'
+p1181
+sS'Syrup'
+p1182
+S'NULL'
+p1183
+sS'Cucumber'
+p1184
+S'Cucumis sativus'
+p1185
+sS'Alaska wild rhubarb'
+p1186
+S'Polygonum alpinum'
+p1187
+sS'Pate'
+p1188
+S'NULL'
+p1189
+sS'Natal plum'
+p1190
+S'Carissa macrocarpa'
+p1191
+sS'Romaine lettuce'
+p1192
+S'Lactuca sativa L. var. longifolia'
+p1193
+sS'Pepper (C. annuum)'
+p1194
+S'Capsicum annuum'
+p1195
+sS'Cuttlefish'
+p1196
+S'Sepiidae'
+p1197
+sS'Breadnut tree seed'
+p1198
+S'Brosimum alicastrum'
+p1199
+sS'Cocoa bean'
+p1200
+S'Theobroma cacao'
+p1201
+sS'Milk substitute'
+p1202
+S'NULL'
+p1203
+sS'Pacific halibut'
+p1204
+S'Hippoglossus stenolepis'
+p1205
+sS'Green zucchini'
+p1206
+S'Cucurbita pepo var. cylindrica'
+p1207
+sS'Cottonseed'
+p1208
+S'Gossypium'
+p1209
+sS'Vanilla'
+p1210
+S'Vanilla'
+p1211
+sS'Rapini'
+p1212
+S'Brassica ruvo'
+p1213
+sS'Emu'
+p1214
+S'Dromaius novaehollandiae'
+p1215
+sS'Sugar apple'
+p1216
+S'Annona squamosa'
+p1217
+sS'Rowanberry'
+p1218
+S'Sorbus aucuparia'
+p1219
+sS'Red bell pepper'
+p1220
+S'Capsicum annuum'
+p1221
+sS'Miso'
+p1222
+S'NULL'
+p1223
+sS'Berry wine'
+p1224
+S'NULL'
+p1225
+sS'Antelope'
+p1226
+S'Artiodactyla'
+p1227
+sS'Common salsify'
+p1228
+S'Tragopogon porrifolius'
+p1229
+sS'Orange bell pepper'
+p1230
+S'Capsicum annuum'
+p1231
+sS'White mustard'
+p1232
+S'Sinapis alba'
+p1233
+sS'Leavening agent'
+p1234
+S'NULL'
+p1235
+sS'Columbidae (Dove, Pigeon)'
+p1236
+S'Columbidae'
+p1237
+sS'Kelp'
+p1238
+S'Laminaria'
+p1239
+sS'Tamarind'
+p1240
+S'Tamarindus indica'
+p1241
+sS'Hibiscus tea'
+p1242
+S'Hibiscus sabbariffa'
+p1243
+sS'Morchella (Morel)'
+p1244
+S'Morchellaceae'
+p1245
+sS'Sake'
+p1246
+S'NULL'
+p1247
+sS'Roman camomile'
+p1248
+S'Chamaemelum nobile'
+p1249
+sS'Greenland halibut/turbot'
+p1250
+S'Reinhardtius hippoglossoides'
+p1251
+sS'Mentha (Mint)'
+p1252
+S'Mentha'
+p1253
+sS'Rocket salad'
+p1254
+S'Eruca vesicaria'
+p1255
+sS'Nougat'
+p1256
+S'NULL'
+p1257
+sS'Ceylon cinnamon'
+p1258
+S'Cinnamomum verum'
+p1259
+sS'Fenugreek'
+p1260
+S'Trigonella foenum-graecum'
+p1261
+sS'Topping'
+p1262
+S'NULL'
+p1263
+sS'Sorrel'
+p1264
+S'Rumex acetosa'
+p1265
+sS'Albacore tuna'
+p1266
+S'Thunnus alalunga'
+p1267
+sS'Squirrel'
+p1268
+S'Sciuridae'
+p1269
+sS'Frozen yogurt'
+p1270
+S'NULL'
+p1271
+sS'Charr'
+p1272
+S'Salvelinus'
+p1273
+sS'Potato gratin'
+p1274
+S'NULL'
+p1275
+sS'Bean'
+p1276
+S'NULL'
+p1277
+sS'Coalfish pollock'
+p1278
+S'Pollachius virens'
+p1279
+sS'Carob'
+p1280
+S'Ceratonia siliqua'
+p1281
+sS'Abalone'
+p1282
+S'Haliotis'
+p1283
+sS'Pancake'
+p1284
+S'NULL'
+p1285
+sS'Black raspberry'
+p1286
+S'Rubus occidentalis'
+p1287
+sS'Green bell pepper'
+p1288
+S'Capsicum annuum'
+p1289
+sS'Evergreen huckleberry'
+p1290
+S'Vaccinium ovatum'
+p1291
+sS'Chinook salmon'
+p1292
+S'Oncorhynchus tshawytscha'
+p1293
+sS'Guinea hen'
+p1294
+S'Numida meleagris'
+p1295
+sS'American lobster'
+p1296
+S'Homarus americanus'
+p1297
+sS'Garden tomato'
+p1298
+S'Solanum lycopersicum'
+p1299
+sS'Whisky'
+p1300
+S'NULL'
+p1301
+sS'European cranberry'
+p1302
+S'Vaccinium oxycoccos'
+p1303
+sS'Hot dog'
+p1304
+S'NULL'
+p1305
+sS'Lupine'
+p1306
+S'Lupinus'
+p1307
+sS'Nance'
+p1308
+S'Byrsonima crassifolia'
+p1309
+sS'Half-highbush blueberry'
+p1310
+S'Vaccinium angustifolium X Vaccinium corymbosum'
+p1311
+sS'American shad'
+p1312
+S'Alosa sapidissima'
+p1313
+sS'Cornmint'
+p1314
+S'Mentha arvensis'
+p1315
+sS'Mango'
+p1316
+S'Mangifera indica'
+p1317
+sS'Lasagna'
+p1318
+S'NULL'
+p1319
+sS'Bamboo shoots'
+p1320
+S'Phyllostachys edulis'
+p1321
+sS'Pineapple'
+p1322
+S'Ananas comosus'
+p1323
+sS'Colorado pinyon'
+p1324
+S'Pinus edulis'
+p1325
+sS'Black bear'
+p1326
+S'Ursus americanus'
+p1327
+sS'Pita bread'
+p1328
+S'NULL'
+p1329
+sS'Meatloaf'
+p1330
+S'NULL'
+p1331
+sS'Devilfish'
+p1332
+S'Myoxocephalus'
+p1333
+sS'Naranjilla'
+p1334
+S'Solanum quitoense'
+p1335
+sS'Mallard duck'
+p1336
+S'Anas platyrhynchos'
+p1337
+sS'Garden rhubarb'
+p1338
+S'Rheum rhabarbarum'
+p1339
+sS'Millet'
+p1340
+S'Panicum miliaceum'
+p1341
+sS'Meat bouillon'
+p1342
+S'NULL'
+p1343
+sS'Corn grits'
+p1344
+S'NULL'
+p1345
+sS'Junket'
+p1346
+S'NULL'
+p1347
+sS'Pak choy'
+p1348
+S'Brassica rapa var. chinensis'
+p1349
+sS'Great horned owl'
+p1350
+S'Bubo virginianus'
+p1351
+sS'Cow milk, pasteurized, vitamin A + D added, 0% fat'
+p1352
+g714
+sS'Jerusalem artichoke'
+p1353
+S'Helianthus tuberosus'
+p1354
+sS'Nectarine'
+p1355
+S'Prunus persica var. nucipersica'
+p1356
+sS'Common oregano'
+p1357
+S'Origanum vulgare'
+p1358
+sS'American butterfish'
+p1359
+S'Peprilus triacanthus'
+p1360
+sS'Tilefish'
+p1361
+S'Lopholatilus chamaeleonticeps'
+p1362
+sS'Nuts'
+p1363
+S'NULL'
+p1364
+sS'Heart of palm'
+p1365
+S'NULL'
+p1366
+sS'European rabbit'
+p1367
+S'Oryctolagus'
+p1368
+sS'Common pea'
+p1369
+S'Pisum sativum'
+p1370
+sS'Monkfish'
+p1371
+S'Lophius piscatorius'
+p1372
+sS'Muscadine grape'
+p1373
+S'Vitis rotundifolia'
+p1374
+sS'Other frozen dessert'
+p1375
+S'NULL'
+p1376
+sS'Tamale'
+p1377
+S'NULL'
+p1378
+sS'Sweet rowanberry'
+p1379
+S'Grataegosorbus mitschurinii'
+p1380
+sS'Mammee apple'
+p1381
+S'Mammea americana'
+p1382
+sS'Pine nut'
+p1383
+S'Pinus'
+p1384
+sS'Flour'
+p1385
+S'NULL'
+p1386
+sS'Eggs'
+p1387
+S'NULL'
+p1388
+sS'Chestnut'
+p1389
+S'Castanea'
+p1390
+sS'Mulberry'
+p1391
+S'Morus'
+p1392
+sS'Chocolate'
+p1393
+S'NULL'
+p1394
+sS'Salad dressing'
+p1395
+S'NULL'
+p1396
+sS'Quinoa'
+p1397
+S'Chenopodium quinoa'
+p1398
+sS'Wild carrot'
+p1399
+S'Daucus carota'
+p1400
+sS'Winged bean'
+p1401
+S'Psophocarpus tetragonolobus'
+p1402
+sS'Rainbow smelt'
+p1403
+S'Osmerus mordax'
+p1404
+sS'Taco'
+p1405
+S'NULL'
+p1406
+sS'Olive'
+p1407
+S'Olea europaea'
+p1408
+sS'Hippoglossus (Common halibut)'
+p1409
+S'Hippoglossus'
+p1410
+sS'Frybread'
+p1411
+S'NULL'
+p1412
+sS'Lambsquarters'
+p1413
+S'Chenopodium album'
+p1414
+sS'Macaroni and cheese'
+p1415
+S'NULL'
+p1416
+sS'Pacific cod'
+p1417
+S'Gadus macrocephalus'
+p1418
+sS'Sourdock'
+p1419
+S'Rumex articus'
+p1420
+sS'Salad'
+p1421
+S'NULL'
+p1422
+sS'Potato'
+p1423
+S'Solanum tuberosum'
+p1424
+sS'Oyster mushroom'
+p1425
+S'Pleurotus ostreatus'
+p1426
+sS'Cumin'
+p1427
+S'Cuminum cyminum'
+p1428
+sS'Flatfish'
+p1429
+S'Pleuronectiformes'
+p1430
+sS'Arepa'
+p1431
+S'NULL'
+p1432
+sS'Norway lobster'
+p1433
+S'Nephrops norvegicus'
+p1434
+sS'Cocoa and cocoa products'
+p1435
+S'NULL'
+p1436
+sS'Yogurt'
+p1437
+S'NULL'
+p1438
+sS'Oil palm'
+p1439
+S'Elaeis'
+p1440
+sS'Sweet potato'
+p1441
+S'Ipomoea batatas'
+p1442
+sS'Common sage'
+p1443
+S'Salvia officinalis'
+p1444
+sS'North Pacific giant octopus'
+p1445
+S'Enteroctopus dofleini'
+p1446
+sS'Cornbread'
+p1447
+S'NULL'
+p1448
+sS'Common persimmon'
+p1449
+S'Diospyros virginiana'
+p1450
+sS'Thunnus (Common tuna)'
+p1451
+S'Thunnus'
+p1452
+sS'Shark'
+p1453
+S'Squaliformes'
+p1454
+sS'Jicama'
+p1455
+S'Pachyrhizus erosus'
+p1456
+sS'Cisco'
+p1457
+S'Coregonus artedi'
+p1458
+sS'Soy yogurt'
+p1459
+S'NULL'
+p1460
+sS'Cooking oil'
+p1461
+S'NULL'
+p1462
+sS'Soft-necked garlic'
+p1463
+S'Allium sativum L. var. sativum'
+p1464
+sS'Swamp cabbage'
+p1465
+S'Ipomoea aquatica'
+p1466
+sS'Pie'
+p1467
+S'NULL'
+p1468
+sS'Common wheat'
+p1469
+S'Triticum aestivum'
+p1470
+sS'Chinese chives'
+p1471
+S'Allium tuberosum'
+p1472
+sS'Honey'
+p1473
+S'NULL'
+p1474
+sS'Deerberry'
+p1475
+S'Vaccinium stamineum'
+p1476
+sS'Kefir'
+p1477
+S'NULL'
+p1478
+sS'Pepper (Spice)'
+p1479
+S'Piper nigrum'
+p1480
+sS'Blue crab'
+p1481
+S'Callinectes sapidus'
+p1482
+sS'Silver linden'
+p1483
+S'Tilia argentea'
+p1484
+sS'Towel gourd'
+p1485
+S'Luffa aegyptiaca'
+p1486
+sS'Broad whitefish'
+p1487
+S'Coregonus nasus'
+p1488
+sS'Summer grape'
+p1489
+S'Vitis aestivalis'
+p1490
+sS'Clawed lobster'
+p1491
+S'Nephropidae'
+p1492
+sS'Arrowhead'
+p1493
+S'Sagittaria latifolia'
+p1494
+sS'Salmonberry'
+p1495
+S'Rubus spectabilis'
+p1496
+sS'Peanut'
+p1497
+S'Arachis hypogaea'
+p1498
+sS'Crustaceans'
+p1499
+S'NULL'
+p1500
+sS'Oval-leaf huckleberry'
+p1501
+S'Vaccinium ovalifolium'
+p1502
+sS'Walnut'
+p1503
+S'Juglans'
+p1504
+sS'Gram bean'
+p1505
+S'Vigna mungo'
+p1506
+sS'Beer'
+p1507
+S'NULL'
+p1508
+sS'Grapefruit'
+p1509
+S'Citrus X paradisi'
+p1510
+sS'Catfish'
+p1511
+S'Siluriformes'
+p1512
+sS'Red raspberry'
+p1513
+S'Rubus idaeus'
+p1514
+sS'Gelatin dessert'
+p1515
+S'NULL'
+p1516
+sS'Pigeon pea'
+p1517
+S'Cajanus cajan'
+p1518
+sS'Potato chip'
+p1519
+S'NULL'
+p1520
+sS'Coffee'
+p1521
+S'Coffea'
+p1522
+sS'Cocoa powder'
+p1523
+S'NULL'
+p1524
+sS'Spirulina'
+p1525
+S'Spirulina'
+p1526
+sS'Citrus'
+p1527
+S'NULL'
+p1528
+sS'Wonton wrapper'
+p1529
+S'NULL'
+p1530
+sS'Casein'
+p1531
+S'NULL'
+p1532
+sS'Marzipan'
+p1533
+S'NULL'
+p1534
+sS'Wasabi'
+p1535
+S'Wasabia japonica'
+p1536
+sS'Leek'
+p1537
+S'Allium porrum'
+p1538
+sS'Atlantic salmon'
+p1539
+S'Salmo salar'
+p1540
+sS'Babassu palm'
+p1541
+S'Attalea speciosa'
+p1542
+sS'Lumpsucker'
+p1543
+S'Cyclopteridae'
+p1544
+sS'Green vegetables'
+p1545
+S'NULL'
+p1546
+sS'Semolina'
+p1547
+S'NULL'
+p1548
+sS'Tree fern'
+p1549
+S'Cyathea'
+p1550
+sS'Jute'
+p1551
+S'Corchorus olitorius'
+p1552
+sS'Pepper (Capsicum)'
+p1553
+S'Capsicum'
+p1554
+sS'Remoulade'
+p1555
+S'NULL'
+p1556
+sS'Conch'
+p1557
+S'Strombidae'
+p1558
+sS'Malabar spinach'
+p1559
+S'Basella alba'
+p1560
+sS'Other animal fat'
+p1561
+S'NULL'
+p1562
+sS'Lemon thyme'
+p1563
+S'Thymus pulegioides'
+p1564
+sS'Brassicas'
+p1565
+S'NULL'
+p1566
+sS'Loganberry'
+p1567
+S'Rubus loganobaccus'
+p1568
+sS'Fruits'
+p1569
+S'NULL'
+p1570
+sS'Raccoon'
+p1571
+S'Procyon lotor'
+p1572
+sS'Japanese pumpkin'
+p1573
+S'Cucurbita maxima'
+p1574
+sS'Dumpling'
+p1575
+S'NULL'
+p1576
+sS'Cow milk, pasteurized, vitamin A + D added, 2% fat'
+p1577
+g714
+sS'Globe artichoke'
+p1578
+S'Cynara scolymus'
+p1579
+sS'Marshmallow'
+p1580
+S'NULL'
+p1581
+sS'Other vegetable product'
+p1582
+S'NULL'
+p1583
+sS'Purslane'
+p1584
+S'Portulaca oleracea'
+p1585
+sS'Roe'
+p1586
+S'NULL'
+p1587
+sS'Fish burger'
+p1588
+S'NULL'
+p1589
+sS'Sturgeon'
+p1590
+S'Acipenseridae'
+p1591
+sS'Turnip'
+p1592
+S'Brassica rapa var. rapa'
+p1593
+sS'Potato bread'
+p1594
+S'NULL'
+p1595
+sS'Rock ptarmigan'
+p1596
+S'Lagopus muta'
+p1597
+sS'Durian'
+p1598
+S'Durio zibethinus'
+p1599
+sS'Rape'
+p1600
+S'Brassica napus var. napus'
+p1601
+sS'Angelica'
+p1602
+S'Angelica keiskei'
+p1603
+sS'Elk'
+p1604
+S'Cervus canadensis'
+p1605
+sS'Grape'
+p1606
+S'Vitis'
+p1607
+sS'Roselle'
+p1608
+S'Hibiscus sabdariffa'
+p1609
+sS'New Zealand spinach'
+p1610
+S'Tetragonia tetragonioides'
+p1611
+sS'Anise'
+p1612
+S'Pimpinella anisum'
+p1613
+sS'Domestic pig (Piglet, Pork)'
+p1614
+S'Sus scrofa domestica'
+p1615
+sS'Pepper (C. chinense)'
+p1616
+S'Capsicum chinense'
+p1617
+sS'Horseradish'
+p1618
+S'Armoracia rusticana'
+p1619
+sS'Barley'
+p1620
+S'Hordeum vulgare'
+p1621
+sS'Lemon'
+p1622
+S'Citrus limon'
+p1623
+sS'Cascade huckleberry'
+p1624
+S'Vaccinium deliciosum'
+p1625
+sS'Vermouth'
+p1626
+S'NULL'
+p1627
+sS'Oxheart cabbage'
+p1628
+S'Brassica oleracea var. conica'
+p1629
+sS'True sole'
+p1630
+S'Soleidae'
+p1631
+sS'Red beetroot'
+p1632
+S'Beta vulgaris var. rubra'
+p1633
+sS'Vegetarian food'
+p1634
+S'NULL'
+p1635
+sS'Pacific ocean perch'
+p1636
+S'Sebastes alutus'
+p1637
+sS'Icing'
+p1638
+S'NULL'
+p1639
+sS'Horned melon'
+p1640
+S'Cucumis metuliferus'
+p1641
+sS'Chimichanga'
+p1642
+S'NULL'
+p1643
+sS'Freshwater drum'
+p1644
+S'Aplodinotus grunniens'
+p1645
+sS'Cardoon'
+p1646
+S'Cynara cardunculus'
+p1647
+sS'Sesbania flower'
+p1648
+S'Sesbania bispinosa'
+p1649
+sS'Spelt'
+p1650
+S'Triticum spelta'
+p1651
+sS'Spot croaker'
+p1652
+S'Leiostomus xanthurus'
+p1653
+sS'Chili'
+p1654
+S'NULL'
+p1655
+sS'Napa cabbage'
+p1656
+S'Brassica rapa var. pekinensis'
+p1657
+sS'Pacific oyster'
+p1658
+S'Crassostrea gigas'
+p1659
+sS"Elliott's blueberry"
+p1660
+S'Vaccinium elliottii'
+p1661
+sS'Broad bean'
+p1662
+S'Vicia faba'
+p1663
+sS'Cereals and cereal products'
+p1664
+S'NULL'
+p1665
+sS'French plantain'
+p1666
+S'Musa X paradisiaca'
+p1667
+sS'Tinda'
+p1668
+S'Citrullus lanatus var. fistulosus'
+p1669
+sS'Asparagus'
+p1670
+S'Asparagus officinalis'
+p1671
+sS'Stuffing'
+p1672
+S'NULL'
+p1673
+sS'Norway haddock'
+p1674
+S'Sebastes viviparus'
+p1675
+sS'Garden onion'
+p1676
+S'Allium cepa'
+p1677
+sS'Longan'
+p1678
+S'Dimocarpus longan'
+p1679
+sS'Atlantic mackerel'
+p1680
+S'Scomber scombrus'
+p1681
+sS'Red rice'
+p1682
+S'Oryza rufipogon'
+p1683
+sS'Tapioca pearl'
+p1684
+S'NULL'
+p1685
+sS'Sourdough'
+p1686
+S'NULL'
+p1687
+sS'Common cabbage'
+p1688
+S'Brassica oleracea'
+p1689
+sS'Peach (var.)'
+p1690
+S'Prunus persica var. persica'
+p1691
+sS'Spiny dogfish'
+p1692
+S'Squalus acanthias'
+p1693
+sS'Pupusa'
+p1694
+S'NULL'
+p1695
+sS'Tea'
+p1696
+S'Camellia sinensis'
+p1697
+sS'Other candy'
+p1698
+S'NULL'
+p1699
+sS'Akutaq'
+p1700
+S'NULL'
+p1701
+sS'Celery stalks'
+p1702
+S'Apium graveolens var. dulce'
+p1703
+sS'Thistle'
+p1704
+S'Cirsium'
+p1705
+sS'Garden onion (var.)'
+p1706
+S'Allium cepa var. cepa'
+p1707
+sS'Seatrout'
+p1708
+S'Cynoscion'
+p1709
+sS'Black-eyed pea'
+p1710
+S'Vigna unguiculata ssp. unguiculata'
+p1711
+sS'Ice cream'
+p1712
+S'NULL'
+p1713
+sS'Cream'
+p1714
+S'NULL'
+p1715
+sS'Butter'
+p1716
+S'NULL'
+p1717
+sS'Spanish mackerel'
+p1718
+S'Scomberomorus maculatus'
+p1719
+sS'Macadamia nut'
+p1720
+S'Macadamia'
+p1721
+sS'Sapodilla'
+p1722
+S'Manilkara zapota'
+p1723
+sS'Onion-family vegetables'
+p1724
+S'NULL'
+p1725
+sS'Wax gourd'
+p1726
+S'Benincasa hispida'
+p1727
+sS'Chinese mustard'
+p1728
+S'Brassica juncea'
+p1729
+sS'Coho salmon'
+p1730
+S'Oncorhynchus kisutch'
+p1731
+sS'Rye'
+p1732
+S'Secale cereale'
+p1733
+sS'Condensed milk'
+p1734
+S'NULL'
+p1735
+sS'Bagel'
+p1736
+S'NULL'
+p1737
+sS'Dried milk'
+p1738
+S'NULL'
+p1739
+sS'Common thyme'
+p1740
+S'Thymus vulgaris'
+p1741
+sS'Squab'
+p1742
+S'Columba'
+p1743
+sS'Cow milk, pasteurized, vitamin D added, 3.25% fat'
+p1744
+g714
+sS'Common chokecherry'
+p1745
+S'Prunus virginiana'
+p1746
+sS'Waffle'
+p1747
+S'NULL'
+p1748
+sS'Evening primrose'
+p1749
+S'Oenothera biennis'
+p1750
+sS'Alpine sweetvetch'
+p1751
+S'Hedysarum alpinum'
+p1752
+sS'Rubus (Blackberry, Raspberry)'
+p1753
+S'Rubus'
+p1754
+sS'Alaska blackfish'
+p1755
+S'Dallia pectoralis'
+p1756
+sS'Poppy'
+p1757
+S'Papaver'
+p1758
+sS'Loquat'
+p1759
+S'Eriobotrya japonica'
+p1760
+sS'Pacific sardine'
+p1761
+S'Sardinops sagax'
+p1762
+sS'Atlantic wolffish'
+p1763
+S'Anarhichas lupus'
+p1764
+sS'Lingonberry'
+p1765
+S'Vaccinium vitis-idaea'
+p1766
+sS'Lake trout'
+p1767
+S'Salvelinus namaycush'
+p1768
+sS'Breakfast sandwich'
+p1769
+S'NULL'
+p1770
+sS'Wild leek'
+p1771
+S'Allium ampeloprasum'
+p1772
+sS'Succotash'
+p1773
+S'NULL'
+p1774
+sS'Agar'
+p1775
+S'Eucheuma'
+p1776
+sS"Jew's ear"
+p1777
+S'Auricularia auricula-judae'
+p1778
+sS'Other dish'
+p1779
+S'NULL'
+p1780
+sS'Flaxseed'
+p1781
+S'Linum usitatissimum'
+p1782
+sS'Evaporated milk'
+p1783
+S'NULL'
+p1784
+sS'Robusta coffee'
+p1785
+S'Coffea canephora'
+p1786
+sS'Alfalfa'
+p1787
+S'Medicago sativa'
+p1788
+sS'Whitefish'
+p1789
+S'Coregonus'
+p1790
+sS'Safflower'
+p1791
+S'Carthamus tinctorius'
+p1792
+sS'Other bread product'
+p1793
+S'NULL'
+p1794
+sS'King mackerel'
+p1795
+S'Scomberomorus cavalla'
+p1796
+sS'Snow crab'
+p1797
+S'Chionoecetes opilio'
+p1798
+sS'Ringed seal'
+p1799
+S'Pusa hispida'
+p1800
+sS'Lowbush blueberry'
+p1801
+S'Vaccinium angustifolium'
+p1802
+sS'Yellow pond-lily'
+p1803
+S'Nuphar lutea'
+p1804
+sS'Tortilla chip'
+p1805
+S'NULL'
+p1806
+sS'Potato puffs'
+p1807
+S'NULL'
+p1808
+sS'Cassava'
+p1809
+S'Manihot esculenta'
+p1810
+sS'Pot marjoram'
+p1811
+S'Origanum onites'
+p1812
+s.
