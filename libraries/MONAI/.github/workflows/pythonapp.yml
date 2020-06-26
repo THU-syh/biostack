@@ -1,0 +1,168 @@
+name: build
+
+on:
+  # quick tests for every pull request
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  flake8-py3:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.7
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.7
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip wheel
+        pip install -r requirements-dev.txt
+    - name: Lint with black formater
+      run: |
+        $(pwd)/runtests.sh --nounittests --black
+    - name: Lint with flake8 code checker
+      run: |
+        $(pwd)/runtests.sh --nounittests --flake8
+    - name: Type check with mypy static analysis
+      run: |
+        $(pwd)/runtests.sh --nounittests --mypy
+    - name: Type check with Pytype static analysis
+      run: |
+        # Git hub actions have 2 cores, so parallize pytype
+        $(pwd)/runtests.sh --nounittests --pytype -j 2
+
+  quick-py3:  # full dependencies installed
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, macOS-latest, ubuntu-latest]
+    timeout-minutes: 20
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.x
+      uses: actions/setup-python@v1
+      with:
+        python-version: '3.x'
+    - name: Prepare pip wheel
+      run: |
+        which python
+        python -m pip install --upgrade pip wheel
+    - if: runner.os == 'windows'
+      name: Install torch cpu from pytorch.org (Windows only)
+      run: |
+        python -m pip install torch==1.4 -f https://download.pytorch.org/whl/cpu/torch_stable.html
+        # min. requirements for windows instances
+        python -c "f=open('requirements-dev.txt', 'r'); txt=f.readlines(); f.close(); print(txt); f=open('requirements-dev.txt', 'w'); f.writelines(txt[1:10]); f.close()"
+    - name: Install the dependencies
+      run: |
+        python -m pip install torch==1.4
+        cat "requirements-dev.txt"
+        python -m pip install -r requirements-dev.txt
+        python -m pip list
+    - name: Run quick tests (CPU ${{ runner.os }})
+      run: |
+        python -c 'import torch; print(torch.__version__); print(torch.rand(5,3))'
+        python -m unittest -v
+      env:
+        QUICKTEST: True
+
+  GPU-quick-py3:  # GPU with full dependencies
+    container:
+      image: nvcr.io/nvidia/pytorch:20.03-py3
+      options: --gpus all
+    runs-on: [self-hosted, linux, x64]
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install the dependencies
+      run: |
+        which python
+        python -m pip install --upgrade pip wheel
+        python -m pip uninstall -y torch torchvision
+        python -m pip install torch==1.4
+        python -m pip install -r requirements-dev.txt
+    - name: Run quick tests (GPU)
+      run: |
+        python -m pip list
+        nvidia-smi
+        export CUDA_VISIBLE_DEVICES=$(python -m tests.utils)
+        echo $CUDA_VISIBLE_DEVICES
+        python -c "import torch; print(torch.__version__); print('{} of GPUs available'.format(torch.cuda.device_count()))"
+        python -c 'import torch; print(torch.rand(5,3, device=torch.device("cuda:0")))'
+        ./runtests.sh --quick
+        pip list
+        coverage xml
+    - name: Upload coverage
+      uses: codecov/codecov-action@v1
+      with:
+        file: ./coverage.xml
+
+  packaging:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Set up Python 3.x
+      uses: actions/setup-python@v1
+      with:
+        python-version: '3.x'
+    - name: Install setuptools
+      run: |
+        python -m pip install --user --upgrade pip setuptools wheel twine
+    - name: Test source archive and wheel file
+      run: |
+        git fetch --depth=1 origin +refs/tags/*:refs/tags/*
+        root_dir=$PWD
+        echo "$root_dir"
+        set -e
+
+        # build tar.gz and wheel
+        python setup.py check -m -s
+        python setup.py sdist bdist_wheel
+        python -m twine check dist/*
+
+        # move packages to a temp dir
+        tmp_dir=$(mktemp -d)
+        cp dist/monai* "$tmp_dir"
+        rm -r build dist monai.egg-info
+        cd "$tmp_dir"
+        ls -al
+
+        # install from wheel
+        python -m pip install monai*.whl
+        python -c 'import monai; monai.config.print_config()' 2>&1 | grep -iv "unknown"
+        python -c 'import monai; print(monai.__file__)'
+        python -m pip uninstall -y monai
+        rm monai*.whl
+
+        # install from tar.gz
+        python -m pip install monai*.tar.gz
+        python -c 'import monai; monai.config.print_config()' 2>&1 | grep -iv "unknown"
+        python -c 'import monai; print(monai.__file__)'
+        python -m pip uninstall -y monai
+        rm monai*.tar.gz
+
+        # clean up
+        cd "$root_dir"
+        rm -r "$tmp_dir"
+
+  build-docs:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.7
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.7
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip wheel
+        pip install -r docs/requirements.txt
+    - name: Make html
+      run: |
+        cd docs/
+        make html
