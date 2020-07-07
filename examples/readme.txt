@@ -1,1 +1,1 @@
-Code examples accompanied by research papers on topics related to the framework.
+Code examples built by developers, some of which are accompanied by research papers.
