@@ -1,0 +1,15 @@
+******************************************************************************************
+*                                                                                        *
+*   G-MARC: GUI for Model-Agnostic model explanations for Rupture status Classification  *
+*                                                                                        *
+******************************************************************************************
+*                                                                                        *
+*                              INSTALLATION GUIDELINES                                   *
+*                                                                                        *
+******************************************************************************************
+
+
+1.  Run the .msi executable file of G-MARC to install in to desired directory
+2.  Rename cKDTree.cp37-win_amd64.pyd to ckdtree.cp37-win_amd64.pyd in lib\scipy\spatial
+3.  Rename Pool.pyc to pool.pyc in lib\multiprocessing
+4.  Run G-MARC.exe in the root folder. 

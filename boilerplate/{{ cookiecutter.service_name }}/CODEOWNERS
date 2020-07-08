@@ -1,0 +1,2 @@
+# @{{ cookiecutter.github_username }} is the global code owner
+* @{{ cookiecutter.github_username }}

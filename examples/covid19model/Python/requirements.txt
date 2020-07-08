@@ -1,5 +1,0 @@
-PyYAML
-pandas numpy
-scipy
-statsmodels
-datetime

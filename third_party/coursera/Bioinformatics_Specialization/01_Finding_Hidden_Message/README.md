@@ -1,1 +1,0 @@
-This folder contains codes for the course Finding Hidden Message in DNA, from the University of California - San Diego, on www.coursera.org

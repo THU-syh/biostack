@@ -1,0 +1,37 @@
+#Directories to be ignored fully
+/books/
+/articles/
+/other/
+/output/
+/graphics/
+/models/*.dat
+dist/
+tmp/
+*_tmp/
+medcat.egg-info/
+build/
+.idea
+venv
+db.sqlite3
+
+#tmp and similar files
+.nfs*
+*.pyc
+*.out
+*.swp
+*.swn
+tmp_*
+t_*
+tmp_*
+*_tmp
+*.swo
+*.lyx.emergency
+*.lyx#
+*~
+*hidden*
+nohup.out
+tmp.py
+.DS_Store
+
+# models files
+*.dat
