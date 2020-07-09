@@ -1,0 +1,53 @@
+# Configuration comparing alignment methods, preparation approaches
+# and variant callers for a CEPH NA12878 whole genome trio, using Illumina platinum
+# genome inputs and Genome in a Bottle reference calls.
+#
+# See the bcbio-nextgen documentation for full instructions to
+# run this analysis:
+# https://bcbio-nextgen.readthedocs.org/en/latest/contents/testing.html#example-pipelines
+---
+upload:
+  dir: ../final
+details:
+  - files: [../input/NA12878_1.fastq.gz, ../input/NA12878_2.fastq.gz]
+    description: NA12878
+    metadata:
+      batch: ceph
+      sex: female
+    analysis: variant2
+    genome_build: hg38
+    algorithm:
+      aligner: bwa
+      mark_duplicates: true
+      recalibrate: false
+      realign: false
+      variantcaller: gatk-haplotype
+      remove_lcr: true
+      validate: giab-NA12878/truth_small_variants.vcf.gz
+      validate_regions: giab-NA12878/truth_regions.bed
+  - files: [../input/NA12891_1.fastq.gz, ../input/NA12891_2.fastq.gz]
+    description: NA12891
+    metadata:
+      batch: ceph
+      sex: male
+    analysis: variant2
+    genome_build: hg38
+    algorithm:
+      aligner: bwa
+      mark_duplicates: true
+      recalibrate: false
+      realign: false
+      variantcaller: gatk-haplotype
+  - files: [../input/NA12892_1.fastq.gz, ../input/NA12892_2.fastq.gz]
+    description: NA12892
+    metadata:
+      batch: ceph
+      sex: female
+    analysis: variant2
+    genome_build: hg38
+    algorithm:
+      aligner: bwa
+      mark_duplicates: true
+      recalibrate: false
+      realign: false
+      variantcaller: gatk-haplotype

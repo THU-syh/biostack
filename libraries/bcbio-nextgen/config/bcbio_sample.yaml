@@ -1,0 +1,26 @@
+---
+# Example file for specifying run information to bcbio_nextgen.py
+# In a fully Galaxy automated setup this information can be retrieved
+# from the Galaxy server based on user inputs. This YAML files allows you to
+# run the automated pipeline separately or from other external programs
+
+# If your folder naming is not standard Illumina style
+# (110729_SN728_0036_A81UJUABXX) you can optionally specify a date and a unique name
+# to use for naming the output files and project directories.
+fc_date: '110812'
+fc_name: unique_name
+# Directory to upload final results to. Also supports Galaxy and S3 upload.
+upload:
+  dir: ../final
+details:
+  # For each flowcell, you specify either the lane if the files follow standard
+  # naming conventions (1_110729_A81UJUABXX) or the names of the files if they
+  # are differently named. Can specify either one file for single end or two for
+  # paired.
+  - files: [/path/to/1_1-fastq.txt, /path/to/1_2-fastq.txt]
+    description: 'Sample 1'
+    genome_build: GRCh37
+    analysis: variant2
+    algorithm:
+      aligner: novoalign
+      variantcaller: gatk

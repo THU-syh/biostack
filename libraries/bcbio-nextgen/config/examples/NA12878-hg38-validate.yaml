@@ -1,0 +1,179 @@
+# Validation for hg38/GRCh38
+# https://bcbio-nextgen.readthedocs.org/en/latest/contents/testing.html#example-pipelines
+#
+# Uses two build 38 reference genomes
+#  - hg38 -- full reference with alternative alleles and HLA
+#  - hg38-noalt -- no alternative alleles
+#
+# Uses 4 validation sets:
+#  - Genome in a Bottle native hg38 validation calls
+#  - Genome in a Bottle converted to build 38 with NCBI remap
+#  - Genome in a Bottle converted to build 38 with CrossMap and a UCSC chain file
+#  - Illumina's platinum genome
+---
+upload:
+  dir: ../final
+details:
+  - files: [../input/NA12878_1.fastq.gz, ../input/NA12878_2.fastq.gz]
+    description: NA12878-1
+    metadata:
+      sex: female
+      validate_batch: giab
+      validate_sample: giab-hg38
+    analysis: variant2
+    genome_build: hg38
+    algorithm:
+      aligner: bwa
+      save_diskspace: true
+      mark_duplicates: true
+      recalibrate: false
+      realign: false
+      remove_lcr: true
+      tools_off: [vqsr]
+      variantcaller: [freebayes, gatk-haplotype]
+      validate: giab-NA12878/truth_small_variants.vcf.gz
+      validate_regions: giab-NA12878/truth_regions.bed
+#  - files: [../input/NA12878_1.fastq.gz, ../input/NA12878_2.fastq.gz]
+#    description: NA12878-1
+#    metadata:
+#      sex: female
+#      validate_batch: giab
+#      validate_sample: remap-hg38
+#    analysis: variant2
+#    genome_build: hg38
+#    algorithm:
+#      aligner: bwa
+#      mark_duplicates: true
+#      recalibrate: false
+#      realign: false
+#      remove_lcr: true
+#      tools_off: [vqsr]
+#      variantcaller: [freebayes, gatk-haplotype]
+#      validate: giab-NA12878-remap/truth_small_variants.vcf.gz
+#      validate_regions: giab-NA12878-remap/truth_regions.bed
+#  - files: [../input/NA12878_1.fastq.gz, ../input/NA12878_2.fastq.gz]
+#    description: NA12878-2
+#    metadata:
+#      sex: female
+#      validate_batch: giab
+#      validate_sample: remap-hg38-noalt
+#    analysis: variant2
+#    genome_build: hg38-noalt
+#    algorithm:
+#      aligner: bwa
+#      mark_duplicates: true
+#      recalibrate: false
+#      realign: false
+#      remove_lcr: true
+#      tools_off: [vqsr]
+#      variantcaller: [freebayes, gatk-haplotype]
+#      validate: giab-NA12878-remap/truth_small_variants.vcf.gz
+#      validate_regions: giab-NA12878-remap/truth_regions.bed
+#  - files: [../input/NA12878_1.fastq.gz, ../input/NA12878_2.fastq.gz]
+#    description: NA12878-3
+#    metadata:
+#      sex: female
+#      validate_batch: giab
+#      validate_sample: GRCh37
+#    analysis: variant2
+#    genome_build: GRCh37
+#    algorithm:
+#      aligner: bwa
+#      mark_duplicates: true
+#      recalibrate: false
+#      realign: false
+#      remove_lcr: true
+#      tools_off: [vqsr]
+#      variantcaller: [freebayes, gatk-haplotype]
+#      validate: giab-NA12878/truth_small_variants.vcf.gz
+#      validate_regions: giab-NA12878/truth_regions.bed
+#  - files: [../input/NA12878_1.fastq.gz, ../input/NA12878_2.fastq.gz]
+#    description: NA12878-4
+#    metadata:
+#      sex: female
+#      validate_batch: giab
+#      validate_sample: crossmap-hg38
+#    analysis: variant2
+#    genome_build: hg38
+#    algorithm:
+#      aligner: bwa
+#      mark_duplicates: true
+#      recalibrate: false
+#      realign: false
+#      remove_lcr: true
+#      tools_off: [vqsr]
+#      variantcaller: [freebayes, gatk-haplotype]
+#      validate: giab-NA12878-crossmap/truth_small_variants.vcf.gz
+#      validate_regions: giab-NA12878-crossmap/truth_regions.bed
+#  - files: [../input/NA12878_1.fastq.gz, ../input/NA12878_2.fastq.gz]
+#    description: NA12878-5
+#    metadata:
+#      sex: female
+#      validate_batch: giab
+#      validate_sample: crossmap-hg38-noalt
+#    analysis: variant2
+#    genome_build: hg38-noalt
+#    algorithm:
+#      aligner: bwa
+#      mark_duplicates: true
+#      recalibrate: false
+#      realign: false
+#      remove_lcr: true
+#      tools_off: [vqsr]
+#      variantcaller: [freebayes, gatk-haplotype]
+#      validate: giab-NA12878-crossmap/truth_small_variants.vcf.gz
+#      validate_regions: giab-NA12878-crossmap/truth_regions.bed
+#  - files: [../input/NA12878_1.fastq.gz, ../input/NA12878_2.fastq.gz]
+#    description: NA12878-6
+#    metadata:
+#      sex: female
+#      validate_batch: platinum
+#      validate_sample: hg19
+#    analysis: variant2
+#    genome_build: hg19
+#    algorithm:
+#      aligner: bwa
+#      mark_duplicates: true
+#      recalibrate: false
+#      realign: false
+#      remove_lcr: true
+#      tools_off: [vqsr]
+#      variantcaller: [freebayes, gatk-haplotype]
+#      validate: platinum-genome-NA12878/truth_small_variants.vcf.gz
+#      validate_regions: platinum-genome-NA12878/truth_regions.bed
+#  - files: [../input/NA12878_1.fastq.gz, ../input/NA12878_2.fastq.gz]
+#    description: NA12878-7
+#    metadata:
+#      sex: female
+#      validate_batch: platinum
+#      validate_sample: hg38
+#    analysis: variant2
+#    genome_build: hg38
+#    algorithm:
+#      aligner: bwa
+#      mark_duplicates: true
+#      recalibrate: false
+#      realign: false
+#      remove_lcr: true
+#      tools_off: [vqsr]
+#      variantcaller: [freebayes, gatk-haplotype]
+#      validate: platinum-genome-NA12878/truth_small_variants.vcf.gz
+#      validate_regions: platinum-genome-NA12878/truth_regions.bed
+#  - files: [../input/NA12878_1.fastq.gz, ../input/NA12878_2.fastq.gz]
+#    description: NA12878-8
+#    metadata:
+#      sex: female
+#      validate_batch: platinum
+#      validate_sample: hg38-noalt
+#    analysis: variant2
+#    genome_build: hg38-noalt
+#    algorithm:
+#      aligner: bwa
+#      mark_duplicates: true
+#      recalibrate: false
+#      realign: false
+#      remove_lcr: true
+#      tools_off: [vqsr]
+#      variantcaller: [freebayes, gatk-haplotype]
+#      validate: platinum-genome-NA12878/truth_small_variants.vcf.gz
+#      validate_regions: platinum-genome-NA12878/truth_regions.bed

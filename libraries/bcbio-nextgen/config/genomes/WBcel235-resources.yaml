@@ -1,0 +1,5 @@
+version: 18
+
+aliases:
+  ensembl: caenorhabditis_elegans_vep_100_WBcel235
+  snpeff: WBcel235.86

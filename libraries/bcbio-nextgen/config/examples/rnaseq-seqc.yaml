@@ -1,0 +1,11 @@
+# Template for human RNA-seq using Illumina prepared samples
+---
+details:
+  - analysis: RNA-seq
+    genome_build: hg38
+    algorithm:
+      quality_format: Standard
+      aligner: star
+      strandedness: unstranded
+upload:
+  dir: ../final

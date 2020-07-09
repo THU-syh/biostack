@@ -1,0 +1,5 @@
+version: 7
+
+aliases:
+  ensembl: danio_rerio_vep_100_GRCz11
+  #snpeff:

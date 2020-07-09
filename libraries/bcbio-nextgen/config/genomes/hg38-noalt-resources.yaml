@@ -1,0 +1,38 @@
+version: 29
+
+aliases:
+  human: true
+  snpeff: GRCh38.86
+  ensembl: homo_sapiens_merged_vep_100_GRCh38
+
+variation:
+  dbsnp: ../variation/dbsnp-151.vcf.gz
+  dbnsfp: ../variation/dbNSFP.txt.gz
+  dbscsnv: ../variation/dbscSNV.txt.gz
+  genesplicer: ../variation/genesplicer
+  train_hapmap: ../variation/hapmap_3.3.vcf.gz
+  train_omni: ../variation/1000G_omni2.5.vcf.gz
+  train_1000g: ../variation/1000G_phase1.snps.high_confidence.vcf.gz
+  train_indels: ../variation/Mills_and_1000G_gold_standard.indels.vcf.gz
+  cosmic: ../variation/cosmic.vcf.gz
+  lcr: ../variation/LCR.bed.gz
+  genotype2phenotype: ../variation/G2P.csv
+
+rnaseq:
+  transcripts: ../rnaseq/ref-transcripts.gtf
+  transcripts_mask: ../rnaseq/ref-transcripts-mask.gtf
+  transcriptome_index:
+    tophat: ../rnaseq/tophat/hg38-noalt_transcriptome.ver
+  dexseq: ../rnaseq/ref-transcripts.dexseq.gff3
+  refflat: ../rnaseq/ref-transcripts.refFlat
+  rRNA_fa: ../rnaseq/rRNA.fa
+
+srnaseq:
+  srna_transcripts: ../srnaseq/srna-transcripts.gtf
+  mirbase_hairpin: ../srnaseq/hairpin.fa
+  mirbase_mature: ../srnaseq/mature.fa
+  mirdeep2_fasta: ../srnaseq/Rfam_for_miRDeep.fa
+  trna_fasta: ../srnaseq/trna_mature_pre.fa
+  mint_lookup: ../srnaseq/LookupTable.tRFs.MINTmap_v1.txt
+  mint_space: ../srnaseq/tRNAspace.Spliced.Sequences.MINTmap_v1.fa
+  mint_other: ../srnaseq/OtherAnnotations.MINTmap_v1.txt

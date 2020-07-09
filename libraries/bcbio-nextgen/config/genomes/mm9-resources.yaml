@@ -1,0 +1,7 @@
+version: 7
+
+rnaseq:
+  transcripts: ../rnaseq/ref-transcripts.gtf
+  transcripts_mask: ../rnaseq/ref-transcripts-mask.gtf
+  transcriptome_index:
+    tophat: ../rnaseq/tophat/mm9_transcriptome.ver

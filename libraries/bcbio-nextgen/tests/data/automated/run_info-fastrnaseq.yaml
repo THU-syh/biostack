@@ -1,0 +1,19 @@
+upload:
+  dir: upload
+details:
+  - analysis: fastrna-seq
+    algorithm:
+      spikein_fasta: ../data/spikeins/spikeins.fa
+    metadata:
+      batch: TestBatch1
+    description: Test1
+    files: [1_1.fq.gz, 1_2.fq.gz]
+    genome_build: hg19
+  - analysis: fastrna-seq
+    algorithm:
+      spikein_fasta: ../data/spikeins/spikeins.fa
+    metadata:
+      batch: TestBatch1
+    description: Test2
+    files: [1_1.fq.gz, 1_2.fq.gz]
+    genome_build: hg19
