@@ -1,0 +1,1 @@
+web: wandb login && sh setup.sh && streamlit run text_classification/streamlit.py
