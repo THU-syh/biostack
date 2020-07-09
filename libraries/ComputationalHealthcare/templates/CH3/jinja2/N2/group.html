@@ -1,0 +1,193 @@
+{% extends "base.html" %}
+{% import 'macro_tables.html' as tables %}
+{% block page_content %}
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-12">
+        <ol class="breadcrumb m-t">
+            <li><a href="/">Home</a></li>
+            <li><a href="/N2/">Readmission Analytics</a></li>
+            <li><a href="/N2/{{payload.dataset.identifier}}">{{ payload.dataset.name }}</a></li>
+            <li class="active"><strong> {{ payload.Coder[payload.split_code] }} ({{ payload.split_code }})</strong></li>
+        </ol>
+    </div>
+    <div class="col-lg-12 m-t">
+        <h3> <span class="mid-size">Index hospitalizations and rehospitalizations following:</span> {{ payload.Coder[payload.split_code] }}</h3>
+    </div>
+</div>
+<div class="wrapper wrapper-content">
+    <div class="row m-b">
+    <div class="col-lg-4">
+        {{ tables.exclusion_table("Exclusions selecting index hospitalizations",payload.exclusions_index)}}
+    </div>
+    <div class="col-lg-4">
+        {{ tables.exclusion_table("Exclusions selecting rehospitalizations",payload.exclusions_edge)}}
+    </div>
+    <div class="col-lg-4">
+        <div class="ibox">
+            <div class="ibox-title">
+                <h4>Index Hospitalization counts</h4>
+            </div>
+            <div class="ibox-content">
+            <table class="table table-striped table-hover dataTables-dict">
+                <thead>
+                    <th>Index hospitalization</th>
+                    <th class="text-center">Count</th>
+                    <th class="text-center">%</th>
+                </thead>
+                <tr>
+                    <td> All </td>
+                    <td class="text-right">{{ payload.node.all.count }}</td>
+                    <td class="text-right">100%</td>
+                </tr>
+                <tr>
+                    <td> Discharged </td>
+                    <td class="text-right">{% if payload.node.discharged %}{{ payload.node.discharged.count }}{% endif %}</td>
+                    <td class="text-right">{% if payload.node.discharged %}{{ (100.0*payload.node.discharged.count/payload.node.all.count)|round(1) }}%{% endif %}</td>
+
+                </tr>
+                <tr>
+                    <td> Transferred </td>
+                    <td class="text-right">{% if payload.node.transferred %}{{ payload.node.transferred.count }}{% endif %}</td>
+                    <td class="text-right">{% if payload.node.transferred %}{{ (100.0*payload.node.transferred.count/payload.node.all.count)|round(1) }}%{% endif %}</td>
+                </tr>
+                <tr>
+                    <td> Died </td>
+                    <td class="text-right">{% if payload.node.died %}{{ payload.node.died.count }}{% endif %}</td>
+                    <td class="text-right">{% if payload.node.died %}{{ (100.0*payload.node.died.count/payload.node.all.count)|round(1) }}%{% endif %}</td>
+                </tr>
+            </table>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+        <div class="ibox">
+            <div class="ibox-title">
+                <h4>All Cause Rehospitalizations</h4>
+            </div>
+            <div class="ibox-content">
+                <table class="table dataTables-full">
+                    <thead>
+                        <th>sub</th>
+                        <th>count</th>
+                        <th>rate</th>
+                        <th>explore</th>
+                    </thead>
+                    <tbody>
+                     {% for k in payload.edges %}
+                     {% if k.initial == payload.split_code and k.sub.startswith("N2") %}
+                     <tr>
+                         <td>{{ payload.Coder[k.sub] }}</td>
+                         <td class="text-right">{{ k.count }}</td>
+                         <td class="text-right">{% if payload.node.discharged %}{{ (100.0*k.count/payload.node.discharged.count)|round(1) }}%{% endif %}</td>
+                         <td class="text-center"><a href="/N2/{{payload.dataset.identifier}}/Entry/{{ k.key }}">view</a></td>
+                     </tr>
+                    {% endif %}
+                    {% endfor %}
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+        </div>
+        <div class="col-lg-6">
+        <div class="ibox">
+            <div class="ibox-title">
+                <h4>Readmission grouped by subsequent procedures</h4>
+            </div>
+            <div class="ibox-content">
+                <table class="table dataTables-full">
+                    <thead>
+                        <th>sub</th>
+                        <th>count</th>
+                        <th>rate</th>
+                        <th>explore</th>
+                    </thead>
+                    <tbody>
+                     {% for k in payload.edges %}
+                     {% if k.initial == payload.split_code and k.sub.startswith("P") %}
+                     <tr>
+                         <td>{{ payload.Coder[k.sub] }}</td>
+                         <td class="text-right">{{ k.count }}</td>
+                         <td class="text-right">{% if payload.node.discharged %}{{ (100.0*k.count/payload.node.discharged.count)|round(1) }}%{% endif %}</td>
+                         <td class="text-center"><a href="/N2/{{payload.dataset.identifier}}/Entry/{{ k.key }}">view</a></td>
+                     </tr>
+                    {% endif %}
+                    {% endfor %}
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+        <div class="ibox">
+            <div class="ibox-title">
+                <h4>Readmission grouped by subsequent primary diagnosis</h4>
+            </div>
+            <div class="ibox-content">
+                <table class="table dataTables-full">
+                    <thead>
+                        <th>sub</th>
+                        <th>count</th>
+                        <th>rate</th>
+                        <th>explore</th>
+                    </thead>
+                    <tbody>
+                     {% for k in payload.edges %}
+                     {% if k.initial == payload.split_code and k.sub.startswith("D") and not k.sub.startswith("DG") %}
+                     <tr>
+                         <td>{{ payload.Coder[k.sub] }}</td>
+                         <td class="text-right">{{ k.count }}</td>
+                         <td class="text-right">{% if payload.node.discharged %}{{ (100.0*k.count/payload.node.discharged.count)|round(1) }}%{% endif %}</td>
+                         <td class="text-center"><a href="/N2/{{payload.dataset.identifier}}/Entry/{{ k.key }}">view</a></td>
+                     </tr>
+                    {% endif %}
+                    {% endfor %}
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+        </div>
+        <div class="col-lg-6">
+        <div class="ibox">
+            <div class="ibox-title">
+                <h4>Readmission grouped by subsequent DRG</h4>
+            </div>
+            <div class="ibox-content">
+                <table class="table dataTables-full">
+                    <thead><tr>
+                        <th>sub</th>
+                        <th>count</th>
+                        <th>rate</th>
+                        <th>explore</th></tr>
+                    </thead>
+                    <tbody>
+                     {% for k in payload.edges %}
+                     {% if k.initial == payload.split_code and k.sub.startswith("DG") %}
+                     <tr>
+                         <td>{{ payload.Coder[k.sub] }}</td>
+                         <td class="text-right">{{ k.count }}</td>
+                         <td class="text-right">{% if payload.node.discharged %}{{ (100.0*k.count/payload.node.discharged.count)|round(1) }}%{% endif %}</td>
+                         <td class="text-center"><a href="/N2/{{payload.dataset.identifier}}/Entry/{{ k.key }}">view</a></td>
+                     </tr>
+                    {% endif %}
+                    {% endfor %}
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block page_js %}
+<script>
+    InitializeTables();
+</script>
+{% endblock %}

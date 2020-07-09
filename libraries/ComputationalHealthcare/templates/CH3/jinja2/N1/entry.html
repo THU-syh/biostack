@@ -1,0 +1,229 @@
+{% extends "base.html" %}
+{% import 'macro_tables.html' as tables %}
+{% block page_css%}
+<!--<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>-->
+<!--<link href='https://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>-->
+{% endblock %}
+{% block page_content %}
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-12">
+        <ol class="breadcrumb m-t">
+            <li><a href="/">Home</a></li>
+            <li><a href="/N1/">Procedure Analytics</a></li>
+            <li><a href="/N1/{{payload.dataset.identifier}}">{{ payload.dataset.name }}</a></li>
+            <li>{% if payload.entry.pediatric %} Pediatric patients (Age <= 20 years) {% else %} Adult patients (Age > 20 years) {% endif %}</li>
+            <li class="active"><strong>{{ payload.entry.key }}</strong></li>
+        </ol>
+    </div>
+    <div class="col-lg-12 m-t">
+        <h3><a href="../Group/{{payload.entry.initial}}"> {{ payload.Coder[payload.entry.initial] }} <small class="mid-size">( {{ payload.entry.initial}} )</small></a> <small class="mid-size">  followed by   </small> <a href="../Group/{{payload.entry.sub}}"> {{ payload.Coder[payload.entry.sub] }} <small  class="mid-size">( {{ payload.entry.sub}} )</small></a></h3>
+        {% if payload.entry.dx %}
+        <h3><small class="mid-size">In visits with Primary Diagnosis:</small>  <a href="../Group/{{payload.entry.dx}}"> {{ payload.Coder[payload.entry.dx] }} <small class="mid-size">( {{ payload.entry.dx}} )</small> </a></h3>
+        {% endif %}
+        <h4>{% if payload.entry.pediatric %} Pediatric patients (Age <= 20 years) {% else %} Adult patients (Age > 20 years) {% endif %}</h4>
+    </div>
+</div>
+<div class="wrapper wrapper-content">
+<div class="row">
+        <div class="col-md-4 col-lg-2">
+            <div class="ibox m-b">
+                <div class="ibox-title">
+                    <h5>Visits</h5>
+                    <span class="label label-primary pull-right">{% if payload.entry.pediatric %} Pediatric patients (Age <= 20 years) {% else %} Adult patients (Age > 20 years) {% endif %}</span>
+                </div>
+                <div class="ibox-content">
+                    <h1 class="no-margins text-right">{{ payload.humanize.intcomma(payload.entry.stats.count) }}</h1>
+                </div>
+                <div class="ibox-content text-center">
+                    <a class="btn btn-success" href="/N1/Compare/{{payload.dataset.identifier}}/P_{{ payload.entry.key }}/{{payload.dataset.identifier}}/A_{{payload.entry.key}}">Compare Adult vs Pediatric</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-4">{{tables.simple_table("Sex Distribution","Sex",payload.entry.stats.sexh,payload.Coder)}}</div>
+        <div class="col-md-4 col-lg-2">
+            <div class="ibox m-b">
+                <div class="ibox-title">
+                    <span class="label label-primary pull-right">In hospital</span>
+                    <h5>Mortality</h5>
+                </div>
+                <div class="ibox-content">
+                {% for k in payload.entry.stats.deathh %}
+                    {% if k.k == 31 %}
+                        <h1 class="no-margins text-right">{{(100.0*k.v/payload.entry.stats.count)|round(2)}} %</h1>
+                    {% endif %}
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-8">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>Length of Stay Distribution</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="MG_chart" style="height:75px" id="los_chart" data-y-label="Visits" data-x-label="LOS in days" data-left=80 data-bottom=50 data-chart-type="line" data-x="los" data-y="visits" data-height=200 data-chart-data="los_data"></div>
+                    {{ tables.int_table_flat("LOS","days",payload.entry.stats.losh) }}
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-4">{{tables.policy_table(payload.entry.stats.policy)}}</div>
+</div>
+<div class="row white-bg ibox">
+    <div class="col-lg-8 m-t">
+        <h3>Temporal Distribution : {{ payload.Coder[payload.entry.initial] }} <small class="mid-size">( {{ payload.entry.initial}} )</small> <small class="mid-size">  followed by   </small> {{ payload.Coder[payload.entry.sub] }} <small  class="mid-size">( {{ payload.entry.sub}} )</small></h3>
+    </div>
+    <div class="col-lg-4 m-t">
+        {{ tables.int_table_flat("&Delta;T","days",payload.entry.deltah) }}
+    </div>
+    <div class="col-lg-12">
+        <div id="delta-chart" style="height:200px"></div>
+    </div>
+    <div class="col-lg-8 m-t subset_plot">
+        <h3>Variation by &Delta;T for <span id="subset_plot_text"></span></h3>
+    </div>
+    <div class="col-lg-4 m-t subset_plot">
+        <div class="text-right">
+            <div class="btn-group">
+              <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                Select attribute / value combination to plot <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu columnsdd" id="RDropDown" role="menu">
+                <!--<div class="row" style="width:600px;">-->
+                  {% for k,v in payload.dropdown.items() %}
+                   <!--<ul class="col-md-3" role="menu">-->
+                    {% for s in v %}
+                        <li><a href="#" class="refresh" data-value="{{s.0}}" data-attrib="{{k}}" data-text="{{s.1}}" data-selection="{{s.2}}" >{{s.2}}</a></li>
+                    {% endfor %}
+                  <li role="presentation" class="divider"></li>
+                    <!--</ul>-->
+                  {% endfor %}
+                <!--</div>-->
+              </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12 m-b subset_plot">
+        <div id="delta-subset-chart" style="height:200px"></div>
+    </div>
+</div>
+
+<div class="row m-t">
+    <div class="col-lg-6 col-md-12">
+    <div class="row">
+        <div class="col-lg-6 col-md-6">{{tables.dict_table("Source Distribution","Source",payload.entry.stats.sourceh,payload.Coder)}}</div>
+        <div class="col-lg-6 col-md-6">{{tables.dict_table("Disposition Distribution","Disposition",payload.entry.stats.disph,payload.Coder)}}</div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 col-md-6">{{tables.dict_table("Payer Distribution","Payer",payload.entry.stats.payerh,payload.Coder)}}</div>
+        <div class="col-lg-6 col-md-6">{{tables.dict_table("Race Distribution","Race",payload.entry.stats.raceh,payload.Coder)}}</div>
+    </div>
+    </div>
+    <div class="col-lg-6 col-md-12">
+        <div class="ibox m-b">
+            <div class="ibox-title">
+                <h5>State variation</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                {{ tables.subset_table(payload.subset_entry_table(payload.entry.state_subset),"State",payload.Coder)}}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row m-t m-b">
+    <div class="col-lg-6 col-md-12">
+        <div class="ibox m-b">
+            <div class="ibox-title">
+                <h5>Yearly variation</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                {{ tables.subset_table(payload.subset_table(payload.entry.year_subset),"Year",payload.Coder)}}
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-12">
+        <div class="ibox">
+            <div class="ibox-title">
+                <h5>Age Distribution</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+            <div class="row">
+                <div class="col-md-3">
+                    {{ tables.age_table(payload.entry.stats.agedh) }}
+                </div>
+                <div class="col-md-9">
+                    <div class="MG_chart" id="age_chart" data-y-label="Visits" data-x-label="Age in years" data-left=80 data-bottom=50 data-chart-type="histogram" data-x="age" data-y="visits" data-height=200 data-chart-data="age_data" style="height:150px"></div>
+                    {{ tables.int_table("age","years",payload.entry.stats.ageh) }}
+                </div>
+                <div class="col-md-12">
+                    {{ tables.subset_table(payload.subset_table(payload.entry.age_subset),"Age range yrs.",payload.Coder) }}
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row m-t m-b-lg"><div class="col-lg-12">{{ tables.procedures(payload.entry.stats.prh,payload.Coder)}}</div></div>
+<div class="row m-t m-b-lg"><div class="col-lg-12">{{ tables.drg(payload.entry.stats.drgh,payload.Coder)}}</div></div>
+<div class="row m-t m-b-lg"><div class="col-lg-12">{{ tables.dx(payload.entry.stats.dxh,payload.Coder)}}</div></div>
+<div class="row m-t m-b-lg"><div class="col-lg-12">{{ tables.ex(payload.entry.stats.exh,payload.Coder)}}</div></div>
+</div>
+{% endblock %}
+{% block page_js %}
+<script>
+var chart_data = {};
+chart_data["delta_plot_data"] = JSON.parse('{{ payload.delta_plot_data|safe }}');
+chart_data["los_data"] = JSON.parse('{{ payload.los_plot_data }}');
+chart_data["age_data"] = JSON.parse('{{ payload.age_plot_data }}');
+var delta_data = JSON.parse('{{ payload.delta_multi_plot_data }}');
+var plots = {};
+var charts = {};
+var charts_delta = {};
+$(document).ready(function() {
+    InitializeTables();
+    var high = new PlotHighlighter();
+    var refresh = $('.refresh');
+    f1 = function(item) {return "For " + item.datapoint[1] + " visits " + "{{ payload.Coder[payload.entry.sub] }}" + " occured " + item.datapoint[0].toFixed(0) + " days after " + "{{ payload.Coder[payload.entry.initial] }}" + "."};
+    charts_delta["delta-chart"] = new DeltaChart( "#delta-chart",delta_data,plots,f1,high);
+    $('.MG_chart').each(function(index, element){charts[index] = new MGChart(element,chart_data);});
+    if (!jQuery.isEmptyObject(chart_data["delta_plot_data"])){
+        refresh.on('click',function(){
+            var _this = $(this);
+            $('#delta-subset-chart_tooltip').remove();
+            $('#subset_plot_text').text(_this.data("selection"));
+            f2 = function(item){return "For " + item.datapoint[1] + " % visits that occured "+ item.datapoint[0].toFixed(0) +" days "+_this.data('text')};
+            var selected_data = chart_data["delta_plot_data"][_this.data('attrib')][parseInt(_this.data('value'),10)];
+            charts_delta["delta-subset-chart"] = new DeltaChart( "#delta-subset-chart",selected_data,plots,f2,high);
+            high.initialize(charts_delta);
+            $("#RDropDown").dropdown('hide');
+            return false
+        });
+        refresh.first().click();
+    }
+    else
+    {
+        high.initialize(charts_delta);
+        $('.subset_plot').hide();
+    }
+});
+</script>
+{% endblock %}

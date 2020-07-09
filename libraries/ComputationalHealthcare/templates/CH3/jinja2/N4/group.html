@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+{% import 'macro_tables.html' as tables %}
+{% block page_content %}
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-12">
+        <ol class="breadcrumb m-t">
+            <li><a href="/">Home</a></li>
+            <li><a href="/N4/">Patient Analytics</a></li>
+            <li><a href="/N4/{{ payload.dataset.identifier }}">{{ payload.dataset.name }}</a></li>
+            <li class="active"><strong> {{ payload.Coder[payload.split_code] }} ({{ payload.split_code }})</strong></li>
+        </ol>
+    </div>
+    <div class="col-lg-12 m-t">
+        <h3> <span class="mid-size"> Diagnosis co occuring with :</span> {{ payload.Coder[payload.node_entry.index] }}</h3>
+    </div>
+</div>
+<div class="wrapper wrapper-content">
+    <div class="row m-b">
+    <div class="col-lg-4">
+        {% if payload.node_entry.exclusions %}
+        {{ tables.exclusion_table("Exclusions selecting patients and unlinked visits",payload.node_entry.exclusions)}}
+        {% endif %}
+    </div>
+    <div class="col-md-4 col-lg-2">
+        <div class="ibox">
+            <div class="ibox-title">
+                <h5>Patients</h5>
+            </div>
+            <div class="ibox-content">
+                <h4 class="no-margins text-right">
+                    {{ payload.node_entry.patients }}
+                </h4>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-lg-2">
+        <div class="ibox">
+            <div class="ibox-title">
+                <h5>Linked visits</h5>
+            </div>
+            <div class="ibox-content">
+                <h4 class="no-margins text-right">
+                    {{ payload.node_entry.linked_visits }}
+                </h4>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-lg-2">
+        <div class="ibox">
+            <div class="ibox-title">
+                <h5>Unlinked visits</h5>
+            </div>
+            <div class="ibox-content">
+                <h4 class="no-margins text-right">
+                    {{ payload.node_entry.unlinked_visits }}
+                </h4>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+        <div class="ibox">
+            <div class="ibox-title">
+                <h4>Diagnosis cooccuring in patients with Index diagnosis ({{ payload.node_entry.index }}) {{ payload.Coder[payload.node_entry.index] }}</h4>
+            </div>
+            <div class="ibox-content">
+                <table class="table dataTables-full">
+                    <thead>
+                        <th>Code</th>
+                        <th>Sub diagnosis</th>
+                        <th>Unlinked visits</th>
+                        <th>Patients</th>
+                        <th>Relative Risk</th>
+                        <th>Correleation</th>
+                        <th>Selected Patients</th>
+                        <th>Visits with index %</th>
+                        <th>Visits with sub %</th>
+                        <th>Visits with both %</th>
+                        <th>% Patients with index first</th>
+                        <th>% Patients with sub first</th>
+                        <th>Median days between first occurence of index and sub</th>
+                        <th>Median days between first occurence of sub and index</th>
+                        <th>explore</th>
+                    </thead>
+                    <tbody>
+                     {% for k in payload.edges %}
+                     {% if k.sub != k.index %}
+                     <tr>
+                             <td>{{ k.sub }}</td>
+                             <td>{{ payload.Coder[k.sub] }}</td>
+                             <td class="text-right"></td>
+                             <td class="text-right">{{ k.patients }}</td>
+                             <td class="text-right">
+{#                                 {{ k.rr|round(2) }}#}
+                             </td>
+                             <td class="text-right">
+{#                                 {{ k.corr|round(3) }}#}
+                             </td>
+                             {% if k.linked_visits is defined %}
+                                 <td class="text-right">{{ k.patients }}</td>
+                                 <td class="text-right">{{ (100.0*k.index_visits/k.linked_visits)|round(0) }}</td>
+                                 <td class="text-right">{{ (100.0*k.sub_visits/k.linked_visits)|round(0)  }}</td>
+                                 <td class="text-right">{{ (100.0*k.intersection_visits/k.linked_visits)|round(0) }}</td>
+                                 <td class="text-right">{{ (100.0*k.patient_index_first/k.patients)|round(0) }}</td>
+                                {% if k.patient_sub_first %}
+                                    <td class="text-right">{{ (100.0*k.patient_sub_first/k.patients)|round(0) }}</td>
+                                {% else %}
+                                    <td class="text-right">0.0</td>
+                                {% endif %}
+                                 <!--<td class="text-right"></td>-->
+                                 <td class="text-right">{{ k.index_first_days }}</td>
+                                 <td class="text-right">{{ k.sub_first_days }}</td>
+                                 <td class="text-center"><a href="{{payload.dataset.home_url}}/Entry/{{ k.key }}">view</a></td>
+                             {% else %}
+                                 <td class="text-right"></td>
+                                 <td class="text-right"></td>
+                                 <td class="text-right"></td>
+                                 <td class="text-right"></td>
+                                 <td class="text-right"></td>
+                                 <td class="text-right"></td>
+                                 <td class="text-right"></td>
+                                 <td class="text-right"></td>
+                                 <td class="text-center"><a href="/N4/{{ payload.dataset.identifier }}/Entry/{{ k.key }}">view</a></td>
+                             {% endif %}
+                     </tr>
+                     {% endif %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block page_js %}
+<script>
+    InitializeTables();
+</script>
+{% endblock %}

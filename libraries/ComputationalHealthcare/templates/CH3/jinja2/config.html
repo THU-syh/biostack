@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% block page_css %}
+    <link href="/static/ccss/plugins/toastr/toastr.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block page_content %}
+<div class="row  border-bottom white-bg dashboard-header">
+    <div class="col-lg-12">
+        <ol class="breadcrumb m-t">
+            <li><a href="/">Home</a></li>
+            <li class="active"><a href="/Config">Configuration</a></li>
+        </ol>
+    </div>
+</div>
+<div class="wrapper wrapper-content">
+
+
+
+<div class="row m-t">
+    <div class="col-lg-8 col-md-12">
+    <div class="ibox float-e-margins">
+        <div class="ibox-title">
+            List of enumerated Data Elements and possible values
+        </div>
+        <div class="ibox-content">
+            <table class="table table-striped table-bordered table-hover dataTables-full enums_table">
+                <thead>
+                    <tr>
+                        <th>Data Element</th>
+                        <th>Name</th>
+                        <th>Integer value</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for k in payload.enums %}
+                <tr><td>{{ k.0 }}</td><td>{{ k.1 }}</td><td>{{ k.2 }}</td><td>{{ payload.coder[k.2] }}</td></tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </div>
+</div>
+<div class="row m-t">
+    <div class="col-lg-12 col-md-12">
+    <div class="ibox float-e-margins">
+        <div class="ibox-title">
+            List of ICD-9, DRG Codes and Descriptions
+        </div>
+        <div class="ibox-content">
+            <div class="text-center"><a class="btn btn-outline btn-success" type="button" id="loader"><i class="fa-load"></i> Please click here to load all configured codes (Takes 2 ~ 3 minutes)</a></div>
+            <table class="table table-striped table-bordered table-hover dataTables-delayed codes_table" style="display:none">
+                <thead>
+                    <tr>
+                        <th>Code type</th>
+                        <th>Code</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </div>
+</div>
+</div>
+
+
+{% endblock %}
+{% block page_js %}
+<script src="/static/cjs/plugins/toastr/toastr.min.js"></script>
+<script>
+$(document).ready(function() {
+    InitializeTables();
+    $('#loader').on('click',function(){
+        $('.dataTables-delayed').show().dataTable( {
+        "ajax": 'codelist',
+        "sAjaxDataProp":"",
+        responsive: true,
+        "dom": 'T<"clear">lfrtip',
+        "tableTools": {
+            "sSwfPath": "/static/cjs/plugins/dataTables/swf/copy_csv_xls_pdf.swf"
+        }
+        });
+        $('#loader').hide()
+    });
+});
+</script>
+{% endblock %}

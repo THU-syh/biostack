@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% import 'macro_tables.html' as tables %}
+{% block page_css%}
+<!--<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>-->
+<!--<link href='https://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>-->
+{% endblock %}
+{% block page_content %}
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-12">
+        <ol class="breadcrumb m-t">
+            <li><a href="/">Home</a></li>
+            <li><a href="/N1/">Rehospitalization Analytics</a></li>
+            <li><a href="{{payload.dataset.home_url}}">{{ payload.dataset.name }}</a></li>
+            <li class="active"><strong>{{ payload.entry.key }}</strong></li>
+        </ol>
+    </div>
+    <div class="col-lg-12 m-t">
+        <h3><a href="../Group/{{payload.entry.initial_key}}"> {{ payload.Coder[payload.entry.initial_key] }} <small class="mid-size">( {{ payload.entry.initial_key}} )</small></a> <small class="mid-size">  followed by   </small> <a href="../Group/{{payload.entry.sub_key}}"> {{ payload.Coder[payload.entry.sub_key] }} <small  class="mid-size">( {{ payload.entry.sub_key}} )</small></a></h3>
+    </div>
+</div>
+<div class="wrapper wrapper-content">
+<div class="row m-t">
+            <div class="col-md-4 col-lg-2">
+            <div class="ibox m-b">
+                <div class="ibox-title">
+                    <span class="label label-primary pull-right">count</span>
+                    <h5>Visits</h5>
+                </div>
+                <div class="ibox-content">
+                    <h1 class="no-margins text-right">{{ payload.humanize.intcomma(payload.entry.initial.count) }}</h1>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-4">{{tables.simple_table("Sex Distribution","Sex",payload.entry.stats.sexh,payload.Coder)}}</div>
+        <div class="col-md-4 col-lg-2">
+            <div class="ibox m-b">
+                <div class="ibox-title">
+                    <span class="label label-primary pull-right">In hospital</span>
+                    <h5>Mortality</h5>
+                </div>
+                <div class="ibox-content">
+                {% for k in payload.entry.stats.deathh %}
+                    {% if k.k == 31 %}
+                        <h1 class="no-margins text-right">{{(100.0*k.v/payload.entry.stats.count)|round(2)}} %</h1>
+                    {% endif %}
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-8">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>Length of Stay Distribution</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="MG_chart" style="height:75px" id="los_chart" data-y-label="Visits" data-x-label="LOS in days" data-left=80 data-bottom=50 data-chart-type="line" data-x="los" data-y="visits" data-height=200 data-chart-data="los_data"></div>
+                    {{ tables.int_table("LOS","days",payload.entry.stats.losh) }}
+                </div>
+            </div>
+        </div>
+
+</div>
+</div>
+{% endblock %}
+{% block page_js %}
+<script>
+$(document).ready(function() {
+    InitializeTables();
+});
+</script>
+{% endblock %}

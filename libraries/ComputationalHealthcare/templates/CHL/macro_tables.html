@@ -1,0 +1,919 @@
+{% macro dict_table(table_title,field_name,table_data,coder) -%}
+    <div class="modal inmodal" id="table_modal_{{field_name}}" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">{{ table_title }}</h4>
+                </div>
+                <div class="modal-body">
+                    <p>some INFO</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="box m-b">
+        <div class="box-header with-border">
+            <h5>{{ table_title }}</h5>
+        </div>
+        <div class="box-body">
+            <table class="table table-striped table-hover m-clear dataTables-dict">
+                <thead>
+                    <tr>
+                        <th>{{ field_name }}</th>
+                        <th>Count</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for k in table_data %}
+                <tr>
+                    <td> {{ coder[k.k] }}</td>
+                    <td class="text-right"> {{ k.v }}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{%- endmacro %}
+
+{% macro percentage_dict_table(table_title,field_name,table_data,total,coder) -%}
+    <div class="modal inmodal" id="table_modal_{{field_name}}" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">{{ table_title }}</h4>
+                </div>
+                <div class="modal-body">
+                    <p>some INFO</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="box m-b">
+        <div class="box-header with-border">
+            <h5>{{ table_title }}</h5>
+        </div>
+        <div class="box-body">
+            <table class="table table-striped table-hover m-clear dataTables-dict">
+                <thead>
+                    <tr>
+                        <th>{{ field_name }}</th>
+                        <th>Count</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for k in table_data %}
+                <tr>
+                    <td> {{ coder[k.k] }}</td>
+                    <td class="text-right"> {{ ((100.0*k.v)/total)|round(1) }} %</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{%- endmacro %}
+
+{% macro compare_lr_table(table_title,field_name,table_data,coder) -%}
+    <div class="modal inmodal" id="table_modal_{{field_name}}" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">{{ table_title }}</h4>
+                </div>
+                <div class="modal-body">
+                    <p>some INFO</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="box m-b">
+        <div class="box-header with-border">
+            <h5>{{ table_title }}</h5>
+        </div>
+        <div class="box-body">
+            <table class="table table-striped table-hover m-clear dataTables-dict">
+                <thead>
+                    <tr>
+                        <th>{{ field_name }}</th>
+                        <th>Left</th>
+                        <th>Right</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for k,v in table_data.iteritems() %}
+                <tr>
+                    <td> {{ coder[k] }}</td>
+                    <td class="text-right"> {{ v.left }} %</td>
+                    <td class="text-right"> {{ v.right }} %</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{%- endmacro %}
+
+{% macro policy_table(p) -%}
+    <div class="modal inmodal" id="policy_modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">Aggregation Policy</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Minimum count is the lowest count allowed, all values lower than minimum are suppressed. Min hospital refers to the minimum number of hospitals from which each value must originate.
+                    E.g. if a specific combination occurs in only 3 hospitals and min_hospitals is 5 then the value is not shown.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="box m-b">
+        <div class="box-body">
+            <table class="table m-clear">
+                <thead>
+                <tr>
+                    <th colspan="2"> <a data-toggle="modal" data-target="#policy_modal" class="text-center" href="#">Aggregation Policy</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Minimum count</td><td class="text-right">{{p.min_count}}</td></tr>
+                    <tr><td>Multiple</td><td class="text-right">{{p.base}}</td></tr>
+                    <tr><td>Min hospitals</td><td class="text-right">{{p.min_hospital}}</td></tr>
+                    <tr><td>Min subset</td><td class="text-right">{{p.min_subset}}</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+{%- endmacro %}
+
+
+{% macro simple_table(table_title,field_name,table_data,coder) -%}
+    <div class="box m-b">
+        <div class="box-body">
+            <table class="table table-striped m-clear table-hover">
+                <thead>
+                    <tr>
+                        <th>{{ field_name }}</th>
+                        <th>Count</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for k in table_data %}
+                <tr>
+                    <td> {{ coder[k.k] }}</td>
+                    <td class="text-right"> {{ k.v }}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{%- endmacro %}
+
+{% macro simple_table(table_title,field_name,table_data,coder) -%}
+    <div class="box m-b">
+        <div class="box-body">
+            <table class="table table-striped m-clear table-hover">
+                <thead>
+                    <tr>
+                        <th>{{ field_name }}</th>
+                        <th>Count</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for k in table_data %}
+                <tr>
+                    <td> {{ coder[k.k] }}</td>
+                    <td class="text-right"> {{ k.v }}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{%- endmacro %}
+
+{% macro edge_simple_table(table_title,first_field_name,second_field_name,table_data,coder) -%}
+    <div class="box m-b">
+        <div class="box-header">
+            {{ table_title }}
+        </div>
+        <div class="box-body">
+            <table class="table table-striped m-clear table-hover dataTables-full">
+                <thead>
+                    <tr>
+                        <th>{{ first_field_name }}</th>
+                        <th>{{ second_field_name }}</th>
+                        <th>Count</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for k in table_data %}
+                <tr>
+                    <td> {{ coder[k.initial] }}</td>
+                    <td> {{ coder[k.sub] }}</td>
+                    <td class="text-right"> {{ k.v }}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{%- endmacro %}
+
+{% macro edge_delta_simple_table(table_title,first_field_name,second_field_name,table_data,coder) -%}
+    <div class="box m-b">
+        <div class="box-body">
+            <table class="table table-striped m-clear table-hover dataTables-full">
+                <thead>
+                    <tr>
+                        <th>{{ first_field_name }}</th>
+                        <th>{{ second_field_name }}</th>
+                        <th>Delta</th>
+                        <th>Count</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for k in table_data %}
+                <tr>
+                    <td> {{ coder[k.initial] }}</td>
+                    <td> {{ coder[k.sub] }}</td>
+                    <td class="text-right"> {{ k.delta }}</td>
+                    <td class="text-right"> {{ k.v }}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{%- endmacro %}
+
+
+{% macro exclusion_table(table_title,exdict) -%}
+    <div class="box m-b">
+        <div class="box-header with-border">
+            <h5>{{ table_title }}</h5>
+        </div>
+        <div class="box-body">
+            <table class="table table-striped table-hover dataTables-dict">
+                <thead>
+                    <th>Order</th>
+                    <th>Criteria</th>
+                    <th class="text-center">Count</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td>Total</td>
+                        <td class="text-right">{{ exdict.total }}</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Excluded</td>
+                        <td class="text-right"> - {{ exdict.excluded }}</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Selected</td>
+                        <td class="text-right">{{ exdict.selected }}</td>
+                    </tr>
+                    {% if 'selected_pediatric' in exdict %}
+                    <tr>
+                        <td></td>
+                        <td>Selected Pediatric</td>
+                        <td class="text-right">{{ exdict.selected_pediatric }}</td>
+                    </tr>
+                    {% endif %}
+                {% for k in exdict.reasons %}
+                    <tr>
+                        <td>{{ k.0 }}</td>
+                        <td>{{ k.1 }}</td>
+                        <td class="text-right"> - {{ k.2 }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{%- endmacro %}
+
+{% macro exclusion_table_compact(exdict) -%}
+    <table class="table table-striped table-hover dataTables-dict">
+        <thead>
+            <th>Order</th>
+            <th>Criteria</th>
+            <th class="text-center">Count</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td></td>
+                <td>Total</td>
+                <td class="text-right">{{ exdict.total }}</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>Excluded</td>
+                <td class="text-right"> - {{ exdict.excluded }}</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>Selected</td>
+                <td class="text-right">{{ exdict.selected }}</td>
+            </tr>
+            {% if 'selected_pediatric' in exdict %}
+            <tr>
+                <td></td>
+                <td>Selected Pediatric</td>
+                <td class="text-right">{{ exdict.selected_pediatric }}</td>
+            </tr>
+            {% endif %}
+        {% for k in exdict.reasons %}
+            <tr>
+                <td>{{ k.0 }}</td>
+                <td>{{ k.1 }}</td>
+                <td class="text-right"> - {{ k.2 }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{%- endmacro %}
+
+
+{% macro combined_table(table_title,field_name,num_count,den_count,initial_data,sub_data,denominator_data,coder,combiner) -%}
+    <div class="box m-b">
+        <div class="box-body">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>{{ field_name }}</th>
+                        <th>Initial</th>
+                        <th>Sub</th>
+                        <th>Discharged</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for k in combiner(initial_data,sub_data,denominator_data) %}
+                <tr>
+                    <td> {{ coder[k.0] }}</td>
+                    <td class="text-right"> {{ (100.0*k.1.0/num_count)|round(1) }} %</td>
+                    <td class="text-right"> {{ (100.0*k.1.1/num_count)|round(1) }} %</td>
+                    <td class="text-right"> {{ (100.0*k.1.2/den_count)|round(1) }} %</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{%- endmacro %}
+
+{% macro combined_table_dict(table_title,field_name,num_count,den_count,initial_data,sub_data,denominator_data,coder,combiner) -%}
+    <div class="modal inmodal" id="dict_table_modal_{{field_name}}" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">{{ table_title }}</h4>
+                </div>
+                <div class="modal-body">
+                    <p>some INFO</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="box m-b">
+        <div class="box-header with-border">
+            <h5>{{ table_title }}</h5>
+        </div>
+        <div class="box-body">
+            <table class="table table-striped table-hover dataTables-dict">
+                <thead>
+                    <tr>
+                        <th>{{ field_name }}</th>
+                        <th class="text-center">Initial</th>
+                        <th class="text-center">Sub</th>
+                        <th class="text-center">Discharged</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for k in combiner(initial_data,sub_data,denominator_data) %}
+                <tr>
+                    <td> {{ coder[k.0] }}</td>
+                    <td class="text-right"> {{ (100.0*k.1.0/num_count)|round(2) }} %</td>
+                    <td class="text-right"> {{ (100.0*k.1.1/num_count)|round(2) }} %</td>
+                    <td class="text-right"> {{ (100.0*k.1.2/den_count)|round(2) }} %</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{%- endmacro %}
+
+{% macro compare_procedures(left_count,right_count,left_data,right_data,coder,combiner) -%}
+<div class="box">
+    <div class="box-header with-border">
+        <h5>Procedure Distribution</h5>
+    </div>
+    <div class="box-body">
+        <table class="table  dataTables-full">
+            <thead>
+                <tr>
+                    <th>Procedure Code</th>
+                    <th>Description</th>
+                    <th class="text-center">Left</th>
+                    <th class="text-center">Right</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for k in combiner(left_data,right_data) %}
+            <tr>
+                <td> {{ k.0 }}</td>
+                <td> {{ coder[k.0] }}</td>
+                    <td class="text-right"> {{ (100.0*k.1.0/left_count)|round(2) }} %</td>
+                    <td class="text-right"> {{ (100.0*k.1.1/right_count)|round(2) }} %</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{%- endmacro %}
+
+
+{% macro combined_procedures(num_count,den_count,initial_data,sub_data,denominator_data,coder,combiner) -%}
+<div class="box">
+    <div class="box-header with-border">
+        <h5>Procedure Distribution</h5>
+    </div>
+    <div class="box-body">
+        <table class="table  dataTables-full">
+            <thead>
+                <tr>
+                    <th>Procedure Code</th>
+                    <th>Description</th>
+                    <th class="text-center">Initial</th>
+                    <th class="text-center">Sub</th>
+                    <th class="text-center">Discharged</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for k in combiner(initial_data,sub_data,denominator_data) %}
+            <tr>
+                <td> {{ k.0 }}</td>
+                <td> {{ coder[k.0] }}</td>
+                    <td class="text-right"> {{ (100.0*k.1.0/num_count)|round(2) }} %</td>
+                    <td class="text-right"> {{ (100.0*k.1.1/num_count)|round(2) }} %</td>
+                    <td class="text-right"> {{ (100.0*k.1.2/den_count)|round(2) }} %</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{%- endmacro %}
+
+{% macro combined_drg(num_count,den_count,initial_data,sub_data,denominator_data,coder,combiner) -%}
+<div class="box">
+    <div class="box-header with-border">
+        <h5>DRG Distribution</h5>
+    </div>
+    <div class="box-body">
+        <table class="table  dataTables-full">
+            <thead>
+                <tr>
+                    <th>DRG Code</th>
+                    <th>Description</th>
+                    <th class="text-center">Initial</th>
+                    <th class="text-center">Sub</th>
+                    <th class="text-center">Discharged</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for k in combiner(initial_data,sub_data,denominator_data) %}
+            <tr>
+                <td> {{ k.0 }}</td>
+                <td> {{ coder[k.0] }}</td>
+                    <td class="text-right"> {{ (100.0*k.1.0/num_count)|round(2) }} %</td>
+                    <td class="text-right"> {{ (100.0*k.1.1/num_count)|round(2) }} %</td>
+                    <td class="text-right"> {{ (100.0*k.1.2/den_count)|round(2) }} %</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{%- endmacro %}
+
+{% macro combined_dx(num_count,den_count,initial_data,sub_data,denominator_data,coder,combiner_dx) -%}
+<div class="box">
+    <div class="box-header with-border">
+        <h5>Diagnosis Distribution</h5>
+    </div>
+    <div class="box-body">
+        <table class="table  dataTables-full">
+            <thead>
+                <tr>
+                    <th>Diagnosis Code</th>
+                    <th>Description</th>
+                    <th>Initial Primary</th>
+                    <th>Sub Primary</th>
+                    <th>Discharged Primary</th>
+                    <th>Initial All</th>
+                    <th>Sub All</th>
+                    <th>Discharged All</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for k in combiner_dx(initial_data,sub_data,denominator_data) %}
+            <tr>
+                <td> {{ k.0 }}</td>
+                <td> {{ coder[k.0] }}</td>
+                <td class="text-right"> {{ (100.0*k.1.0.0/num_count)|round(2) }}%</td>
+                <td class="text-right"> {{ (100.0*k.1.1.0/num_count)|round(2) }}%</td>
+                <td class="text-right"> {{ (100.0*k.1.2.0/den_count)|round(2) }}%</td>
+                <td class="text-right"> {{ (100.0*k.1.0.2/num_count)|round(2) }}%</td>
+                <td class="text-right"> {{ (100.0*k.1.1.2/num_count)|round(2) }}%</td>
+                <td class="text-right"> {{ (100.0*k.1.2.2/den_count)|round(2) }}%</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{%- endmacro %}
+
+{% macro compare_dx(left_count,right_count,left_data,right_data,coder,combiner_dx) -%}
+<div class="box">
+    <div class="box-header with-border">
+        <h5>Diagnosis Distribution</h5>
+    </div>
+    <div class="box-body">
+        <table class="table  dataTables-full">
+            <thead>
+                <tr>
+                    <th>Diagnosis Code</th>
+                    <th>Description</th>
+                    <th>Left Primary</th>
+                    <th>Right Primary</th>
+                    <th>Left All</th>
+                    <th>Right All</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for k in combiner_dx(left_data,right_data) %}
+            <tr>
+                <td> {{ k.0 }}</td>
+                <td> {{ coder[k.0] }}</td>
+                <td class="text-right"> {{ (100.0*k.1.0.0/left_count)|round(2) }}%</td>
+                <td class="text-right"> {{ (100.0*k.1.1.0/right_count)|round(2) }}%</td>
+                <td class="text-right"> {{ (100.0*k.1.0.2/left_count)|round(2) }}%</td>
+                <td class="text-right"> {{ (100.0*k.1.1.2/right_count)|round(2) }}%</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{%- endmacro %}
+
+
+{% macro compare_ex(left_count,right_count,left_data,right_data,coder,combiner) -%}
+<div class="box">
+    <div class="box-header with-border">
+        <h5>External Causes Distribution</h5>
+    </div>
+    <div class="box-body">
+        <table class="table  dataTables-full">
+            <thead>
+                <tr>
+                    <th>External Cause Code</th>
+                    <th>Description</th>
+                    <th class="text-center">Left</th>
+                    <th class="text-center">Right</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for k in combiner(left_data,right_data) %}
+            <tr>
+                <td> {{ k.0 }}</td>
+                <td> {{ coder[k.0] }}</td>
+                    <td class="text-right"> {{ (100.0*k.1.0/left_count)|round(2) }} %</td>
+                    <td class="text-right"> {{ (100.0*k.1.1/right_count)|round(2) }} %</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{%- endmacro %}
+
+{% macro combined_ex(num_count,den_count,initial_data,sub_data,denominator_data,coder,combiner) -%}
+<div class="box">
+    <div class="box-header with-border">
+        <h5>External Causes Distribution</h5>
+    </div>
+    <div class="box-body">
+        <table class="table  dataTables-full">
+            <thead>
+                <tr>
+                    <th>External Cause Code</th>
+                    <th>Description</th>
+                    <th class="text-center">Initial</th>
+                    <th class="text-center">Sub</th>
+                    <th class="text-center">Discharged</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for k in combiner(initial_data,sub_data,denominator_data) %}
+            <tr>
+                <td> {{ k.0 }}</td>
+                <td> {{ coder[k.0] }}</td>
+                    <td class="text-right"> {{ (100.0*k.1.0/num_count)|round(2) }} %</td>
+                    <td class="text-right"> {{ (100.0*k.1.1/num_count)|round(2) }} %</td>
+                    <td class="text-right"> {{ (100.0*k.1.2/den_count)|round(2) }} %</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{%- endmacro %}
+
+
+
+{% macro age_table(table_data) -%}
+    <table class="table table-hover dataTables-dict">
+        <thead>
+            <tr>
+                <th>Age</th>
+                <th>Count</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for k in table_data  %}
+        <tr>
+            <td class="text-center"> {{ k.k }} - {{ k.k+19 }} </td>
+            <td class="text-right"> {{ k.v }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+{%- endmacro %}
+
+
+{% macro subset_table(subset_table,subset_title,coder) -%}
+    <table class="table table-hover dataTables-subset">
+        <thead>
+            <tr>
+                <th></th>
+                {% for l in subset_table.columns  %}
+                    <th class="text-center" >{{ l }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Count</td>
+            {% for l in subset_table.columns  %}
+                <td class="text-right">{{subset_table.data[l]['count']}}</td>
+            {% endfor %}
+        </tr>
+        {% for r in subset_table.rows  %}
+        <tr>
+            <td> {{ r.0 }} : {{ coder[r.1] }} </td>
+            {% for l in subset_table.columns  %}
+                <td class="text-right">{{subset_table.data[l][r.1]}}%</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+{%- endmacro %}
+
+
+{% macro int_table(table_title,field_units,table_data) -%}
+<table class="table m-clear">
+    <thead>
+    <tr>
+        <th class="text-right">Mean {{table_title}}</th>
+        <th class="text-right">First quartile</th>
+        <th class="text-right">Median</th>
+        <th class="text-right">Third quartile</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td class="text-right"> {{ table_data.mean|round(2) }} {{ field_units }}</td>
+        <td class="text-right"> {{ table_data.fq }} {{ field_units }}</td>
+        <td class="text-right"> {{ table_data.median }} {{ field_units }}</td>
+        <td class="text-right"> {{ table_data.tq }} {{ field_units }}</td>
+    </tr>
+</tbody>
+</table>
+{%- endmacro %}
+        
+{% macro int_table_flat(table_title,field_units,table_data) -%}
+<table class="table m-clear">
+    <thead>
+    <tr>
+        <td class="text-right">Mean {{table_title}}: {{ table_data.mean|round(2) }} {{ field_units }}</td>
+        <td class="text-right">FQ: {{ table_data.fq }} {{ field_units }}</td>
+        <td class="text-right">Median: {{ table_data.median }} {{ field_units }}</td>
+        <td class="text-right">TQ: {{ table_data.tq }} {{ field_units }}</td>
+    </tr>
+</thead>
+</table>
+{%- endmacro %}
+        
+
+{% macro combined_int_table(table_title,field_units,denominator_table_data,initial_table_data,sub_table_data) -%}
+<table class="table m-clear">
+    <thead>
+    <tr>
+        <th class="text-center">Visits</th>
+        <th class="text-right">Mean {{table_title}}</th>
+        <th class="text-right">First quartile</th>
+        <th class="text-right">Median</th>
+        <th class="text-right">Third quartile</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td class=""> Discharged </td>
+        <td class="text-right"> {{ denominator_table_data.mean|round(2) }} {{ field_units }}</td>
+        <td class="text-right"> {{ denominator_table_data.fq }} {{ field_units }}</td>
+        <td class="text-right"> {{ denominator_table_data.median }} {{ field_units }}</td>
+        <td class="text-right"> {{ denominator_table_data.tq }} {{ field_units }}</td>
+    </tr>
+    <tr>
+        <td class=""> Initial </td>
+        <td class="text-right"> {{ initial_table_data.mean|round(2) }} {{ field_units }}</td>
+        <td class="text-right"> {{ initial_table_data.fq }} {{ field_units }}</td>
+        <td class="text-right"> {{ initial_table_data.median }} {{ field_units }}</td>
+        <td class="text-right"> {{ initial_table_data.tq }} {{ field_units }}</td>
+    </tr>
+    <tr>
+        <td class=""> Sub </td>
+        <td class="text-right"> {{ sub_table_data.mean|round(2) }} {{ field_units }}</td>
+        <td class="text-right"> {{ sub_table_data.fq }} {{ field_units }}</td>
+        <td class="text-right"> {{ sub_table_data.median }} {{ field_units }}</td>
+        <td class="text-right"> {{ sub_table_data.tq }} {{ field_units }}</td>
+    </tr>
+</tbody>
+</table>
+{%- endmacro %}
+
+
+
+{% macro procedures(data,coder) -%}
+<div class="box">
+    <div class="box-header with-border">
+        <h5>Procedure Distribution</h5>
+    </div>
+    <div class="box-body">
+        <table class="table  dataTables-full">
+            <thead>
+                <tr>
+                    <th>Procedure Code</th>
+                    <th>Description</th>
+                    <th>Count</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for k in data %}
+            <tr>
+                <td> {{ k.k }}</td>
+                <td> {{ coder[k.k] }}</td>
+                <td class="text-right"> {{ k.v }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{%- endmacro %}
+
+
+
+
+{% macro drg(data,coder) -%}
+    <div class="box">
+            <div class="box-header with-border">
+                <h5>DRG Distribution</h5>
+            </div>
+            <div class="box-body">
+                <table class="table  dataTables-full">
+                    <thead>
+                        <tr>
+                            <th>DRG Code</th>
+                            <th>Description</th>
+                            <th>Count</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for k in data %}
+                    <tr>
+                        <td> {{ k.k }}</td>
+                        <td> {{ coder[k.k] }}</td>
+                        <td class="text-right"> {{ k.v }}</td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+{%- endmacro %}
+
+{% macro dxall(data,coder) -%}
+<div class="box">
+    <div class="box-header with-border">
+        <h5>Diagnosis Distribution</h5>
+    </div>
+    <div class="box-body">
+        <table class="table  dataTables-full">
+            <thead>
+                <tr>
+                    <th>Diagnosis Code</th>
+                    <th>Description</th>
+                    <th>All</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for k in data %}
+            <tr>
+                <td> {{ k.k }}</td>
+                <td> {{ coder[k.k] }}</td>
+                <td class="text-right"> {{ k.v }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{%- endmacro %}
+
+
+{% macro dx(data,coder) -%}
+<div class="box">
+    <div class="box-header with-border">
+        <h5>Diagnosis Distribution</h5>
+    </div>
+    <div class="box-body">
+        <table class="table  dataTables-full">
+            <thead>
+                <tr>
+                    <th>Diagnosis Code</th>
+                    <th>Description</th>
+                    <th>Primary</th>
+                    <th>POA</th>
+                    <th>All</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for k in data %}
+            <tr>
+                <td> {{ k.k }}</td>
+                <td> {{ coder[k.k] }}</td>
+                <td class="text-right"> {{ k.primary }}</td>
+                <td class="text-right"> {{ k.poa }}</td>
+                <td class="text-right"> {{ k.all }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{%- endmacro %}
+
+{% macro ex(data,coder) -%}
+<div class="box">
+        <div class="box-header with-border">
+            <h5>External Causes Distribution</h5>
+        </div>
+        <div class="box-body">
+            <table class="table  dataTables-full">
+                <thead>
+                    <tr>
+                        <th>External Cause Code</th>
+                        <th>Description</th>
+                        <th>Count</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for k in data %}
+                <tr>
+                    <td> {{ k.k }}</td>
+                    <td> {{ coder[k.k] }}</td>
+                    <td class="text-right"> {{ k.v }}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{%- endmacro %}

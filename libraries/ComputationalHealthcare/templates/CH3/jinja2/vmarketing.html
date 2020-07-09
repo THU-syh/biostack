@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block page_title %} {% endblock %} Computational Healthcare</title>
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!-- Data Tables -->
+    <link href="http://s3.amazonaws.com/chstatic/ccss/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="http://s3.amazonaws.com/chstatic/ccss/plugins/dataTables/dataTables.responsive.css" rel="stylesheet">
+    <link href="http://s3.amazonaws.com/chstatic/ccss/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="http://s3.amazonaws.com/chstatic/ccss/plugins/dataTables/dataTables.tableTools.min.css" rel="stylesheet">
+    <link href="http://s3.amazonaws.com/chstatic/ccss/animate.css" rel="stylesheet">
+    <link href="http://s3.amazonaws.com/chstatic/ccss/style.css" rel="stylesheet">
+    <link href="http://s3.amazonaws.com/chstatic/custom/homepage.css" rel="stylesheet">
+    {% block page_css %}
+    {% endblock %}
+</head>
+
+<body class="top-navigation">
+<div id="wrapper">
+<div id="page-wrapper" class="white-bg">
+    {% block page_content %}
+<div class="wrapper wrapper-content">
+<div class="container">
+
+<div class="row m-t">
+    <div class="col-lg-6 col-md-6">
+        <h1 class="" style="font-size:32px;font-weight:bold">Computational Healthcare</h1>
+        <h2 class="home-logo m-b" style="">Search & Aggregation Engine</h2>
+        <ul>
+        <li class="m-b"><h3>Analyze 150 Million Inpatient, ED &amp; Ambulatory Surgery visits</h3></li>
+        <li class="m-b"><h3>Conduct more than million studies in few clicks</h3></li>
+        <li class="m-b"><h3>Replicate studies acrocss multiple datasets</h3></li>
+        <li class="m-b"><h3>Enforce privacy policies on computations</h3></li>
+        </ul>
+    </div>
+    <div class="col-lg-6 col-md-6">
+        <a  data-toggle="modal" data-target="#videoModal">
+            <div class='embed-container'>
+                <img src="http://s3.amazonaws.com/chstatic/simg/video.png" style="width:100%" alt="Play video">
+            </div>
+        </a>
+    </div>
+</div>
+<div class="row hidden-xs m-b m-t">
+    <div class="col-lg-10 col-lg-offset-1">
+        <h1 class="text-center">Search across aggregated statistics over millions of visits</h1>
+        <form role="search" id="top-form" class="form m-t text-center"  method="post" action="/Search">
+        <div class="form-group text-left home-search-group">
+            <input type="text"  tabindex="1" placeholder="Search by diagnosis, symptoms, ICD procedure / diagnosis codes (type and press enter)" class=" text-left input-lg input-block form-control homepage-search-q typeahead" name="top-search" id="home-search">
+        </div>
+        <div class="home-search-div">
+            <button class="btn btn-info m-r home-search-btn" ><i class="fa fa-search"></i> Search</button>
+        </div>
+        </form>
+        <div class="text-center appear" style="display:none"><h4>Quickly view a <a href="/N1/TX/Entry/A_D4280_N1_e_P8856">Procedure Analytics example</a> or <a href="/N2/HCUP/Entry/D41071_P9604">Rehospitalization Analytics example</a>.</h4></div>
+    </div>
+    <div class="row m-t appear" style="display:none">
+        <div class="col-lg-12">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th class="text-center">Dataset</th>
+                    <th class="text-center">Visits</th>
+                    <th class="text-center">Linked Visits</th>
+                    <th class="text-center">Unlinked Visits</th>
+                    <th class="text-center">Patients</th>
+                    <th class="text-center">Procedure Analytics</th>
+                    <th class="text-center">Rehospitalization Analytics</th>
+                    <th class="text-center">Revisit Analytics</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><p class="">Texas Inpatient synthetic sample</p></td>
+                        <td class="text-right">8,207,713</td>
+                        <td class="text-right">0</td>
+                        <td class="text-right">8,207,713</td>
+                        <td class="text-right">0</td>
+                        <td class="text-center"><a href="/N1/TX"><h4>Results</h4></a></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><p class="">Synthetic dataset for demo</p></td>
+                        <td class="text-center">-</td>
+                        <td class="text-center">-</td>
+                        <td class="text-center">-</td>
+                        <td class="text-center">-</td>
+                        <td class="text-center"></td>
+                        <td class="text-center"><a href="/N2/HCUP"><h4>Results</h4></a></td>
+                        <td class="text-center"><a href="/N3/HCUP"><h4>Results</h4></a></td>
+                    </tr>
+                    <tr>
+                        <td><p class="">Texas Inpatient 2006 - 2009</p> </td>
+                        <td class="text-right">11,724,807</td>
+                        <td class="text-right">0</td>
+                        <td class="text-right">11,724,807</td>
+                        <td class="text-right">0</td>
+                        <td colspan="3" class="text-center"><p>* Results not available online.</p></td>
+                    </tr>
+                    <tr>
+                        <td><p class="">HCUP FL, NY (SID) CA (SID/SASD/SEDD) 2006-11</p>
+                        <td class="text-right">126,695,265</td>
+                        <td class="text-right">103,515,695</td>
+                        <td class="text-right">23,179,570</td>
+                        <td class="text-right">36,045,406</td>
+                        <td colspan="3" class="text-center"><p>* Results not available online.</p></td>
+                    </tr>
+                    <tr>
+                        <td><p class="">HCUP National Readmission Database 2013</p></td>
+                        <td class="text-right">14,325,172</td>
+                        <td class="text-right">14,325,172</td>
+                        <td class="text-right">0</td>
+                        <td class="text-right">10,511,002</td>
+                        <td colspan="3" class="text-center"><p>* Results not available online.</p></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="text-center"> * An offline version is available for use by researchers who have independently purchased/acquired/downloaded these datasets.</div>
+        </div>
+    </div>
+</div>
+<div class="row hidden-xs">
+    <div class="col-lg-12 col-md-12" >
+        <h1 class="text-center" style="margin-top:0px">Instantly get answers to millions of questions such as</h1>
+        <div class="row m-t">
+            <div class="col-lg-12 m-b">
+                <h4>When did patients who underwent intubation recieve tracheostomy?</h4>
+                <h4 style="margin-left:15px" class="m-t">Answer: <a href="/N1/TX/Entry/A__P9604_P311">Inpatient visits with intubation followed by tracheostomy</a></h4>
+            </div>
+            <div class="col-lg-12 m-b">
+                <h4>How many adult patients who underwent ventriculostomy were admitted via ED? How did their outcomes differ?</h4>
+                <h4 style="margin-left:15px" class="m-t">Answer: <a href="/N1/TX/Group/P022">Patients who underwent ventriculostomy</a>, <a href="/N1/TX/Entry/A__N1_e_P022">Adult patients admitted via ED</a> & <a href="/N1/Compare/TX,A__N1_e_P022/TX,P__N1_e_P022">Comparison with pediatric patients</a></h4>
+            </div>
+            <div class="col-lg-12 m-b">
+                <h4>What are reasons for rehospitalizations and revists following an ED visits for Asthama?</h4>
+                <h4 style="margin-left:15px" class="m-t">Answer: <a href="/N3/HCUP/Group/N3DX_ED_D49392">Revisits and Rehospitalization following ED visit with primary diagnosis for Asthma</a></h4>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row visible-xs">
+    <div class="col-lg-12 col-md-12 text-center m-t alert grey-bg" >
+        <a class="btn btn-success btn-lg" style="margin-bottom:5px;margin-top:5px" href="/Home">Demo
+        <h5 class="">(HCUP result not available for public use)</h5>
+        </a>
+
+    </div>
+</div>
+<div class="row  white-bg ">
+<h1 class="text-center m-b">Aggregation Framework</h1>
+<div class="col-md-3 text-center col-lg-3 ">
+    <div class="m-t-lg">
+        <i class="fa fa-lock" style="font-size:36px"></i>
+        <h2>DUA Compliance</h2>
+        <p>Guarantees DUA compliance by enforcing policies at computation.</p>
+    </div>
+    <div class="m-t-lg">
+        <i class="fa fa-area-chart features-icon" style="font-size:36px"></i>
+        <h2>Visualization</h2>
+        <p>Aggregated statistical reports can be quickly visualized. The standardization allows reuse of charts, widgets and tables.</p>
+    </div>
+</div>
+<div class="col-md-6 text-center col-lg-6 ">
+    <img src="http://s3.amazonaws.com/chstatic/simg/perspective.png" alt="dashboard" class="img-responsive">
+</div>
+<div class="col-md-3 text-center col-lg-3 ">
+    <div class="m-t-lg">
+        <i class="fa fa-plus features-icon" style="font-size:36px"></i>
+        <h2>Extend framework</h2>
+        <p>The aggregation framework can be extended to incorporate additional data elements.</p>
+    </div>
+    <div class="m-t-lg">
+        <i class="fa fa-table features-icon" style="font-size:36px"></i>
+        <h2>Generate Reports</h2>
+        <p>Save aggregated statistical reports in Excel or CSV format.</p>
+    </div>
+</div>
+</div>
+<div class="row white-bg m-t">
+    <div class="col-md-3 col-lg-3">
+        <h2>Manage & Index Data</h2>
+        <p>Computational Healthcare indexes and aggregates healthcare data from millions of healthcare visits. The user
+            interface simplifies data management, analysis, replication and dissemination.</p>
+    </div>
+    <div class="col-md-3 col-lg-3">
+        <h2>Aggregation Framework</h2>
+        <p>The novel Aggregation Framework allows quick analysis and exploration at scale, while maintaining confidentiality and privacy.
+            It also automatically ensures compliance with Data Use Agreements.</p>
+    </div>
+    <div class="col-md-3 col-lg-3">
+        <h2>Aggregation Strategies</h2>
+        <p>Analyze utilization and timing of inpatient procedures. Track patients over multiple years. New strategies can be developed which can go beyond simple
+        combinations of diagnosis and procedure codes.</p>
+    </div>
+    <div class="col-md-3 col-lg-3">
+        <h2>Search Engine</h2>
+        <p>The aggregate statistics can be easily searched using keywords and codes. Users with access to underlying data can quickly select and perform additional studies. Can be used for secure data delivery in future.</p>
+    </div>
+</div>
+
+<div class="row white-bg features-block">
+    <div class="col-md-6 col-lg-6">
+        <h2 class="m-b">Inpatient Procedure analytics</h2>
+        <!--<img src="http://s3.amazonaws.com/chstatic/simg/image.png" alt="dashboard" class="img-responsive m-t" style="margin-left: auto;margin-right: auto;">-->
+        <p>
+        <h3 class="m-t m-b">
+            Analyze timing and utilization of procedures during hospitalization
+        </h3>
+        <p class="navy-color">Get answers to 200,000+ questions such as:</p>
+        <ul class="m-t">
+            <li><p>When do patients with leukemia receive transfusion?</p></li>
+            <li><p>How common is ECMO followed by thoracentesis?</p></li>
+            <li><p>How many patients with Sepsis were Admitted via ED and then Transferred to another hospital?</p></li>
+        </ul>
+    </div>
+    <div class="col-md-6 col-lg-6">
+        <h2 class="m-b">Readmission & Revisit Analytics</h2>
+        <h3 class="m-t m-b">Track rehospitalization by specific reasons and All Cause Rehospitalizations.</h3>
+        <ul class="m-t m-b">
+            <li><p>Compare subsequent visits with initial and all discharges.</p></li>
+            <li><p>Track patients over time periods ranging from 7 days up to a year from discharge.</p></li>
+            <li><p>Track complex transition patterns such as Treat and Release ED visit following discharge or Ambulatory Surgery visit followed by Inpatient Hospitalization</p></li>
+        </ul>
+    </div>
+</div>
+<div class="row white-bg features-block">
+    <div class="col-md-6 col-lg-6 m-b-x">
+        <h2 class="m-b">Patient Analytics</h2>
+        <h3 class="m-t m-b">Examine multi-year outcomes of disease episodes.</h3>
+        <p class="navy-color"></p>
+        <ul class="m-t">
+            <li><p>Do patients with MS suffer from more falls and injuries?</p></li>
+            <li><p>What are rare co-morbid conditions in patients suffering from diabetes?</p></li>
+            <li><p>How many times does a patient with poorly controlled diabetes visits an ER a year befor undergoing amputation.</p></li>
+        </ul>
+    </div>
+    <div class="col-md-6 col-lg-6 m-b-x">
+        <h2 class="m-b">Predictive Analytics</h2>
+        <h3 class="m-t m-b">Develop, Train, Evaluate and Visualize prediction models.</h3>
+        <ul class="m-t m-b">
+            <li><p>Predict short term (Rehospitalization, Revisit) and long term outcomes.</p></li>
+            <li><p>Derive complex features. Train models using TensorFlow.</p></li>
+            <li><p>Evaluate and visualize performance of models on custom patient populations selected using other criteria.</p></li>
+        </ul>
+    </div>
+</div>
+<div class="row white-bg">
+    <div class="col-lg-12 text-center">
+        <h1 class="m-b">Authors & Contact</h1>
+    </div>
+</div>
+<div class="row white-bg">
+    <div class="col-md-4 col-lg-4 m-b-m">
+        <div class="team-member">
+            <h4>Akshay Bhat</h4>
+            <p><a href="http://www.akshaybhat.com" target="_blank">Akshay</a> is a PhD candidate in Information Science at Cornell University. He is currently at Cornell Tech in Manhattan. Computational Healthcare is developed as part of his PhD Thesis Research.</p>
+        </div>
+    </div>
+    <div class="col-md-4 col-lg-4 m-b-m">
+        <div class="team-member">
+            <h4>Peter Fleischut, MD</h4>
+            <p>Peter is Chief Innovation Officer at New York Presbyterian Hospital and Associate Professor of Anesthesiology at Weill Cornell Medical College.</p>
+        </div>
+    </div>
+    <div class="col-md-4 col-lg-4 m-b-m">
+        <div class="team-member">
+            <h4>Ramin Zabih</h4>
+            <p>Ramin is Professor of Computer Science at Cornell Tech and Professor of Radiology at Weill Cornell Medical College.</p>
+        </div>
+    </div>
+</div>
+<div class="row m-b-x">
+    <div class="text-center col-lg-12 m-b-x"><a class="btn btn-warning" href="mailto:akshayubhat@gmail.com">Contact for more information</a></div>
+</div>
+<div class="row white-bg m-t">
+    <div class="col-lg-6 col-md-6">
+        <p class="text-color">
+            The information contained on this site is intended for educational purposes only. It does not constitute medical advice, nor is it a substitute for medical advice. You should consult a physician regarding medical diagnosis or treatment.
+        </p>
+    </div>
+    <div class="col-lg-6 col-md-6">
+        <p class="text-color">
+            This study is not endorsed by Healthcare Cost and Utilization Project (HCUP), Agency for Healthcare Research and Quality.
+        </p>
+    </div>
+</div>
+<div class="row text-center  white-bg">
+    <div class="col-lg-12">
+        <p><strong>&copy; 2015 Akshay U Bhat, Peter M. Fleischut & Ramin Zabih, Cornell University.</strong><br/>All Rights Reserved, At this time we are pursuing the patent process to protect this software.</p>
+    </div>
+</div>
+ </div>
+</div>
+    {% endblock %}
+</div>
+</div>
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" id="videoModal">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class='embed-container'><iframe src='http://www.youtube.com/embed/5_XGu-0n9_k?rel=0&amp;controls=0&amp;showinfo=0' frameborder='0' allowfullscreen></iframe></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Mainly scripts -->
+<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="http://s3.amazonaws.com/chstatic/cjs/typeahead.bundle.js"></script>
+<script src="http://s3.amazonaws.com/chstatic/cjs/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="http://s3.amazonaws.com/chstatic/cjs/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="http://s3.amazonaws.com/chstatic/cjs/plugins/dataTables/jquery.dataTables.js"></script>
+<script src="http://s3.amazonaws.com/chstatic/cjs/plugins/dataTables/dataTables.bootstrap.js"></script>
+<script src="http://s3.amazonaws.com/chstatic/cjs/plugins/dataTables/dataTables.responsive.js"></script>
+<script src="http://s3.amazonaws.com/chstatic/cjs/plugins/dataTables/dataTables.tableTools.min.js"></script>
+<!-- Flot -->
+<script src="http://s3.amazonaws.com/chstatic/cjs/plugins/flot/jquery.flot.js"></script>
+<script src="http://s3.amazonaws.com/chstatic/cjs/plugins/flot/jquery.flot.tooltip.min.js"></script>
+<script src="http://s3.amazonaws.com/chstatic/cjs/plugins/flot/jquery.flot.spline.js"></script>
+<script src="http://s3.amazonaws.com/chstatic/cjs/plugins/flot/jquery.flot.resize.js"></script>
+<script src="http://s3.amazonaws.com/chstatic/cjs/plugins/flot/jquery.flot.pie.js"></script>
+<!-- Custom and plugin javascript -->
+<script src="http://s3.amazonaws.com/chstatic/cjs/inspinia.js"></script>
+<script src="http://s3.amazonaws.com/chstatic/cjs/plugins/pace/pace.min.js"></script>
+<script src="http://s3.amazonaws.com/chstatic/custom/typedata_noncpt.js"></script>
+<!-- jQuery UI -->
+<script src="http://s3.amazonaws.com/chstatic/cjs/plugins/jquery-ui/jquery-ui.min.js"></script>
+<script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-67752016-1', 'auto');
+      ga('send', 'pageview');
+</script>
+{% block page_js %}
+<script>
+    $(document).ready(function() {
+        $('.appear').hide();
+        $('#home-search').on('focus',function(event){
+            $('.appear').show();
+            event.preventDefault()
+        })
+    });
+</script>
+{% endblock %}
+</body>
+</html>

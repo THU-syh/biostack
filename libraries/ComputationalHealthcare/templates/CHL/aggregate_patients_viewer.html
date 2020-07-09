@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% import 'macro_tables.html' as tables %}
+{% block page_css %}
+<link href="/static/ccss/plugins/toastr/toastr.min.css" rel="stylesheet">
+{% endblock %}
+{% block page_content %}
+<section class="content-header">
+<div class="row border-bottom">
+    <div class="col-lg-12 ">
+        <div class="box">
+        <div class="box-body">
+            <h4>Viewing aggregate statistics stored in {{ payload.path }}</h4>
+            <h4>with key : {{ payload.entry.key }} </h4>
+            <h4>in dataset : {{ payload.entry.dataset }}</h4>
+        </div>
+        </div>
+    </div>
+</div>
+</section>
+<section class="content">
+<div class="row">
+        <div class="col-md-4 col-lg-2">
+            <div class="box m-b">
+                <div class="box-header with-border">
+                    <h5>Patients</h5>
+                </div>
+                <div class="box-body">
+                    <h1 class="no-margins text-right">{{ payload.humanize.intcomma(payload.entry.patient_count) }}</h1>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-4">{{tables.simple_table("Sex Distribution","Sex",payload.entry.sexh,payload.Coder)}}</div>
+        <div class="col-md-4 col-lg-2">
+            <div class="box m-b">
+                <div class="box-header with-border">
+                    <h5>Mortality in hospital</h5>
+                </div>
+                <div class="box-body">
+                {% for k in payload.entry.deathh %}
+                    {% if k.k == 31 %}
+                        <h1 class="no-margins text-right">{{(100.0*k.v/payload.entry.patient_count)|round(2)}} %</h1>
+                    {% endif %}
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-8">
+            {{ tables.simple_table("Visit Types","Visit type",payload.entry.vtypeh,payload.Coder) }}
+            {{ tables.edge_simple_table("Visit edges","Initial","Subsequent",payload.entry.edgeh,payload.Coder) }}
+        </div>
+        <div class="col-lg-2 col-md-4">{{tables.policy_table(payload.entry.policy)}}</div>
+</div>
+
+<div class="row m-t">
+    <div class="col-lg-6 col-md-12">
+    <div class="box">
+        <div class="box-header with-border">
+            <h5>Age Distribution</h5>
+        </div>
+        <div class="box-body">
+        <div class="row">
+            <div class="col-md-3">
+                {{ tables.age_table(payload.entry.agedh) }}
+            </div>
+            <div class="col-md-9">
+                <div class="MG_chart" id="age_chart" data-y-label="Visits" data-x-label="Age in years" data-left=80 data-bottom=50 data-chart-type="histogram" data-x="age" data-y="visits" data-height=200 data-chart-data="age_data" style="height:150px"></div>
+                {{ tables.int_table("age","years",payload.entry.ageh) }}
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-lg-6 col-md-6">{{tables.dict_table("Disposition Distribution","Disposition",payload.entry.disph,payload.Coder)}}</div>
+        <div class="col-lg-6 col-md-6">{{tables.dict_table("Payer Distribution","Payer",payload.entry.payerh,payload.Coder)}}</div>
+        <div class="col-lg-6 col-md-6">{{tables.dict_table("Race Distribution","Race",payload.entry.raceh,payload.Coder)}}</div>
+    </div>
+    </div>
+    <div class="col-lg-6 col-md-12">
+        {{ tables.edge_delta_simple_table("Days between consecutive visits","Initial","Subsequent",payload.entry.deltah,payload.Coder) }}
+    </div>
+</div>
+<div class="row m-t m-b-lg"><div class="col-lg-12">{{ tables.procedures(payload.entry.prh,payload.Coder)}}</div></div>
+<div class="row m-t m-b-lg"><div class="col-lg-12">{{ tables.drg(payload.entry.drgh,payload.Coder)}}</div></div>
+<div class="row m-t m-b-lg"><div class="col-lg-12">{{ tables.dxall(payload.entry.dxh,payload.Coder)}}</div></div>
+<div class="row m-t m-b-lg"><div class="col-lg-12">{{ tables.ex(payload.entry.exh,payload.Coder)}}</div></div>
+</section>
+{% endblock %}
+{% block page_js %}
+<script>
+var chart_data = {};
+chart_data["age_data"] = JSON.parse({{ payload.age_plot_data|safe }});
+charts = {};
+$(document).ready(function() {
+    InitializeTables();
+    $('.MG_chart').each(function(index, element){charts[index] = new MGChart(element,chart_data);});
+});
+</script>
+{% endblock %}

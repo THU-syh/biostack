@@ -1,0 +1,181 @@
+{% extends "CH3/base.html" %}
+{% load humanize %}
+
+{% block page_content %}
+<div class="row  border-bottom white-bg dashboard-header">
+    <div class="col-lg-12 m-t">
+        <h4><span class="m-t">Dataset list</span></h4>
+    </div>
+</div>
+<div class="wrapper wrapper-content m-t">
+    <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox">
+                    <div class="ibox-title">
+                        <h3>List of results</h3>
+                    </div>
+                    <div class="ibox-content">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Dataset</th>
+                                <th>Identifier</th>
+                                <th class="text-center">Procedure Analytics</th>
+                                <th class="text-center">Readmission Analytics</th>
+                                <th class="text-center">Revisit Analytics</th>
+                                <th class="text-center">Patient Analytics</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for row in dataset_list %}
+                                <tr>
+                                <td>{{ row.name }}</td>
+                                <td>{{ row.identifier }}</td>
+                                <td class="text-center">{% if row.aggregate_visits  %}<a href="/N1/{{ row.identifier }}">View results</a>{% endif %}</td>
+                                <td class="text-center">{% if row.aggregate_readmits  %}<a href="/N2/{{ row.identifier }}">View results</a>{% endif %}</td>
+                                <td class="text-center">{% if row.aggregate_revisits  %}<a href="/N3/{{ row.identifier }}">View results</a>{% endif %}</td>
+                                <td class="text-center">{% if row.aggregate_patients  %}<a href="/N4/{{ row.identifier }}">View results</a>{% endif %}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="ibox">
+                    <div class="ibox-title">
+                        <h3>List of datasets</h3>
+                    </div>
+                    <div class="ibox-content">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Dataset</th>
+                                <th>Identifier</th>
+                                <th>Linked</th>
+                                <th class="text-center">Patients</th>
+                                <th class="text-center">Linked visits</th>
+                                <th class="text-center">Unlinked visits</th>
+                                <th class="text-center">States</th>
+                                <th class="text-center">Years</th>
+                                <th class="text-center">Codes</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for row in dataset_list %}
+                                <tr>
+                                <td>{{ row.name }}</td>
+                                <td>{{ row.identifier }}</td>
+                                <td>{{ row.linked }}</td>
+                                <td class="text-right">{{ row.patients_count|intcomma }}</td>
+                                <td class="text-right">{{ row.linked_count|intcomma }}</td>
+                                <td class="text-right">{{ row.unlinked_count|intcomma }}</td>
+                                <td class="text-center">{{ row.states }}</td>
+                                <td class="text-center">{{ row.years }}</td>
+                                <td class="text-center"><a href="/codes/{{ row.identifier }}">codes</a></td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+    </div>
+    {% for d in datasets %}
+    <div class="row">
+    <div class="col-lg-6">
+    <div class="ibox float-e-margins">
+        <div class="ibox-title">
+            {{ d.entry.name }}: state / visit type
+        </div>
+        <div class="ibox-content">
+            <table class="table raw_table table-striped table-bordered table-hover dataTables-dict" id="pro">
+                <thead>
+                    <tr>
+                        <th>State</th>
+                        <th>Patients</th>
+                        <th>linked visits</th>
+                        <th>unlinked visits</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for k in d.s %}
+                        {% if k.state != 'ALL'%}
+                        <tr>
+                            <td>{{ k.state }}</td>
+                            <td class="text-right">{{ k.patients_count|intcomma }}</td>
+                            <td class="text-right">{{ k.linked_count|intcomma }}</td>
+                            <td class="text-right">{{ k.unlinked_count|intcomma }}</td>
+                        </tr>
+                        {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+            <table class="table raw_table table-striped table-bordered table-hover dataTables-full" id="pro">
+                <thead>
+                    <tr>
+                        <th>State</th>
+                        <th>Visit type</th>
+                        <th>Linked/Unlinked</th>
+                        <th>visits count</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for k in d.st %}
+                    {% if k.count > 0 and k.state != 'ALL'%}
+                    <tr>
+                        <td>{{ k.state }}</td>
+                        <td>{% if k.visit_type == 0 %} Inpatient {% elif k.visit_type == 1 %} ED {% elif k.visit_type == 2%} Ambulatory Surg {% else %} Visit type enum {{ k.visit_type }} {% endif %}</td>
+                        <td>{{ k.linked }}</td>
+                        <td class="text-right">{{ k.count|intcomma }}</td>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </div>
+    <div class="col-lg-6">
+    <div class="ibox float-e-margins">
+        <div class="ibox-title">
+            {{ d.entry.name }}: state / visit type / years
+        </div>
+        <div class="ibox-content">
+            <table class="table raw_table table-striped table-bordered table-hover dataTables-full" id="raw_table">
+                <thead>
+                    <tr>
+                        <th>State</th>
+                        <th>Visit type</th>
+                        <th>Year</th>
+                        <th>Linked / Unlinked</th>
+                        <th>visits count</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for k in d.syt %}
+                    {% if k.count > 0 and k.state != 'ALL' %}
+                    <tr>
+                        <td>{{ k.state }}</td>
+                        <td>{% if k.visit_type == 0 %} Inpatient {% elif k.visit_type == 1 %} ED {% elif k.visit_type == 2%} Ambulatory Surg {% else %} Visit type enum {{ k.visit_type }} {% endif %}</td>
+                        <td>{{ k.year }}</td>
+                        <td>{{ k.linked }}</td>
+                        <td class="text-right">{{ k.count|intcomma }}</td>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+{% block page_js %}
+<script>
+$(document).ready(function() {
+    InitializeTables();
+});
+</script>
+{% endblock %}

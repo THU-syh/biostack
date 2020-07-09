@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+{% import 'macro_tables.html' as tables %}
+{% block page_content %}
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-12">
+        <ol class="breadcrumb m-t">
+            <li><a href="/">Home</a></li>
+            <li><a href="/N1/">Procedure Analytics</a></li>
+            <li><a href="/N1/{{payload.dataset.identifier}}">{{ payload.dataset.name }}</a></li>
+        </ol>
+    </div>
+    <div class="col-lg-12 m-t">
+        <h3>Inpatient procedures & events analytics: {{ payload.dataset.name }}</h3>
+    </div>
+</div>
+<div class="wrapper wrapper-content">
+    <div class="row m-t">
+        <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                Procedures codes for {{payload.dataset.name}}
+            </div>
+            <div class="ibox-content">
+                <table class="table table-striped table-bordered table-hover dataTables-split_file_table split_file_table">
+                    <thead>
+                        <tr>
+                            <th>Code</th>
+                            <th>Description</th>
+                            <th>Adult visits</th>
+                            <th>Pediatric visits</th>
+                            <th>Results</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for k in payload.entries %}
+                        {% if k.code.startswith('P') %}
+                        <tr>
+                            <td>{{ k.code }}</td>
+                            <td>{{ payload.Coder[k.code] }}</td>
+                            <td class="text-right">{{ k.count }}</td>
+                            <td class="text-right">{{ k.pediatric_count }}</td>
+                            <td><a href="/N1/{{payload.dataset.identifier}}/Group/{{k.code}}">Results</a></td>
+                        </tr>
+                        {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="row m-t">
+        <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                Primary Diagnosis codes for {{payload.dataset.name}}
+            </div>
+            <div class="ibox-content">
+                <table class="table table-striped table-bordered table-hover dataTables-split_file_table split_file_table">
+                    <thead>
+                        <tr>
+                            <th>Code</th>
+                            <th>Description</th>
+                            <th>Adult visits</th>
+                            <th>Pediatric visits</th>
+                            <th>Results</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for k in payload.entries %}
+                            {% if not k.code.startswith('P') and not k.code.startswith('DG') and k.code.startswith('D') %}
+                            <tr>
+                            <td>{{ k.code }}</td>
+                            <td>{{ payload.Coder[k.code] }}</td>
+                            <td class="text-right">{{ k.count }}</td>
+                            <td class="text-right">{{ k.pediatric_count }}</td>
+                            <td><a href="/N1/{{payload.dataset.identifier}}/Group/{{k.code}}">Results</a></td>
+                            </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="row m-t">
+        <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                DRG codes for {{payload.dataset.name}}
+            </div>
+            <div class="ibox-content">
+                <table class="table table-striped table-bordered table-hover dataTables-split_file_table split_file_table">
+                    <thead>
+                        <tr>
+                            <th>Code</th>
+                            <th>Description</th>
+                            <th>Adult visits</th>
+                            <th>Pediatric visits</th>
+                            <th>Results</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for k in payload.entries %}
+                            {% if not k.code.startswith('P') and  (k.code.startswith('DG') or  k.code.startswith('G')) %}
+                            <tr>
+                            <td>{{ k.code }}</td>
+                            <td>{{ payload.Coder[k.code] }}</td>
+                            <td class="text-right">{{ k.count }}</td>
+                            <td class="text-right">{{ k.pediatric_count }}</td>
+                            <td><a href="/N1/{{payload.dataset.identifier}}/Group/{{k.code}}">Results</a></td>
+                            </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+{% endblock %}
+{% block page_js %}
+<script>
+    InitializeTables();
+</script>
+{% endblock %}

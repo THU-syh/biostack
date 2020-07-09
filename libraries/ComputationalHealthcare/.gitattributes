@@ -1,0 +1,3 @@
+chlib/formats/hucpsid/formats/* linguist-vendored=false
+chlib/formats/hucpca/formats/* linguist-vendored=false
+*.sas linguist-language=Python

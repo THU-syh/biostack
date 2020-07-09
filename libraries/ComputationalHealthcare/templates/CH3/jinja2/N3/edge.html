@@ -1,0 +1,227 @@
+{% extends "base.html" %}
+{% import 'macro_tables.html' as tables %}
+{% block page_css%}
+<!--<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>-->
+<!--<link href='https://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>-->
+{% endblock %}
+{% block page_content %}
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-12">
+        <ol class="breadcrumb m-t">
+            <li><a href="/">Home</a></li>
+            <li><a href="/N3/">Revisit Analytics</a></li>
+            <li><a href="/N3/{{payload.dataset.identifier}}">{{ payload.dataset.name }}</a></li>
+            <li class="active"><strong>{{ payload.edge.key }}</strong></li>
+        </ol>
+    </div>
+    <div class="col-lg-12 m-t">
+        <h3><a href="../Group/{{payload.edge.initial_key}}"> {{ payload.Coder[payload.edge.initial_key] }} <small class="mid-size">( {{ payload.edge.initial_key}} )</small></a> <small class="mid-size">  followed by   </small> <a href="../Group/{{payload.edge.sub_key}}"> {{ payload.Coder[payload.edge.sub_key] }} <small  class="mid-size">( {{ payload.edge.sub_key}} )</small></a></h3>
+    </div>
+</div>
+<div class="wrapper wrapper-content">
+<div class="row m-t">
+    <div class="col-md-6 col-lg-2">
+        <div class="ibox">
+            <div class="ibox-title">
+                <h5>Revisits</h5>
+            </div>
+            <div class="ibox-content">
+                <h3 class="no-margins text-right">
+                    <span class="font-bold text-navy small">Numerator</span>
+
+                    {{ payload.humanize.intcomma(payload.edge.initial.count) }}</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-2">
+        <div class="ibox">
+            <div class="ibox-title">
+                <h5>Discharged </h5>
+            </div>
+            <div class="ibox-content">
+                <h3 class="no-margins text-right">
+                <span class="font-bold text-navy small">Denominator</span>
+                 {% if payload.node.discharged %} {{ payload.humanize.intcomma(payload.node.discharged.count) }}{% endif %}
+                </h3>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-2">
+        <div class="ibox">
+            <div class="ibox-title">
+                <h5>Revisit Rate</h5>
+            </div>
+            <div class="ibox-content">
+                <h3 class="no-margins text-right">{{ payload.humanize.intcomma(payload.edge.initial.count) }} / {{ payload.humanize.intcomma(payload.node.discharged.count) }}
+                    = {{ (100.0*payload.edge.initial.count/payload.node.discharged.count)|round(1) }} %</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <div class="ibox">
+            <div class="ibox-title">
+                <h5>Index = Discharged + Died + Transferred </h5>
+            </div>
+            <div class="ibox-content">
+                <h4 class="no-margins text-right">
+                  {{ payload.node.all.count }} (100%) =
+                  {% if payload.node.discharged %} {{ payload.node.discharged.count }} ({{ (100.0*payload.node.discharged.count/payload.node.all.count)|round(1) }}%){% endif %}
+                  {% if payload.node.died %} + {{ payload.node.died.count }} ({{ (100.0*payload.node.died.count/payload.node.all.count)|round(1) }}%){% endif %}
+                  {% if payload.node.transferred %} + {{ payload.node.transferred.count }} ({{ (100.0*payload.node.transferred.count/payload.node.all.count)|round(1) }}%){% endif %}
+                </h4>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-2 col-md-4">{{tables.policy_table(payload.node.all.policy)}}</div>
+</div>
+
+<div class="row white-bg">
+    <div class="col-lg-8 m-t">
+        <h3>Revisits during 50 days since discharge:</h3>
+    </div>
+    <div class="col-lg-4 m-t">
+        {{ tables.int_table_flat("&Delta;T","days",payload.edge.deltah) }}
+    </div>
+    <div class="col-lg-12">
+        <div id="delta-chart" style="height:200px"></div>
+    </div>
+</div>
+
+<div class="row white-bg">
+    <div class="col-lg-8 m-t">
+        <h3>Revisits during 50 weeks since discharge:</h3>
+    </div>
+    <div class="col-lg-4 m-t">
+        {{ tables.int_table_flat("&Delta;T","weeks",payload.edge.deltaweekh) }}
+    </div>
+    <div class="col-lg-12">
+        <div id="delta-chart-week" style="height:200px"></div>
+    </div>
+</div>
+
+<div class="row m-t">
+    <div class="col-lg-4 col-md-6">{{tables.combined_table_dict("Sex Distribution","Sex",payload.edge.initial.count,payload.node.discharged.count,payload.edge.initial.sexh,payload.edge.sub.sexh,payload.node.discharged.sexh,payload.Coder,payload.combiner)}}</div>
+    <div class="col-lg-4 col-md-6">{{tables.combined_table_dict("Race Distribution","Race",payload.edge.initial.count,payload.node.discharged.count,payload.edge.initial.raceh,payload.edge.sub.raceh,payload.node.discharged.raceh,payload.Coder,payload.combiner)}}</div>
+    <div class="col-lg-4 col-md-6">{{tables.combined_table_dict("Payer Distribution","Payer",payload.edge.initial.count,payload.node.discharged.count,payload.edge.initial.payerh,payload.edge.sub.payerh,payload.node.discharged.payerh,payload.Coder,payload.combiner)}}</div>
+</div>
+<div class="row m-t">
+    <div class="col-lg-4 col-md-6">{{tables.combined_table_dict("Source Distribution","Source",payload.edge.initial.count,payload.node.discharged.count,payload.edge.initial.sourceh,payload.edge.sub.sourceh,payload.node.discharged.sourceh,payload.Coder,payload.combiner)}}</div>
+    <div class="col-lg-4 col-md-6">{{tables.combined_table_dict("Disposition Distribution","Disposition",payload.edge.initial.count,payload.node.discharged.count,payload.edge.initial.disph,payload.edge.sub.disph,payload.node.discharged.disph,payload.Coder,payload.combiner)}}</div>
+</div>
+<div class="row m-t">
+    <div class="col-lg-6 col-md-12">
+        <div class="ibox">
+            <div class="ibox-title">
+                <h5>Length of Stay Distribution</h5>
+                <div class="ibox-tools">
+                <a class="collapse-link">
+                    <i class="fa fa-chevron-up"></i>
+                </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+            <div class="row">
+                <div class="col-lg-2">
+                    <h5>Discharged</h5>
+                </div>
+                <div class="col-lg-10">
+                    <div class="MG_chart" style="height:75px" id="los_chart_discharged" data-y-label="Visits" data-x-label="LOS in days" data-left=80 data-bottom=50 data-chart-type="line" data-x="los" data-y="visits" data-height=200 data-chart-data="los_data_discharged"></div>
+                </div>
+                <div class="col-lg-2">
+                    <h5>Initial</h5>
+                </div>
+                <div class="col-lg-10">
+                    <div class="MG_chart" style="height:75px" id="los_chart_initial" data-y-label="Visits" data-x-label="LOS in days" data-left=80 data-bottom=50 data-chart-type="line" data-x="los" data-y="visits" data-height=200 data-chart-data="los_data_initial"></div>
+                </div>
+                <div class="col-lg-2">
+                    <h5>Subsequent</h5>
+                </div>
+                <div class="col-lg-10">
+                    <div class="MG_chart" style="height:75px" id="los_chart_sub" data-y-label="Visits" data-x-label="LOS in days" data-left=80 data-bottom=50 data-chart-type="line" data-x="los" data-y="visits" data-height=200 data-chart-data="los_data_sub"></div>
+                </div>
+                <div class="col-lg-12">
+                    {{ tables.combined_int_table("LOS","days",payload.node.discharged.losh,payload.edge.initial.losh,payload.edge.sub.losh)}}
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-12">
+        <div class="ibox">
+            <div class="ibox-title">
+                <h5>Age Distribution</h5>
+                <div class="ibox-tools">
+                <a class="collapse-link">
+                    <i class="fa fa-chevron-up"></i>
+                </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+            <div class="row">
+                <div class="col-lg-2">
+                    <h5>Discharged</h5>
+                </div>
+                <div class="col-lg-10">
+                    <div class="MG_chart" style="height:75px" id="age_chart_discharged" data-y-label="Visits" data-x-label="Age in years" data-left=80 data-bottom=50 data-chart-type="histogram" data-x="age" data-y="visits" data-height=200 data-chart-data="age_data_discharged" style="height:150px"></div>
+                </div>
+                <div class="col-lg-2">
+                    <h5>Initial</h5>
+                </div>
+                <div class="col-lg-10">
+                    <div class="MG_chart" style="height:75px" id="age_chart_initial" data-y-label="Visits" data-x-label="Age in years" data-left=80 data-bottom=50 data-chart-type="histogram" data-x="age" data-y="visits" data-height=200 data-chart-data="age_data_initial" style="height:150px"></div>
+                </div>
+                <div class="col-lg-2">
+                    <h5>Subsequent</h5>
+                </div>
+                <div class="col-lg-10">
+                    <div class="MG_chart" style="height:75px" id="age_chart_sub" data-y-label="Visits" data-x-label="Age in years" data-left=80 data-bottom=50 data-chart-type="histogram" data-x="age" data-y="visits" data-height=200 data-chart-data="age_data_sub" style="height:150px"></div>
+                </div>
+                <div class="col-lg-12">
+                    {{ tables.combined_int_table("Age","year",payload.node.discharged.ageh,payload.edge.initial.ageh,payload.edge.sub.ageh)}}
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row m-t m-b-lg"><div class="col-lg-12">{{ tables.combined_procedures(payload.edge.initial.count,payload.node.discharged.count,payload.edge.initial.prh,payload.edge.sub.prh,payload.node.discharged.prh,payload.Coder,payload.combiner)}}</div></div>
+<div class="row m-t m-b-lg"><div class="col-lg-12">{{ tables.combined_drg(payload.edge.initial.count,payload.node.discharged.count,payload.edge.initial.drgh,payload.edge.sub.drgh,payload.node.discharged.drgh,payload.Coder,payload.combiner)}}</div></div>
+<div class="row m-t m-b-lg"><div class="col-lg-12">{{ tables.combined_dx(payload.edge.initial.count,payload.node.discharged.count,payload.edge.initial.dxh,payload.edge.sub.dxh,payload.node.discharged.dxh,payload.Coder,payload.combiner_dx)}}</div></div>
+<div class="row m-t m-b-lg"><div class="col-lg-12">{{ tables.combined_ex(payload.edge.initial.count,payload.node.discharged.count,payload.edge.initial.exh,payload.edge.sub.exh,payload.node.discharged.exh,payload.Coder,payload.combiner)}}</div></div>
+</div>
+{% endblock %}
+{% block page_js %}
+<script>
+var chart_data = {};
+chart_data["delta_plot_data"] = JSON.parse('{{ payload.delta_plot_data }}');
+chart_data["delta_week_plot_data"] = JSON.parse('{{ payload.delta_week_plot_data }}');
+chart_data["los_data_discharged"] = JSON.parse('{{ payload.los_plot_data_discharged }}');
+chart_data["los_data_initial"] = JSON.parse('{{ payload.los_plot_data_initial }}');
+chart_data["los_data_sub"] = JSON.parse('{{ payload.los_plot_data_sub }}');
+chart_data["age_data_discharged"] = JSON.parse('{{ payload.age_plot_data_discharged}}');
+chart_data["age_data_initial"] = JSON.parse('{{ payload.age_plot_data_initial }}');
+chart_data["age_data_sub"] = JSON.parse('{{ payload.age_plot_data_sub }}');
+var plots = {};
+var plots_week = {};
+var charts = {};
+var charts_delta = {};
+var charts_delta_week = {};
+var high = new PlotHighlighter();
+var high_week = new PlotHighlighter();
+$(document).ready(function() {
+    InitializeTables();
+    f_days = function(item) {
+        return " " + item.datapoint[1] + " revisits occurred on  " +  item.datapoint[0].toFixed(0) + " day since discharge"
+    };
+    f_weeks = function(item) {
+        return " " + item.datapoint[1] + " revisits occurred during " +  item.datapoint[0].toFixed(0) + " week since discharge"
+    };
+    charts_delta_week["delta-chart-week"] = new DeltaChart( "#delta-chart-week",chart_data["delta_week_plot_data"],plots,f_weeks,high_week,50);
+    charts_delta["delta-chart"] = new DeltaChart( "#delta-chart",chart_data["delta_plot_data"],plots_week,f_days,high,50);
+    $('.MG_chart').each(function(index, element){charts[index] = new MGChart(element,chart_data);});
+    high.initialize(charts_delta);
+    high_week.initialize(charts_delta_week);
+});
+</script>
+{% endblock %}

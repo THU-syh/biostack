@@ -1,0 +1,78 @@
+{% macro sidebar() -%}
+    <nav class="navbar-default navbar-static-side"  role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav" id="side-menu">
+                <li>
+                    <a class="navbar-minimalize" href="#"><i class="fa fa-close"></i><span class="nav-label">Hide</span></a>
+                </li>
+                <li><a href="/"><i class="fa fa-home"></i> <span class="nav-label">Home</span></a></li>
+                <li><a href="/dashboard"><i class="fa fa-search"></i> <span class="nav-label">Search</span></a></li>
+                <li><a href="/datasets"><i class="fa fa-database"></i><span class="nav-label">Data</span></a></li>
+                <li><a href="/codes"><i class="fa fa-list"></i><span class="nav-label">Codes</span></a></li>
+                <li><a href="/config"><i class="fa fa-cogs"></i><span class="nav-label">Configuration</span></a></li>
+            </ul>
+        </div>
+</nav>
+{%- endmacro %}
+
+
+{% macro homepage_navbar() -%}
+<nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+    <div class="navbar-header">
+        <a class="navbar-minimalize minimalize-styl-2 btn btn-primary" href="#"><i class="fa fa-bars"></i> Menu </a>
+    </div>
+</nav>
+{%- endmacro %}
+
+
+{% macro explore_raw() %}
+    <div class="ibox float-e-margins">
+        <div class="ibox-title">
+            <h5>Configuration</h5>
+        </div>
+        <div class="ibox-content">
+            <div class="row">
+                    <div class="col-lg-2">
+                        <a class="btn btn-info" href=""><i class="fa fa-list"></i> Tasks</a>
+                    </div>
+                    <div class="col-lg-2">
+                        <a class="btn btn-info" href=""><i class="fa fa-wrench"></i> Configuration</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+{%- endmacro %}
+
+
+
+{% macro navbar_item() -%}
+    <li class="dropdown">
+        <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+            <i class="fa fa-bell"></i>  <span class="label label-primary">3</span>
+        </a>
+        <ul class="dropdown-menu dropdown-alerts">
+            <li>
+                <a href="reference/mailbox.html">
+                    <div>
+                        <i class="fa fa-envelope fa-fw"></i> You have 16 messages
+                        <span class="pull-right text-muted small">4 minutes ago</span>
+                    </div>
+                </a>
+            </li>
+            <li class="divider"></li>
+            <li>
+                <a href="reference/profile.html">
+                    <div>
+                        <i class="fa fa-twitter fa-fw"></i> 3 New Followers
+                        <span class="pull-right text-muted small">12 minutes ago</span>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <a href="reference/login.html">
+            <i class="fa fa-home"></i> Log out
+        </a>
+    </li>
+{%- endmacro %}

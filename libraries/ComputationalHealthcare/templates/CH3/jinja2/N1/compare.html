@@ -1,0 +1,378 @@
+{% extends "base.html" %}
+{% import 'macro_tables.html' as tables %}
+{% block page_css%}
+<!--<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>-->
+<!--<link href='https://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>-->
+{% endblock %}
+{% block page_content %}
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-12">
+        <ol class="breadcrumb m-t">
+            <li><a href="/">Home</a></li>
+            <li><a href="/N1/">Procedure Analytics</a></li>
+            <li>Comparison between <strong><a href="/N1/{{payload.left.entry.dataset}}/Entry/{{payload.left.entry.key}}">{{ payload.left.key }}</a></strong> & <strong><a href="/N1/{{payload.right.entry.dataset}}/Entry/{{payload.right.entry.key}}">{{ payload.right.key }}</a></strong></li>
+        </ol>
+    </div>
+    <div class="col-lg-12 m-t">
+    </div>
+</div>
+<div class="wrapper wrapper-content">
+<div class="row">
+    <div class="col-md-6 col-lg-6">
+        <div class="ibox">
+            <div class="ibox-title">
+                <h2>Left</h2>
+                <ol class="breadcrumb m-t">
+                    <li><a href="{{payload.left.dataset.home_url}}">{{ payload.left.dataset.name }}</a></li>
+                    <li class="active"><strong>{{ payload.left.entry.key }}</strong></li>
+                </ol>
+            </div>
+            <div class="ibox-content">
+                <h3><a href="/N1/{{payload.left.entry.dataset}}/Group/{{payload.left.entry.initial}}"> {{ payload.Coder[payload.left.entry.initial] }} <small class="mid-size">( {{ payload.left.entry.initial}} )</small></a> <small class="mid-size">  followed by   </small> <a href="/N1/{{payload.left.entry.dataset}}/Group/{{payload.left.entry.sub}}"> {{ payload.Coder[payload.left.entry.sub] }} <small  class="mid-size">( {{ payload.left.entry.sub}} )</small></a></h3>
+                {% if payload.left.entry.dx %}
+                <h3><small class="mid-size">In visits with Primary Diagnosis:</small>  <a href="/N1/{{payload.left.entry.dataset}}/Group/{{payload.left.entry.dx}}"> {{ payload.Coder[payload.left.entry.dx] }} <small class="mid-size">( {{ payload.left.entry.dx}} )</small> </a></h3>
+                {% endif %}
+                <h4>{% if payload.left.entry.pediatric %} Pediatric patients (Age <= 20 years) {% else %} Adult patients (Age > 20 years) {% endif %}</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-lg-3">
+                <div class="ibox m-b">
+                    <div class="ibox-title">
+                        <span class="label label-primary pull-right">count</span>
+                        <h5>Visits</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <h1 class="no-margins text-right">{{ payload.left.humanize.intcomma(payload.left.entry.stats.count) }}</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">{{tables.simple_table("Sex Distribution","Sex",payload.left.entry.stats.sexh,payload.left.Coder)}}</div>
+            <div class="col-md-6 col-lg-4">
+                <div class="ibox m-b">
+                    <div class="ibox-title">
+                        <span class="label label-primary pull-right">In hospital</span>
+                        <h5>Mortality</h5>
+                    </div>
+                    <div class="ibox-content">
+                    {% for k in payload.left.entry.stats.deathh %}
+                        {% if k.k == 31 %}
+                            <h1 class="no-margins text-right">{{(100.0*k.v/payload.left.entry.stats.count)|round(2)}} %</h1>
+                        {% endif %}
+                    {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 col-md-8">
+                <div class="ibox">
+                    <div class="ibox-title">
+                        <h5>Left: Length of Stay Distribution</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="MG_chart" style="height:75px" id="los_chart_left" data-y-label="Visits" data-x-label="LOS in days" data-left=80 data-bottom=50 data-chart-type="line" data-x="los" data-y="visits" data-height=200 data-chart-data="los_data_left"></div>
+                        {{ tables.int_table_flat("LOS","days",payload.left.entry.stats.losh) }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4">{{tables.policy_table(payload.left.entry.stats.policy)}}</div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-6">
+        <div class="ibox">
+            <div class="ibox-title"><h2>Right</h2>
+                <ol class="breadcrumb m-t">
+                    <li><a href="{{payload.right.dataset.home_url}}">{{ payload.right.dataset.name }}</a></li>
+                    <li class="active"><strong>{{ payload.right.entry.key }}</strong></li>
+                </ol>
+            </div>
+            <div class="ibox-content">
+                <h3><a href="/N1/{{payload.right.entry.dataset}}/Group/{{payload.right.entry.initial}}"> {{ payload.Coder[payload.right.entry.initial] }} <small class="mid-size">( {{ payload.right.entry.initial}} )</small></a> <small class="mid-size">  followed by   </small> <a href="/N1/{{payload.right.entry.dataset}}/Group/{{payload.right.entry.sub}}"> {{ payload.Coder[payload.right.entry.sub] }} <small  class="mid-size">( {{ payload.right.entry.sub}} )</small></a></h3>
+                {% if payload.right.entry.dx %}
+                <h3><small class="mid-size">In visits with Primary Diagnosis:</small>  <a href="/N1/{{payload.right.entry.dataset}}/Group/{{payload.right.entry.dx}}"> {{ payload.Coder[payload.right.entry.dx] }} <small class="mid-size">( {{ payload.right.entry.dx}} )</small> </a></h3>
+                {% endif %}
+                <h4>{% if payload.right.entry.pediatric %} Pediatric patients (Age <= 20 years) {% else %} Adult patients (Age > 20 years) {% endif %}</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-lg-3">
+                <div class="ibox m-b">
+                    <div class="ibox-title">
+                        <span class="label label-primary pull-right">count</span>
+                        <h5>Visits</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <h1 class="no-margins text-right">{{ payload.right.humanize.intcomma(payload.right.entry.stats.count) }}</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">{{tables.simple_table("Sex Distribution","Sex",payload.right.entry.stats.sexh,payload.right.Coder)}}</div>
+            <div class="col-md-6 col-lg-4">
+                <div class="ibox m-b">
+                    <div class="ibox-title">
+                        <span class="label label-primary pull-right">In hospital</span>
+                        <h5>Mortality</h5>
+                    </div>
+                    <div class="ibox-content">
+                    {% for k in payload.right.entry.stats.deathh %}
+                        {% if k.k == 31 %}
+                            <h1 class="no-margins text-right">{{(100.0*k.v/payload.right.entry.stats.count)|round(2)}} %</h1>
+                        {% endif %}
+                    {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 col-md-8">
+                <div class="ibox">
+                    <div class="ibox-title">
+                        <h5>Right: Length of Stay Distribution</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="MG_chart" style="height:75px" id="los_chart_right" data-y-label="Visits" data-x-label="LOS in days" data-left=80 data-bottom=50 data-chart-type="line" data-x="los" data-y="visits" data-height=200 data-chart-data="los_data_right"></div>
+                        {{ tables.int_table_flat("LOS","days",payload.right.entry.stats.losh) }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4">{{tables.policy_table(payload.right.entry.stats.policy)}}</div>
+        </div>
+    </div>
+</div>
+<div class="row white-bg ibox">
+    <div class="col-lg-8 m-t">
+        <h3>Left Temporal Distribution : {{ payload.Coder[payload.left.entry.initial] }} <small class="mid-size">( {{ payload.left.entry.initial}} )</small> <small class="mid-size">  followed by   </small> {{ payload.Coder[payload.left.entry.sub] }} <small  class="mid-size">( {{ payload.left.entry.sub}} )</small></h3>
+    </div>
+    <div class="col-lg-4 m-t">
+        {{ tables.int_table_flat("&Delta;T","days",payload.left.entry.deltah) }}
+    </div>
+    <div class="col-lg-12">
+        <div id="delta-chart" style="height:200px"></div>
+    </div>
+    <div class="col-lg-8 m-t">
+        <h3>Right Temporal Distribution : {{ payload.Coder[payload.right.entry.initial] }} <small class="mid-size">( {{ payload.right.entry.initial}} )</small> <small class="mid-size">  followed by   </small> {{ payload.Coder[payload.right.entry.sub] }} <small  class="mid-size">( {{ payload.right.entry.sub}} )</small></h3>
+    </div>
+    <div class="col-lg-4 m-t">
+        {{ tables.int_table_flat("&Delta;T","days",payload.right.entry.deltah) }}
+    </div>
+    <div class="col-lg-12">
+        <div id="delta-chart-right" style="height:200px"></div>
+    </div>
+</div>
+
+<div class="row m-t">
+    <div class="col-lg-6 col-md-12">
+    <div class="row">
+        <div class="col-lg-6 col-md-6">{{tables.compare_lr_table("Source Distribution","Source",payload.combine_lr(payload.left.entry.stats.sourceh,payload.right.entry.stats.sourceh,payload.left.entry.stats.count,payload.right.entry.stats.count),payload.Coder)}}</div>
+        <div class="col-lg-6 col-md-6">{{tables.compare_lr_table("Disposition Distribution","Disposition",payload.combine_lr(payload.left.entry.stats.disph,payload.right.entry.stats.disph,payload.left.entry.stats.count,payload.right.entry.stats.count),payload.Coder)}}</div>
+    </div>
+    </div>
+    <div class="col-lg-6 col-md-12">
+    <div class="row">
+        <div class="col-lg-6 col-md-6">{{tables.compare_lr_table("Payer Distribution","Payer",payload.combine_lr(payload.left.entry.stats.payerh,payload.right.entry.stats.payerh,payload.left.entry.stats.count,payload.right.entry.stats.count),payload.Coder)}}</div>
+        <div class="col-lg-6 col-md-6">{{tables.compare_lr_table("Race Distribution","Race",payload.combine_lr(payload.left.entry.stats.raceh,payload.right.entry.stats.raceh,payload.left.entry.stats.count,payload.right.entry.stats.count),payload.Coder)}}</div>
+    </div>
+    </div>
+</div>
+<div class="row m-t">
+    <div class="col-lg-6">
+        <div class="ibox m-b">
+        <div class="ibox-title">
+            <h5>Left: State variation</h5>
+            <div class="ibox-tools">
+                <a class="collapse-link">
+                    <i class="fa fa-chevron-up"></i>
+                </a>
+            </div>
+        </div>
+        <div class="ibox-content">
+            {{ tables.subset_table(payload.left.subset_entry_table(payload.left.entry.state_subset),"State",payload.left.Coder)}}
+        </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="ibox m-b">
+        <div class="ibox-title">
+            <h5>Right: State variation</h5>
+            <div class="ibox-tools">
+                <a class="collapse-link">
+                    <i class="fa fa-chevron-up"></i>
+                </a>
+            </div>
+        </div>
+        <div class="ibox-content">
+            {{ tables.subset_table(payload.right.subset_entry_table(payload.right.entry.state_subset),"State",payload.right.Coder)}}
+        </div>
+        </div>
+    </div>
+</div>
+<div class="row m-t m-b">
+    <div class="col-lg-6 col-md-12">
+        <div class="ibox m-b">
+            <div class="ibox-title">
+                <h5>Left: Yearly variation</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                {{ tables.subset_table(payload.left.subset_table(payload.left.entry.year_subset),"Year",payload.left.Coder)}}
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-12">
+        <div class="ibox m-b">
+            <div class="ibox-title">
+                <h5>Right: Yearly variation</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                {{ tables.subset_table(payload.right.subset_table(payload.right.entry.year_subset),"Year",payload.right.Coder)}}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row m-t m-b">
+    <div class="col-lg-6 col-md-12">
+        <div class="ibox">
+            <div class="ibox-title">
+                <h5>Left: Age Distribution</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+            <div class="row">
+                <div class="col-md-3">
+                    {{ tables.age_table(payload.left.entry.stats.agedh) }}
+                </div>
+                <div class="col-md-9">
+                    <div class="MG_chart" id="age_chart" data-y-label="Visits" data-x-label="Age in years" data-left=80 data-bottom=50 data-chart-type="histogram" data-x="age" data-y="visits" data-height=200 data-chart-data="age_data_left" style="height:150px"></div>
+                    {{ tables.int_table("age","years",payload.left.entry.stats.ageh) }}
+                </div>
+                <div class="col-md-12">
+                    {{ tables.subset_table(payload.left.subset_table(payload.left.entry.age_subset),"Age range yrs.",payload.left.Coder) }}
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-12">
+        <div class="ibox">
+            <div class="ibox-title">
+                <h5>Right: Age Distribution</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+            <div class="row">
+                <div class="col-md-3">
+                    {{ tables.age_table(payload.right.entry.stats.agedh) }}
+                </div>
+                <div class="col-md-9">
+                    <div class="MG_chart" id="age_chart2" data-y-label="Visits" data-x-label="Age in years" data-left=80 data-bottom=50 data-chart-type="histogram" data-x="age" data-y="visits" data-height=200 data-chart-data="age_data_right" style="height:150px"></div>
+                    {{ tables.int_table("age","years",payload.right.entry.stats.ageh) }}
+                </div>
+                <div class="col-md-12">
+                    {{ tables.subset_table(payload.right.subset_table(payload.right.entry.age_subset),"Age range yrs.",payload.right.Coder) }}
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row m-t m-b-lg"><div class="col-lg-12">{{ tables.compare_procedures(payload.left.entry.stats.count,payload.right.entry.stats.count,payload.left.entry.stats.prh,payload.right.entry.stats.prh,payload.left.Coder,payload.combiner)}}</div></div>
+<div class="row m-t m-b-lg"><div class="col-lg-12">{{ tables.compare_dx(payload.left.entry.stats.count,payload.right.entry.stats.count,payload.left.entry.stats.dxh,payload.right.entry.stats.dxh,payload.left.Coder,payload.combiner_dx)}}</div></div>
+<div class="row m-t m-b-lg"><div class="col-lg-12">{{ tables.compare_ex(payload.left.entry.stats.count,payload.right.entry.stats.count,payload.left.entry.stats.exh,payload.right.entry.stats.exh,payload.left.Coder,payload.combiner)}}</div></div>
+</div>
+{% endblock %}
+{% block page_js %}
+<script>
+var chart_data = {};
+chart_data["delta_plot_data_left"] = JSON.parse('{{ payload.left.delta_plot_data|safe }}');
+chart_data["delta_plot_data_right"] = JSON.parse('{{ payload.right.delta_plot_data|safe }}');
+chart_data["los_data_left"] = JSON.parse('{{ payload.left.los_plot_data }}');
+chart_data["los_data_right"] = JSON.parse('{{ payload.right.los_plot_data }}');
+chart_data["age_data_left"] = JSON.parse('{{ payload.left.age_plot_data }}');
+chart_data["age_data_right"] = JSON.parse('{{ payload.right.age_plot_data }}');
+var delta_data_left = JSON.parse('{{ payload.left.delta_multi_plot_data|safe }}');
+var delta_data_right = JSON.parse('{{ payload.right.delta_multi_plot_data|safe }}');
+var plots = {};
+var charts = {};
+var charts_delta = {};
+$(document).ready(function() {
+    InitializeTables();
+    var high = new PlotHighlighter();
+    var refresh = $('.refresh');
+    var refreshr = $('.refreshr');
+    f1 = function(item) {return "For " + item.datapoint[1] + " visits " + "{{ payload.Coder[payload.left.entry.sub] }}" + " occured " + item.datapoint[0].toFixed(0) + " days after " + "{{ payload.Coder[payload.left.entry.initial] }}" + "."};
+    f2 = function(item) {return "For " + item.datapoint[1] + " visits " + "{{ payload.Coder[payload.right.entry.sub] }}" + " occured " + item.datapoint[0].toFixed(0) + " days after " + "{{ payload.Coder[payload.right.entry.initial] }}" + "."};
+    charts_delta["delta-chart"] = new DeltaChart( "#delta-chart",delta_data_left,plots,f1,high);
+    charts_delta["delta-chart-right"] = new DeltaChart( "#delta-chart-right",delta_data_right,plots,f2,high);
+//    if (!jQuery.isEmptyObject(chart_data["delta_plot_data_left"])){
+//        refresh.on('click',function(){
+//            var _this = $(this);
+//            $('#delta-subset-chart_tooltip').remove();
+//            $('#subset_plot_text').text(_this.data("selection"));
+//            f3 = function(item){return "For " + item.datapoint[1] + " % visits that occured "+ item.datapoint[0].toFixed(0) +" days "+_this.data('text')};
+//            var selected_data = chart_data["delta_plot_data_left"][_this.data('attrib')][parseInt(_this.data('value'),10)];
+//            charts_delta["delta-subset-chart"] = new DeltaChart( "#delta-subset-chart",selected_data,plots,f3,high);
+//            high.initialize(charts_delta);
+//            $("#RDropDown").dropdown('hide');
+//            return false
+//        });
+//        refresh.first().click();
+//    }
+//    else
+//    {
+//        high.initialize(charts_delta);
+//        $('.subset_plot').hide();
+//    }
+
+//    if (!jQuery.isEmptyObject(chart_data["delta_plot_data_right"])){
+//        refreshr.on('click',function(){
+//            var _this = $(this);
+//            $('#delta-subset-chart-right_tooltip').remove();
+//            $('#subset_plot_text_right').text(_this.data("selection"));
+//            f4 = function(item){return "For " + item.datapoint[1] + " % visits that occured "+ item.datapoint[0].toFixed(0) +" days "+_this.data('text')};
+//            var selected_data_right = chart_data["delta_plot_data_right"][_this.data('attrib')][parseInt(_this.data('value'),10)];
+//            charts_delta["delta-subset-chart-right"] = new DeltaChart( "#delta-subset-chart-right",selected_data_right,plots,f4,high);
+//            high.initialize(charts_delta);
+//            $("#RDropDown_right").dropdown('hide');
+//            return false
+//        });
+//        refreshr.first().click();
+//        debugger;
+//    }
+//    else
+//    {
+//        high.initialize(charts_delta);
+//        $('.subset_plot_right').hide();
+//    }
+    $('.MG_chart').each(function(index, element){charts[index] = new MGChart(element,chart_data);});
+    high.initialize(charts_delta);
+});
+</script>
+{% endblock %}

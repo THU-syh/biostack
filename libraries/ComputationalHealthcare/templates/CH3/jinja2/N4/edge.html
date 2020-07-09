@@ -1,0 +1,197 @@
+{% extends "base.html" %}
+{% import 'macro_tables.html' as tables %}
+{% block page_content %}
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-12">
+        <ol class="breadcrumb m-t">
+            <li><a href="/">Home</a></li>
+            <li><a href="/N4/">Patient Analytics</a></li>
+            <li><a href="/N4/{{ payload.dataset.identifier }}">{{ payload.dataset.name }}</a></li>
+            <li><a href="/N4/{{payload.dataset.identifier}}/Group/{{payload.edge.index}}">{{ payload.edge.index }}</a></li>
+            <li class="active"><strong> {{ payload.edge.key }}</strong></li>
+        </ol>
+    </div>
+    <div class="col-lg-12 m-t">
+        <h3> <span class="mid-size"> {{ payload.Coder[payload.edge.index] }}  and  {{ payload.Coder[payload.edge.sub] }} </span> </h3>
+    </div>
+</div>
+<div class="wrapper wrapper-content">
+    <div class="row m-b">
+        <div class="col-lg-3">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h4>Selected Patients</h4>
+                </div>
+                <div class="ibox-content">
+                    <h3 class="no-margins text-right">
+                        {{ payload.edge.patients }}
+                    </h3>
+                </div>
+            </div>
+            {{ tables.exclusion_table("Exclusions selecting patients",payload.excluded)}}
+        </div>
+    <div class="col-md-6 col-lg-4">
+        <div class="ibox">
+            <div class="ibox-title">
+                <h5>Linked Visit Types</h5>
+            </div>
+            <div class="ibox-content">
+                <table class="table table-hover dataTables-dict">
+                    <thead>
+                    <tr>
+                            <th>Diagnosis</th>
+                            <th class="text-center">All types</th>
+                            <th class="text-center">IP</th>
+                            <th class="text-center">ED</th>
+                            <th class="text-center">AS</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for k in payload.edge.vtype_count %}
+                        {% if k.k == "All" %}
+                            <tr>
+                                <td>Total linked visits</td>
+                                <td class="text-right">{{ payload.edge.linked_visits }}</td>
+                                <td class="text-right">{{ k.IP }}</td>
+                                <td class="text-right">{{ k.ED }}</td>
+                                <td class="text-right">{{ k.AS }}</td>
+                            </tr>
+                        {% elif k.k == "Both" %}
+                            <tr>
+                                <td>With both diagnoses</td>
+                                <td class="text-right">{{ payload.edge.intersection_visits }}</td>
+                                <td class="text-right">{{ k.IP }}</td>
+                                <td class="text-right">{{ k.ED }}</td>
+                                <td class="text-right">{{ k.AS }}</td>
+                            </tr>
+                        {% elif k.k == payload.edge.index %}
+                            <tr>
+                            <td>{{ payload.Coder[payload.edge.index] }}</td>
+                            <td class="text-right">{{ payload.edge.index_visits }}</td>
+                                <td class="text-right">{{ k.IP }}</td>
+                                <td class="text-right">{{ k.ED }}</td>
+                                <td class="text-right">{{ k.AS }}</td>
+                            </tr>
+                        {% elif k.k == payload.edge.sub %}
+                            <tr>
+                                <td>{{ payload.Coder[payload.edge.sub] }}</td>
+                                <td class="text-right">{{ payload.edge.sub_visits }}</td>
+                                <td class="text-right">{{ k.IP }}</td>
+                                <td class="text-right">{{ k.ED }}</td>
+                                <td class="text-right">{{ k.AS }}</td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8 col-lg-5">
+        <div class="ibox">
+            <div class="ibox-title">
+                <h5>Order of diagnosis in Patients</h5>
+            </div>
+            <div class="ibox-content">
+                <table class="table table-hover dataTables-dict">
+                    <thead>
+                    <tr>
+                            <th rowspan="2">Observed First</th>
+                            <th class="text-center" rowspan="2">Patients</th>
+                            <th class="text-center" rowspan="2">% of Patients</th>
+                            <th colspan="4">Time between first occurrence</th>
+                    </tr>
+                    <tr>
+                            <th class="text-center">Mean</th>
+                            <th class="text-center">FQ</th>
+                            <th class="text-center">Median</th>
+                            <th class="text-center">TQ</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{ payload.Coder[payload.edge.index] }}</td>
+                            <td class="text-right">{{ payload.edge.patient_index_first }}</td>
+                            <td class="text-right">{{ (100.0*payload.edge.patient_index_first/payload.edge.patients)|round(0) }} %</td>
+                            <td class="text-right">{{ payload.edge.index_first_days.mean|round(0) }} days</td>
+                            <td class="text-right">{{ payload.edge.index_first_days.fq }} days</td>
+                            <td class="text-right">{{ payload.edge.index_first_days.median }} days</td>
+                            <td class="text-right">{{ payload.edge.index_first_days.tq }} days</td>
+                        </tr>
+                        <tr>
+                            <td>{{ payload.Coder[payload.edge.sub] }}</td>
+                            <td class="text-right">{{ payload.edge.patient_sub_first }}</td>
+                            <td class="text-right">{{ (100.0*payload.edge.patient_sub_first/payload.edge.patients)|round(0) }} %</td>
+                            <td class="text-right">{{ payload.edge.sub_first_days.mean|round(0) }} days</td>
+                            <td class="text-right">{{ payload.edge.sub_first_days.fq }} days</td>
+                            <td class="text-right">{{ payload.edge.sub_first_days.median }} days</td>
+                            <td class="text-right">{{ payload.edge.sub_first_days.tq }} days</td>
+                        </tr>
+                        {% if payload.edge.patients-(payload.edge.patient_sub_first+payload.edge.patient_index_first) > 10 %}
+                        <tr>
+                            <td> Both together </td>
+                            <td class="text-right">{{ payload.edge.patients-(payload.edge.patient_sub_first+payload.edge.patient_index_first)}}</td>
+                            <td class="text-right">{{ (100.0*(payload.edge.patients-(payload.edge.patient_sub_first+payload.edge.patient_index_first))/payload.edge.patients)|round(0) }} %</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="row m-t">
+    <div class="col-lg-6 col-md-12">
+    <div class="row">
+        <div class="col-lg-6 col-md-6">{{tables.dict_table("Payer Distribution","Payer",payload.edge.first_inpatient_visit.payerh,payload.Coder)}}</div>
+        <div class="col-lg-6 col-md-6">{{tables.dict_table("Race Distribution","Race",payload.edge.first_inpatient_visit.raceh,payload.Coder)}}</div>
+    </div>
+    </div>
+    <div class="col-lg-6 col-md-12">
+    <div class="ibox">
+        <div class="ibox-title">
+            <h5>Age Distribution at First visit</h5>
+            <div class="ibox-tools">
+                <a class="collapse-link">
+                    <i class="fa fa-chevron-up"></i>
+                </a>
+            </div>
+        </div>
+        <div class="ibox-content">
+        <div class="row">
+            <div class="col-md-3">
+                {{ tables.age_table(payload.edge.first_inpatient_visit.agedh) }}
+            </div>
+            <div class="col-md-9">
+                <div class="MG_chart" id="age_chart" data-y-label="Visits" data-x-label="Age in years" data-left=80 data-bottom=50 data-chart-type="histogram" data-x="age" data-y="visits" data-height=200 data-chart-data="age_data" style="height:150px"></div>
+                {{ tables.int_table("age","years",payload.edge.first_inpatient_visit.ageh) }}
+            </div>
+        </div>
+        </div>
+    </div>
+    </div>
+</div>
+<div class="row m-t m-b-lg"><div class="col-lg-12">{{ tables.procedures(payload.edge.prh,payload.Coder)}}</div></div>
+<div class="row m-t m-b-lg"><div class="col-lg-12">{{ tables.drg(payload.edge.drgh,payload.Coder)}}</div></div>
+<div class="row m-t m-b-lg"><div class="col-lg-12">{{ tables.dx(payload.edge.dxh,payload.Coder)}}</div></div>
+<div class="row m-t m-b-lg"><div class="col-lg-12">{{ tables.ex(payload.edge.exh,payload.Coder)}}</div></div>
+</div>
+{% endblock %}
+{% block page_js %}
+<script>
+    chart_data = {};
+    charts = {};
+    chart_data["age_data"] = JSON.parse('{{ payload.age_plot_data }}');
+    $(document).ready(function() {
+        InitializeTables();
+        $('.MG_chart').each(function (index, element) {
+            charts[index] = new MGChart(element, chart_data);
+        });
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,41 @@
+package comphealth;
+import "penums.proto";
+import "pvisit.proto";
+import "pstat.proto";
+import "pn1.proto";
+
+message PDXCLASSIFIER{
+    required string index_code = 1;
+    required PAGG patients = 2;
+    required AGG index = 3;
+    optional AGG sub = 4;
+    repeated Labels labels = 5;
+    repeated Exclusions exclusions = 6;
+    required int32 count = 7;
+}
+
+message NPRESULT{
+    required PAGG patients = 2;
+    required AGG index = 3;
+    optional AGG future = 4;
+    repeated QUERY query = 6;
+    required IntHist deltah = 5;
+    required int32 neighbors = 7;
+}
+
+
+message Labels {
+    required int32 count = 1;
+    optional string label = 3;
+}
+
+message Exclusions {
+    required int32 count = 1;
+    optional string reason = 3;
+}
+
+message QUERY {
+    required float weight = 1;
+    optional string fname = 3;
+}
+

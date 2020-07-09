@@ -1,0 +1,209 @@
+{% extends "base.html" %}
+{% block page_css %}
+<link href="/static/ccss/plugins/toastr/toastr.min.css" rel="stylesheet">
+{% endblock %}
+{% block page_content %}
+<section class="content-header">
+<div class="row  border-bottom white-bg dashboard-header">
+    <div class="col-sm-7"><h4>Patient viewer for exploring individual visits and patients:</h4></div>
+</div>
+</section>
+<section class="content">
+<div class="row m-t">
+<div class="col-lg-8">
+<div class="box float-e-margins">
+    <div class="box-header with-border">
+        Retrieve patient using database and id
+    </div>
+    <div class="box-body">
+            {% for k,v in payload.DB_LIST.items() %}
+            <form method="get" class="form-horizontal" action=".">
+            <div class="form-group">
+                <label class="col-sm-3 control-label">Examine patient from {{ k }}</label>
+                <input type="hidden" class="form-control" name="db" value="{{k}}">
+                {% if payload.patient and payload.patient.db == k %}
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="patient_id" value="{{ payload.next_key }}">
+                </div>
+                {% else %}
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="patient_id" value="{{v}}">
+                </div>
+                {% endif %}
+                <div class="col-sm-3">
+                    <button class="btn btn-primary" type="submit">retrieve</button>
+                </div>
+            </div>
+            </form>
+            {% endfor %}
+    </div>
+</div>
+</div>
+</div>
+{% if payload.patient %}
+<div class="row">
+    <div class="col-sm-12">
+        <div class="box">
+            <div class="box-header with-border">{{ payload.patient.patient_id }} in {{ payload.patient.db }}</div>
+            <div class="box-body">
+                <table class="table table-striped table-bordered dataTables-full">
+                    <thead>
+                        <th>Visit type</th>
+                        <th>Visit key</th>
+                        <th>Day</th>
+                        <th>Month</th>
+                        <th>Quarter</th>
+                        <th>Year</th>
+                        <th>State</th>
+                        <th>Primary diagnosis</th>
+                        <th>Primary procedure</th>
+                        <th>Source</th>
+                        <th>Disposition</th>
+                        <th>Age</th>
+                        <th>LOS</th>
+                        <th>Payer</th>
+                        <th>Race</th>
+                        <th>Sex</th>
+                        <th>Hospital ID</th>
+                        <th>DRG</th>
+                    </thead>
+                    <tbody>
+                    {% for v in payload.patient_obj.visits %}
+                    <tr>
+                        <td>{{payload.coder[v.vtype]}}</td>
+                        <td>{{v.key}}</td>
+                        <td>{{v.day}}</td>
+                        <td>{{v.month}}</td>
+                        <td>{{v.quarter}}</td>
+                        <td>{{v.year}}</td>
+                        <td>{{v.state}}</td>
+                        <td>{{payload.coder[v.primary_diagnosis]}}</td>
+                        <td>{{payload.coder[v.primary_procedure.pcode]}} (code: {{v.primary_procedure.pcode}})</td>
+                        <td>{{payload.coder[v.source]}}</td>
+                        <td>{{payload.coder[v.disposition]}}</td>
+                        <td>{{v.age}}</td>
+                        <td>{{v.los}}</td>
+                        <td>{{payload.coder[v.payer]}}</td>
+                        <td>{{payload.coder[v.race]}}</td>
+                        <td>{{payload.coder[v.sex]}}</td>
+                        <td>{{v.facility}}</td>
+                        <td>{{payload.coder[v.drg]}}</td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="box">
+            <div class="box-header with-border">Diagnoses for {{ payload.patient.patient_id }} in {{ payload.patient.db }}</div>
+            <div class="box-body">
+                <table class="table table-striped table-bordered dataTables-full">
+                    <thead>
+                        <th>Visit type</th>
+                        <th>Visit key</th>
+                        <th>Day</th>
+                        <th>Month</th>
+                        <th>Quarter</th>
+                        <th>Year</th>
+                        <th>Code</th>
+                        <th>Diagnosis</th>
+                    </thead>
+                    <tbody>
+                    {% for v in payload.patient_obj.visits %}
+                        {% for dx in v.dxs%}
+                        <tr>
+                            <td>{{payload.coder[v.vtype]}}</td>
+                            <td>{{v.key}}</td>
+                            <td>{{v.day}}</td>
+                            <td>{{v.month}}</td>
+                            <td>{{v.quarter}}</td>
+                            <td>{{v.year}}</td>
+                            <td>{{dx}}</td>
+                            <td>{{payload.coder[dx]}}</td>
+                        </tr>
+                        {% endfor %}
+                        {% for dx in v.exs%}
+                        <tr>
+                            <td>{{payload.coder[v.vtype]}}</td>
+                            <td>{{v.key}}</td>
+                            <td>{{v.day}}</td>
+                            <td>{{v.month}}</td>
+                            <td>{{v.quarter}}</td>
+                            <td>{{v.year}}</td>
+                            <td>{{dx}}</td>
+                            <td>{{payload.coder[dx]}}</td>
+                        </tr>
+                        {% endfor %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="box">
+            <div class="box-header with-border">Procedures for {{ payload.patient.patient_id }} in {{ payload.patient.db }}</div>
+            <div class="box-body">
+                <table class="table table-striped table-bordered dataTables-full">
+                    <thead>
+                        <th>Visit type</th>
+                        <th>Visit key</th>
+                        <th>Day</th>
+                        <th>Month</th>
+                        <th>Quarter</th>
+                        <th>Year</th>
+                        <th>code</th>
+                        <th>Procedure</th>
+                        <th>Procedure day</th>
+                    </thead>
+                    <tbody>
+                    {% for v in payload.patient_obj.visits %}
+                        {% for pr in v.prs %}
+                        <tr>
+                            <td>{{payload.coder[v.vtype]}}</td>
+                            <td>{{v.key}}</td>
+                            <td>{{v.day}}</td>
+                            <td>{{v.month}}</td>
+                            <td>{{v.quarter}}</td>
+                            <td>{{v.year}}</td>
+                            <td>{{pr.pcode}}</td>
+                            <td>{{payload.coder[pr.pcode]}}</td>
+                            <td>{{pr.pday}}</td>
+                        </tr>
+                        {% endfor %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="box">
+            <div class="box-header with-border">{{ payload.patient.patient_id }} in {{ payload.patient.db }}</div>
+            <div class="box-body">
+                <textarea style="height:300px;width:100%">{{ payload.patient.data }}</textarea>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+</section>
+
+{% endblock %}
+{% block page_js%}
+<script>
+    $(document).ready(function() {
+        InitializeTables();
+    })
+</script>
+{% endblock %}

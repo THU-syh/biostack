@@ -1,0 +1,441 @@
+{% extends "base.html" %}
+{% import 'macro_tables.html' as tables %}
+{% block page_content %}
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-12">
+        <ol class="breadcrumb m-t">
+            <li><a href="/">Home</a></li>
+            <li><a href="/N1/">Procedure Analytics</a></li>
+            <li><a href="/N1/{{payload.dataset.identifier}}">{{ payload.dataset.name }}</a></li>
+            <li class="active"><strong> {{ payload.Coder[payload.code] }} ({{ payload.code }})</strong></li>
+        </ol>
+    </div>
+    <div class="col-lg-12 m-t">
+    </div>
+</div>
+<div class="wrapper wrapper-content">
+
+{% if payload.pr_type %}
+<div class="row m-b m-t">
+    <div class="col-lg-4">
+        {{ tables.exclusion_table("Exclusions",payload.exclusions) }}
+    </div>
+    <div class="col-lg-4">
+        <div class="ibox">
+            <div class="ibox-title">
+                <strong>Admission source preceding procedure</strong>
+                <div class="ibox-tools">
+                    <a data-toggle="modal" data-target="#myModal" href="#">
+                        <i class="fa fa-question"></i>
+                    </a>
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <table class="table dataTables-dict">
+                    <thead>
+                        <tr>
+                            <th>Pediatric</th>
+                            <th>Initial</th>
+                            <th>Median &Delta;T days</th>
+                            <th>Count</th>
+                            <th>All</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for k in payload.groups %}
+                    {% if not k.dx and k.sub == payload.code and k.initial.startswith("N")  %}
+                    <tr>
+                        <td class="text-center"> {{ k.pediatric }}</td>
+                        <td> {{ payload.Coder[k.initial] }} ({{ k.initial }}) </td>
+                        <td class="text-right"> {{ k.delta_median }}</td>
+                        <td class="text-right"> {{ k.count }}</td>
+                        <td class="text-center"><a href="/N1/{{payload.dataset.identifier}}/Entry/{{ k.key }}">view</a></td>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="ibox">
+            <div class="ibox-title">
+                <strong>Disposition destination following procedure</strong>
+                <div class="ibox-tools">
+                    <a data-toggle="modal" data-target="#myModal" href="#">
+                        <i class="fa fa-question"></i>
+                    </a>
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <table class="table dataTables-dict">
+                    <thead>
+                        <tr>
+                            <th>Pediatric</th>
+                            <th>Subsequent</th>
+                            <th>Median &Delta;T days</th>
+                            <th>Count</th>
+                            <th>All</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for k in payload.groups %}
+                        {% if not k.dx and k.initial == payload.code and k.sub.startswith("N") %}
+                        <tr>
+                            <td class="text-center"> {{ k.pediatric }}</td>
+                            <td> {{ payload.Coder[k.sub] }} ({{ k.sub }})</td>
+                            <td class="text-right"> {{ k.delta_median }}</td>
+                            <td class="text-right"> {{ k.count }}</td>
+                            <td class="text-center"><a href="/N1/{{payload.dataset.identifier}}/Entry/{{ k.key }}">view</a></td>
+                        </tr>
+                        {% endif %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row m-t m-b-lg">
+    <div class="col-lg-6">
+        <div class="ibox">
+            <div class="ibox-title">
+                <strong>Procedures Preceding {{ payload.Coder[payload.code] }} ({{ payload.code }})</strong>
+                <div class="ibox-tools">
+                    <a data-toggle="modal" data-target="#myModal" href="#">
+                        <i class="fa fa-question"></i>
+                    </a>
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <table class="table dataTables-full">
+                    <thead>
+                        <tr>
+                            <th>Pediatric</th>
+                            <th>Initial</th>
+                            <th>Median &Delta;T days</th>
+                            <th>Count</th>
+                            <th>All</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for k in payload.groups %}
+                    {% if not k.dx and k.sub == payload.code and not k.initial.startswith("N") %}
+                    <tr>
+                        <td class="text-center"> {{ k.pediatric }}</td>
+                        <td> {{ payload.Coder[k.initial] }} ({{ k.initial }}) </td>
+                        <td class="text-right"> {{ k.delta_median }}</td>
+                        <td class="text-right"> {{ k.count }}</td>
+                        <td class="text-center"><a href="/N1/{{payload.dataset.identifier}}/Entry/{{ k.key }}">view</a></td>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="ibox">
+            <div class="ibox-title">
+                <strong>Procedures followed by {{ payload.Coder[payload.code] }} ({{ payload.code }})</strong>
+                <div class="ibox-tools">
+                    <a data-toggle="modal" data-target="#myModal" href="#">
+                        <i class="fa fa-question"></i>
+                    </a>
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <table class="table dataTables-full">
+                    <thead>
+                        <tr>
+                            <th>Pediatric</th>
+                            <th>Subsequent</th>
+                            <th>Median &Delta;T days</th>
+                            <th>Count</th>
+                            <th>All</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for k in payload.groups %}
+                        {% if not k.dx and k.initial == payload.code and not k.sub.startswith("N") %}
+                        <tr>
+                            <td class="text-center"> {{ k.pediatric }}</td>
+                            <td> {{ payload.Coder[k.sub] }} ({{ k.sub }})</td>
+                            <td class="text-right"> {{ k.delta_median }}</td>
+                            <td class="text-right"> {{ k.count }}</td>
+                            <td class="text-center"><a href="/N1/{{payload.dataset.identifier}}/Entry/{{ k.key }}">view</a></td>
+                        </tr>
+                        {% endif %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row m-t m-b-lg">
+    <div class="col-lg-12">
+        <div class="ibox">
+            <div class="ibox-title">
+                <h5>Grouped entries by {{ payload.Coder[payload.code] }} ({{ payload.code }}) with specific Diagnosis or DRG</h5>
+                <div class="ibox-tools">
+                    <a data-toggle="modal" data-target="#myModal" href="#">
+                        <i class="fa fa-question"></i>
+                    </a>
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <table class="table dataTables-full">
+                    <thead>
+                        <tr>
+                            <th>Pediatric</th>
+                            <th>Diagnosis Code</th>
+                            <th>Initial Code</th>
+                            <th>Subsequent Code</th>
+                            <th>Diagnosis</th>
+                            <th>Initial</th>
+                            <th>Subsequent</th>
+                            <th>Median &Delta;T days</th>
+                            <th>Count</th>
+                            <th>All</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for k in payload.groups %}
+                    {% if k.dx %}
+                    <tr>
+                        <td class="text-center"> {{ k.pediatric }}</td>
+                        <td class="tdv" > {{ k.dx }}</td>
+                        <td class="tdv" > {{ k.initial }}</td>
+                        <td class="tdv" > {{ k.sub }}</td>
+                        <td>{{ payload.Coder[k.dx] }} </td>
+                        <td>{{ payload.Coder[k.initial]}}</td>
+                        <td>{{ payload.Coder[k.sub] }}</td>
+                        <td class="text-right"> {{ k.delta_median }}</td>
+                        <td class="text-right"> {{ k.count }}</td>
+                        <td class="text-center"><a href="/N1/{{payload.dataset.identifier}}/Entry/{{ k.key }}">view</a></td>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+{% else %}
+
+<div class="row m-t m-b-lg">
+    <div class="col-lg-3">
+        {{ tables.exclusion_table("Exclusions",payload.exclusions) }}
+    </div>
+    <div class="col-lg-9">
+        <div class="ibox">
+            <div class="ibox-title">
+                <h5>Grouped Event Pairs by Diagnosis or DRG {{ payload.Coder[payload.code] }} ({{ payload.code }}) </h5>
+                <div class="ibox-tools">
+                    <a data-toggle="modal" data-target="#myModal" href="#">
+                        <i class="fa fa-question"></i>
+                    </a>
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <table class="table dataTables-full">
+                    <thead>
+                        <tr>
+                            <th>Pediatric</th>
+                            <th>Source</th>
+                            <th>Disposition</th>
+                            <th>Median &Delta;T days</th>
+                            <th>Count</th>
+                            <th>All</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for k in payload.groups %}
+                        {% if k.dx and k.initial.startswith('N1') and k.sub.startswith('N1') %}
+                        <tr>
+                            <td class="text-center"> {{ k.pediatric }}</td>
+                            <td>{{ payload.Coder[k.initial]}}</td>
+                            <td>{{ payload.Coder[k.sub] }}</td>
+                            <td class="text-right"> {{ k.delta_median }}</td>
+                            <td class="text-right"> {{ k.count }}</td>
+                            <td class="text-center"><a href="/N1/{{payload.dataset.identifier}}/Entry/{{ k.key }}">view</a></td>
+                        </tr>
+                        {% endif %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row m-t m-b-lg">
+    <div class="col-lg-6">
+        <div class="ibox">
+            <div class="ibox-title">
+                <h5>Admission followed by Procedure  </h5>
+                <div class="ibox-tools">
+                    <a data-toggle="modal" data-target="#myModal" href="#">
+                        <i class="fa fa-question"></i>
+                    </a>
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <table class="table dataTables-full">
+                    <thead>
+                        <tr>
+                            <th>Pediatric</th>
+                            <th>Initial</th>
+                            <th>Subsequent</th>
+                            <th>Median &Delta;T days</th>
+                            <th>Count</th>
+                            <th>All</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for k in payload.groups %}
+                        {% if k.initial.startswith('N1') and not k.sub.startswith('N1') %}
+                        <tr>
+                            <td class="text-center"> {{ k.pediatric }}</td>
+                            <td>{{ payload.Coder[k.initial]}}</td>
+                            <td>{{ k.sub }}: {{ payload.Coder[k.sub] }}</td>
+                            <td class="text-right"> {{ k.delta_median }}</td>
+                            <td class="text-right"> {{ k.count }}</td>
+                            <td class="text-center"><a href="/N1/{{payload.dataset.identifier}}/Entry/{{ k.key }}">view</a></td>
+                        </tr>
+                        {% endif %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="ibox">
+            <div class="ibox-title">
+                <h5>Procedure followed by Disposition</h5>
+                <div class="ibox-tools">
+                    <a data-toggle="modal" data-target="#myModal" href="#">
+                        <i class="fa fa-question"></i>
+                    </a>
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <table class="table dataTables-full">
+                    <thead>
+                        <tr>
+                            <th>Pediatric</th>
+                            <th>Initial</th>
+                            <th>Subsequent</th>
+                            <th>Median &Delta;T days</th>
+                            <th>Count</th>
+                            <th>All</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for k in payload.groups %}
+                        {% if  k.sub.startswith('N1') and not k.initial.startswith('N1') %}
+                        <tr>
+                            <td class="text-center"> {{ k.pediatric }}</td>
+                            <td>{{ k.initial }}: {{ payload.Coder[k.initial]}}</td>
+                            <td>{{ payload.Coder[k.sub] }}</td>
+                            <td class="text-right"> {{ k.delta_median }}</td>
+                            <td class="text-right"> {{ k.count }}</td>
+                            <td class="text-center"><a href="/N1/{{payload.dataset.identifier}}/Entry/{{ k.key }}">view</a></td>
+                        </tr>
+                        {% endif %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row m-t m-b-lg">
+    <div class="col-lg-12">
+        <div class="ibox">
+            <div class="ibox-title">
+                <h5>Procedure followed by other Procedure  </h5>
+                <div class="ibox-tools">
+                    <a data-toggle="modal" data-target="#myModal" href="#">
+                        <i class="fa fa-question"></i>
+                    </a>
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <table class="table dataTables-full">
+                    <thead>
+                        <tr>
+                            <th>Pediatric</th>
+                            <th>Initial Code</th>
+                            <th>Subsequent Code</th>
+                            <th>Initial</th>
+                            <th>Subsequent</th>
+                            <th>Median &Delta;T days</th>
+                            <th>Count</th>
+                            <th>All</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for k in payload.groups %}
+                        {% if  not (k.sub.startswith('N1') or  k.initial.startswith('N1')) %}
+                        <tr>
+                            <td class="text-center"> {{ k.pediatric }}</td>
+                            <td class="tdv" > {{ k.initial }}</td>
+                            <td class="tdv" > {{ k.sub }}</td>
+                            <td>{{ payload.Coder[k.initial]}}</td>
+                            <td>{{ payload.Coder[k.sub] }}</td>
+                            <td class="text-right"> {{ k.delta_median }}</td>
+                            <td class="text-right"> {{ k.count }}</td>
+                            <td class="text-center"><a href="/N1/{{payload.dataset.identifier}}/Entry/{{ k.key }}">view</a></td>
+                        </tr>
+                        {% endif %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endif %}
+{% endblock %}
+{% block page_js %}
+<script>
+    InitializeTables();
+</script>
+{% endblock %}

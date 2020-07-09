@@ -1,0 +1,191 @@
+{% extends "base.html" %}
+{% import 'macro_tables.html' as tables %}
+{% block page_content %}
+{% if payload.q %}
+<div class="row  border-bottom white-bg dashboard-header">
+    <div class="col-lg-12 m-t">
+        <h4><span class="m-t">Showing results for :</span> {{ payload.q }} </h4>
+    </div>
+</div>
+{% endif %}
+{% if payload.entries_available %}
+<div class="wrapper wrapper-content">
+    <div class="row m-t">
+        <div class="col-lg-12">
+            <div class="ibox">
+            <div class="ibox-title">
+                <h4>Inpatient procedures/events analytics</h4>
+            </div>
+            <div class="ibox-content">
+                <table class="table table-striped dataTables-home">
+                <thead>
+                    <tr>
+                        <th class="text-center">Code</th>
+                        <th class="text-center">Description</th>
+                        <th class="text-center">Dataset</th>
+                        <th>Adult visits</th>
+                        <th>Pediatric visits</th>
+                        <th>Results</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for e in payload.entries_N1 %}
+                    <tr>
+                        <td>{{ e.code }}</td>
+                        <td>{{ payload.coder[e.code] }}</td>
+                        <td>{{ e.dataset.name }}</td>
+                        <td class="text-right">{{ e.count }}</td>
+                        <td class="text-right">{{ e.pediatric_count }}</td>
+                        <td class="text-center"><a href="/N1/{{ e.dataset.identifier }}/Group/{{ e.code }}">view results</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+                </table>
+            </div>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="ibox">
+            <div class="ibox-title">
+                <h4>Rehospitalization analytics</h4>
+            </div>
+            <div class="ibox-content">
+                <table class="table table-striped dataTables-home">
+                <thead>
+                    <tr>
+                        <th class="text-center">Code</th>
+                        <th class="text-center">Description</th>
+                        <th class="text-center">Dataset</th>
+                        <th>index visits</th>
+                        <th>30 day readmissions</th>
+                        <th>Results</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for e in payload.entries_N2 %}
+                    <tr>
+                        <td>{{ e.code }}</td>
+                        <td>{{ payload.coder[e.code] }}</td>
+                        <td>{{ e.dataset.name }}</td>
+                        <td class="text-right">{{ e.index_count }}</td>
+                        <td class="text-right">{{ e.readmit_30_count }}</td>
+                        <td class="text-center"><a href="/N2/{{ e.dataset.identifier }}/Group/{{ e.code }}">view results</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+                </table>
+            </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox">
+            <div class="ibox-title">
+                <h4>Revisits analytics</h4>
+            </div>
+            <div class="ibox-content">
+                <table class="table table-striped dataTables-home">
+                <thead>
+                    <tr>
+                        <th class="text-center">Code</th>
+                        <th class="text-center">Description</th>
+                        <th class="text-center">Dataset</th>
+                        <th class="text-right">index visits</th>
+                        <th>Results</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for e in payload.entries_N3 %}
+                    <tr>
+                        <td>{{ e.code }}</td>
+                        <td>{{ payload.N3coder[e.code] }}</td>
+                        <td>{{ e.dataset.name }}</td>
+                        <td class="text-right">{{ e.index_count }}</td>
+                        <td class="text-center"><a href="/N3/{{ e.dataset.identifier }}/Group/{{ e.code }}">view results</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+                </table>
+            </div>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="ibox">
+            <div class="ibox-title">
+                <h4>Patient analytics</h4>
+            </div>
+            <div class="ibox-content">
+                <table class="table table-striped dataTables-home">
+                <thead>
+                    <tr>
+                        <th class="text-center">Code</th>
+                        <th class="text-center">Description</th>
+                        <th class="text-center">Dataset</th>
+                        <th>Patients</th>
+                        <th>Results</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for e in payload.entries_N4 %}
+                    <tr>
+                        <td>{{ e.code }}</td>
+                        <td>{{ payload.coder[e.code] }}</td>
+                        <td>{{ e.dataset.name }}</td>
+                        <td class="text-right">{{ e.patients }}</td>
+                        <td class="text-center"><a href="/N4/{{ e.dataset.identifier }}/Group/{{ e.code }}">view results</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+                </table>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+<div class="row white-bg dashboard-header">
+    <div class="col-lg-12 m-t">
+        <h3>Related codes </h3>
+    </div>
+</div>
+<div class="wrapper wrapper-content">
+    <div class="row m-t">
+        <div class="col-lg-12">
+                <div class="ibox">
+                <div class="ibox-content">
+                <table class="table table-striped dataTables-home">
+                <thead>
+                    <tr>
+                        <th class="text-center">Type</th>
+                        <th class="text-center">Code</th>
+                        <th>Description</th>
+                        <th class="text-center">Datasets</th>
+                        <th>Results</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for k in payload.results %}
+                <tr>
+                    <td>{{ payload.coder.get_type(k.code) }}</td>
+                    <td>{{ k.code }}</td>
+                    {% if k.code.0 != 'C' %}<td>{{ k.description }}</td>{% else %}<td>Due to AMA copyright we cannot display the description for the CPT code {{ k.code }}</td>{% endif %}
+                    <td class="text-right">{{ k.datasets_count }}</td>
+                    <td class="text-center"><a href="/Search/{{ k.code }}/">Results</a></td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block page_js %}
+<script>
+$(document).ready(function() {
+    InitializeTables();
+});
+</script>
+{% endblock %}

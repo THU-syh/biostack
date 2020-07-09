@@ -1,0 +1,76 @@
+{% extends "CH3/base.html" %}
+{% load humanize %}
+
+{% block page_content %}
+<div class="row  border-bottom white-bg dashboard-header">
+    <div class="col-lg-12 m-t">
+        <h4>back to <a href="/datasets/">list of datasets</a></h4>
+    </div>
+</div>
+<div class="wrapper wrapper-content m-t">
+    <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox">
+                    <div class="ibox-title">
+                        <h4><span class="m-t">Codes present in {{ dataset.identifier }}</span></h4>
+                    </div>
+                    {% if is_paginated %}
+                    <div class="ibox-footer">
+                        <h3 class="text-center">
+                        {% if page_obj.has_previous %}
+                            <span class="pull-left"><a class="btn btn-sm btn-success" href=".?page={{ page_obj.previous_page_number }}"><i class="fa fa-backward"></i> previous</a></span>
+                        {% endif %}
+                            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                        {% if page_obj.has_next %}
+                            <span class="pull-right"><a class="btn btn-sm btn-success" href=".?page={{ page_obj.next_page_number }}"><i class="fa fa-forward"></i> next</a></span>
+                        {% endif %}
+                        </h3>
+                    </div>
+                    {% endif %}
+                    <div class="ibox-content">
+                        <div class="row m-b-sm m-t-sm">
+                            <div class="col-md-12">
+                                <form method="get" action="/codes_search">
+                                <div class="input-group"><input type="text" name="q" placeholder="Search" class="input-sm form-control"> <span class="input-group-btn">
+                                    <button type="button" class="btn btn-sm btn-primary" formaction="submit"> Go!</button> </span></div>
+                                </form>
+                            </div>
+                        </div>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Code</th>
+                                <th>Description</th>
+                                <th>Details</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            {% for row in code_list %}
+                                <tr>
+                                    <td>{{ row.code }}</td>
+                                    <td>{{ row.description }}</td>
+                                    <td><a href="/code/{{ row.code }}">Details and Counts</a></td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% if is_paginated %}
+                    <div class="ibox-footer">
+                        <h3 class="text-center">
+                        {% if page_obj.has_previous %}
+                            <span class="pull-left"><a class="btn btn-sm btn-success" href=".?page={{ page_obj.previous_page_number }}"><i class="fa fa-backward"></i> previous</a></span>
+                        {% endif %}
+                            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                        {% if page_obj.has_next %}
+                            <span class="pull-right"><a class="btn btn-sm btn-success" href=".?page={{ page_obj.next_page_number }}"><i class="fa fa-forward"></i> next</a></span>
+                        {% endif %}
+                        </h3>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+    </div>
+</div>
+{% endblock %}

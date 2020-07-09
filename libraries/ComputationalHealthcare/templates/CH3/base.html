@@ -1,0 +1,103 @@
+{% load humanize %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block page_title %} {% endblock %} Computational Healthcare</title>
+    <link href="/static/ccss/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <!-- Data Tables -->
+    <link href="/static/ccss/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="/static/ccss/plugins/dataTables/dataTables.responsive.css" rel="stylesheet">
+    <link href="/static/ccss/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="/static/ccss/animate.css" rel="stylesheet">
+    <link href="/static/ccss/style.css" rel="stylesheet">
+    <link href="/static/custom/akshay.css" rel="stylesheet">
+    {% block page_css %}
+    {% endblock %}
+</head>
+
+<body class="canvas-menu">
+<div id="wrapper">
+{% block page_sidebar %}
+    <nav class="navbar-default navbar-static-side"  role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav" id="side-menu">
+                <li>
+                    <a class="navbar-minimalize" href="#"><i class="fa fa-close"></i><span class="nav-label">Hide</span></a>
+                </li>
+                <li><a href="/"><i class="fa fa-home"></i> <span class="nav-label">Home</span></a></li>
+                <li><a href="/dashboard"><i class="fa fa-search"></i> <span class="nav-label">Search</span></a></li>
+                <li><a href="/datasets"><i class="fa fa-database"></i><span class="nav-label">Data</span></a></li>
+                <li><a href="/codes"><i class="fa fa-list"></i><span class="nav-label">Codes</span></a></li>
+                <li><a href="/config"><i class="fa fa-cogs"></i><span class="nav-label">Configuration</span></a></li>
+            </ul>
+        </div>
+    </nav>
+{% endblock %}
+<div id="page-wrapper" class="gray-bg dashbard-1">
+    <div class="row border-bottom">
+        {% block page_topbar %}
+            <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <!--<a class="navbar-minimalize minimalize-styl-2 btn btn-primary hidden-lg hidden-md hidden-sm" href="#"><i class="fa fa-bars"></i> </a>-->
+                <a class="navbar-minimalize minimalize-styl-2 btn btn-primary" href="#"><i class="fa fa-bars"></i> Menu </a>
+                <form role="search" id="top-form" class="navbar-form-custom" method="post" action="/Search/">
+                    <div class="form-group top-search-group">
+                        <input type="text"  tabindex="1" placeholder="Search by diagnosis, symptoms, ICD/CPT codes (type and press enter)" class="form-control typeahead" name="top-search" id="top-search">
+                    </div>
+                    <!--<button class="btn btn-info btn-inline m-l" ><i class="fa fa-search"></i></button>-->
+                    {% csrf_token %}
+                </form>
+            </div>
+            <ul class="nav navbar-top-links navbar-right">
+                <li><a href="/dashboard"><i class="fa fa-home"></i> <span class="hidden-md hidden-sm hidden-xs">Computational Healthcare</span></a></li>
+                {% block navbar_item %}
+                {% endblock %}
+            </ul>
+            </nav>
+        {% endblock %}
+    </div>
+    {% block page_content %}
+    {% endblock %}
+    <div class="footer">
+        <div class="pull-right">
+              &copy; <strong>Cornell University 2017.</strong>
+        </div>
+        <div>
+            Akshay Bhat, Peter Fleischut, Ramin Zabih. At this time we are pursuing the patent process to protect this software.
+        </div>
+    </div>
+</div>
+</div>
+<!-- Mainly scripts -->
+<script src="/static/cjs/jquery-2.1.1.js"></script>
+<script src="/static/custom/underscore-min.js"></script>
+<script src="/static/cjs/bootstrap.min.js"></script>
+<script src="/static/cjs/typeahead.bundle.js"></script>
+<script src="/static/cjs/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="/static/cjs/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="/static/cjs/plugins/dataTables/jquery.dataTables.js"></script>
+<script src="/static/cjs/plugins/dataTables/dataTables.bootstrap.js"></script>
+<script src="/static/cjs/plugins/dataTables/dataTables.responsive.js"></script>
+<!-- Flot -->
+<script src="/static/cjs/plugins/flot/jquery.flot.js"></script>
+<script src="/static/cjs/plugins/flot/jquery.flot.tooltip.min.js"></script>
+<script src="/static/cjs/plugins/flot/jquery.flot.spline.js"></script>
+<script src="/static/cjs/plugins/flot/jquery.flot.resize.js"></script>
+<script src="/static/cjs/plugins/flot/jquery.flot.pie.js"></script>
+<!-- Custom and plugin javascript -->
+<script src="/static/cjs/inspinia.js"></script>
+<script src="/static/cjs/plugins/pace/pace.min.js"></script>
+<!-- jQuery UI -->
+<script src="/static/cjs/plugins/jquery-ui/jquery-ui.min.js"></script>
+<script src="/static/custom/charts.js"></script>
+<script src="/static/custom/tables.js"></script>
+<script src="/static/custom/typedata.js"></script>
+{% block page_js %}
+<script>
+</script>
+{% endblock %}
+</body>
+</html>
