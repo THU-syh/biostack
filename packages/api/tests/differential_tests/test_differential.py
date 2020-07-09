@@ -7,7 +7,7 @@ from deepfake_detection.utilities.data_management import load_dataset
 import pandas as pd
 import pytest
 
-from api import config
+from source import config
 
 @pytest.mark.differential
 def test_model_prediction_differential(

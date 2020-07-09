@@ -2,9 +2,9 @@ from flask import Blueprint, request, jsonify
 from deepfake_detection.predict import make_single_prediction
 import os
 from werkzeug.utils import secure_filename
-from api.config import get_logger, UPLOAD_FOLDER
-from api.validation import validate_inputs, allowed_file
-from api import __version__ as api_version
+from source.config import get_logger, UPLOAD_FOLDER
+from source.validation import validate_inputs, allowed_file
+from source import __version__ as api_version
 
 _logger = get_logger(logger_name=__name__)
 prediction_app = Blueprint('prediction_app', __name__)

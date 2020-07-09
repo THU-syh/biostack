@@ -9,7 +9,7 @@ import pandas as pd
 from deepfake_detection.predict import make_prediction
 from deepfake_detection.utilities.data_management import load_dataset
 
-from api import config
+from source import config
 
 def capture_predictions() -> None:
     """Save the test data predictions to a CSV."""

@@ -4,7 +4,7 @@ import math
 import os
 
 from deepfake_detection.config import config as ccn_config
-from api import __version__ as api_version
+from source import __version__ as api_version
 
 
 def test_health_endpoint_returns_200(flask_test_client):
