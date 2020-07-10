@@ -1,0 +1,5 @@
+*.pth
+.gitignore
+Dockerfile
+README.md
+deployment_guide/
