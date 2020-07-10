@@ -1,0 +1,17 @@
+bump2version
+Click
+codecov
+coverage
+coveralls
+flake8
+mypy
+pip
+pylint
+pytest
+pytest-cov
+Sphinx
+sphinx_rtd_theme
+tox
+twine
+watchdog
+wheel

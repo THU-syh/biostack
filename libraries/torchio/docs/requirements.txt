@@ -1,0 +1,10 @@
+Click>=7.0
+humanize
+nibabel
+numpy
+Python-deprecated
+scipy
+SimpleITK
+torch>=1.2
+torchvision
+tqdm
