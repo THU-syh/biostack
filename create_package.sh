@@ -22,16 +22,16 @@ cd ${pname}
 
 mkdir config
 mkdir data
-mkdir misc
+mkdir utilities
 mkdir predictions
 
 type nul > config/__init__.py
 type nul > config/config.py
 
-type nul > misc/__init__.py
-type nul > misc/callbacks.py
-type nul > misc/data_management.py
-type nul > misc/preprocessors.py
+type nul > utilities/__init__.py
+type nul > utilities/callbacks.py
+type nul > utilities/data_management.py
+type nul > utilities/preprocessors.py
 
 cd ..
 
