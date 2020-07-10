@@ -1,0 +1,16 @@
+# Byte-compiled Python
+__pycache__/
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+release.sh
+
+# MIScnn
+batches/
+predictions/
+
+# Testing
+reinstall.sh
+debugging/
