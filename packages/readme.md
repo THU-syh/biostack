@@ -1,1 +1,1 @@
-De novo packages custom built to serve models deployed to the Flask application.
+CNN packages built using Keras for serving models.
