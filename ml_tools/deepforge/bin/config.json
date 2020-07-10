@@ -1,0 +1,8 @@
+{
+  "blob": {
+    "dir": "~/.deepforge/blob"
+  },
+  "mongo": {
+    "dir": "~/.deepforge/data"
+  }
+}

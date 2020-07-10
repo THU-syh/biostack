@@ -1,0 +1,32 @@
+{
+  "id": "ImportArtifact",
+  "name": "Import Existing Data",
+  "version": "0.1.0",
+  "description": "",
+  "icon": {
+    "class": "glyphicon glyphicon-transfer",
+    "src": ""
+  },
+  "disableServerSideExecution": false,
+  "disableBrowserSideExecution": false,
+  "writeAccessRequired": true,
+  "configStructure": [
+    {
+      "name": "dataPath",
+      "displayName": "File Path",
+      "description": "Path to an existing artifact in the storage backend",
+      "value": "",
+      "valueType": "string",
+      "readOnly": false,
+      "required": true
+    },
+    {
+      "name": "dataTypeId",
+      "displayName": "Data Type",
+      "description": "",
+      "value": "",
+      "valueType": "string",
+      "readOnly": false
+    }
+  ]
+}

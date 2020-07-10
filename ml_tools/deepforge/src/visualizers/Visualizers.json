@@ -1,0 +1,152 @@
+[
+  {
+    "id": "AutoViz",
+    "title": "AutoViz",
+    "panel": "panels/AutoViz/AutoVizPanel",
+    "DEBUG_ONLY": false
+  },
+  {
+    "id": "ArchEditor",
+    "title": "ArchEditor",
+    "panel": "panels/ArchEditor/ArchEditorPanel",
+    "DEBUG_ONLY": false
+  },
+  {
+    "id": "OperationEditor",
+    "title": "OperationEditor",
+    "panel": "panels/OperationEditor/OperationEditorPanel",
+    "DEBUG_ONLY": false
+  },
+  {
+    "id": "PipelineEditor",
+    "title": "PipelineEditor",
+    "panel": "panels/PipelineEditor/PipelineEditorPanel",
+    "DEBUG_ONLY": false
+  },
+  {
+    "id": "ExecutionView",
+    "title": "ExecutionView",
+    "panel": "panels/ExecutionView/ExecutionViewPanel",
+    "DEBUG_ONLY": false
+  },
+  {
+    "id": "RootViz",
+    "title": "ForwardViz",
+    "panel": "panels/ForwardViz/ForwardVizPanel",
+    "DEBUG_ONLY": false
+  },
+  {
+    "id": "DataTypeEditor",
+    "title": "DataTypeEditor",
+    "panel": "panels/DataTypeEditor/DataTypeEditorPanel",
+    "DEBUG_ONLY": false
+  },
+  {
+    "id": "LogViewer",
+    "title": "LogViewer",
+    "panel": "panels/LogViewer/LogViewerPanel",
+    "DEBUG_ONLY": false
+  },
+  {
+    "id": "CodeEditor",
+    "title": "CodeEditor",
+    "panel": "panels/TextEditor/TextEditorPanel",
+    "DEBUG_ONLY": false
+  },
+  {
+    "id": "PipelineIndex",
+    "title": "PipelineIndex",
+    "panel": "panels/PipelineIndex/PipelineIndexPanel",
+    "DEBUG_ONLY": false
+  },
+  {
+    "id": "ResourceIndex",
+    "title": "ResourceIndex",
+    "panel": "panels/ResourceIndex/ResourceIndexPanel",
+    "DEBUG_ONLY": false
+  },
+  {
+    "id": "OperationIndex",
+    "title": "OperationIndex",
+    "panel": "js/Panels/ModelEditor/ModelEditorPanel",
+    "DEBUG_ONLY": false
+  },
+  {
+    "id": "LayerIndex",
+    "title": "LayerIndex",
+    "panel": "js/Panels/ModelEditor/ModelEditorPanel",
+    "DEBUG_ONLY": false
+  },
+  {
+    "id": "DataTypeIndex",
+    "title": "DataTypeIndex",
+    "panel": "js/Panels/ModelEditor/ModelEditorPanel",
+    "DEBUG_ONLY": false
+  },
+  {
+    "id": "JobEditor",
+    "title": "JobEditor",
+    "panel": "panels/JobEditor/JobEditorPanel",
+    "DEBUG_ONLY": false
+  },
+  {
+    "id": "OutputViewer",
+    "title": "OutputViewer",
+    "panel": "panels/OutputViewer/OutputViewerPanel",
+    "DEBUG_ONLY": false
+  },
+  {
+    "id": "LineGraph",
+    "title": "LineGraph",
+    "panel": "panels/LineGraph/LineGraphPanel",
+    "DEBUG_ONLY": false
+  },
+  {
+    "id": "ImageViewer",
+    "title": "ImageViewer",
+    "panel": "panels/ImageViewer/ImageViewerPanel",
+    "DEBUG_ONLY": false
+  },
+  {
+    "id": "ExecutionIndex",
+    "title": "ExecutionIndex",
+    "panel": "panels/ExecutionIndex/ExecutionIndexPanel",
+    "DEBUG_ONLY": false
+  },
+  {
+    "id": "ArtifactIndex",
+    "title": "ArtifactIndex",
+    "panel": "panels/ArtifactIndex/ArtifactIndexPanel",
+    "DEBUG_ONLY": false
+  },
+  {
+    "id": "ForwardViz",
+    "title": "ForwardViz",
+    "panel": "panels/ForwardViz/ForwardVizPanel",
+    "DEBUG_ONLY": false
+  },
+  {
+    "id": "TabbedTextEditor",
+    "title": "TabbedTextEditor",
+    "panel": "panels/TabbedTextEditor/TabbedTextEditorPanel",
+    "DEBUG_ONLY": false
+  },
+  {
+    "id": "PlotlyGraph",
+    "title": "PlotlyGraph",
+    "panel": "panels/PlotlyGraph/PlotlyGraphPanel",
+    "DEBUG_ONLY": false
+  },
+  {
+    "id": "OperationSecondaryEditor",
+    "title": "OperationSecondaryEditor",
+    "panel": "panels/OperationSecondaryEditor/OperationSecondaryEditorPanel",
+    "DEBUG_ONLY": false
+  },
+  {
+    "id": "OperationDepEditor",
+    "title": "OperationDepEditor",
+    "panel": "panels/OperationDepEditor/OperationDepEditorPanel",
+    "DEBUG_ONLY": false
+  }
+]

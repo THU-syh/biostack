@@ -1,0 +1,32 @@
+{
+  "id": "ExecutePipeline",
+  "name": "Execute Pipeline",
+  "version": "0.1.0",
+  "description": "",
+  "icon": {
+    "class": "glyphicon glyphicon-random",
+    "src": ""
+  },
+  "disableServerSideExecution": false,
+  "disableBrowserSideExecution": true,
+  "canBeAborted": true,
+  "configStructure": [
+      {
+          "name": "name",
+          "displayName": "Execution name",
+          "description": "Optional name for this execution instance",
+          "value": "",
+          "valueType": "string",
+          "readOnly": false
+      },
+      {
+          "name": "debug",
+          "displayName": "Debug Mode",
+          "description": "Allow for operation editing after creation",
+          "value": false,
+          "valueType": "boolean",
+          "readOnly": false
+      }
+  ]
+
+}

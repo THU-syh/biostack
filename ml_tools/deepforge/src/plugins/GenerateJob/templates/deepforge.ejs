@@ -1,0 +1,40 @@
+# Instantiate the deepforge object
+
+import pickle
+
+serializers = {}
+deserializers = {}
+
+def dump(data, outfile):
+    serialize = get_serializer(data)
+    serialize(data, outfile)
+
+def load(full_name, outfile):
+    deserialize = get_deserializer(full_name)
+    return deserialize(outfile)
+
+def get_full_name(data):
+    class_name = data.__name__
+    module = data.__module__
+    return module + '.' + class_name
+
+def get_full_class_name(data):
+    return get_full_name(data.__class__)
+
+def get_serializer(data):
+    try:
+        full_name = get_full_class_name(data)
+        return serializers[full_name]
+    except:
+        return pickle.dump
+
+def get_deserializer(full_name):
+    try:
+        return deserializers[full_name]
+    except:
+        return pickle.load
+
+def register(classObj, serialize, deserialize):
+    full_name = get_full_name(classObj)
+    serializers[full_name] = serialize
+    deserializers[full_name] = deserialize

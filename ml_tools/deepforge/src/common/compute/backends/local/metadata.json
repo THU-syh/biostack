@@ -1,0 +1,6 @@
+{
+    "name": "Server Execution",
+    "dashboard": null,
+    "client": "./Client",
+    "configStructure": []
+}

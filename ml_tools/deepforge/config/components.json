@@ -1,0 +1,139 @@
+{
+    "GenerateJob": {
+        "enableJobCaching": false
+    },
+    "AutoViz": {
+        "preloadIds": [
+            "ArchEditor",
+            "ArchIndex",
+            "PipelineIndex",
+            "PipelineEditor",
+            "OperationEditor",
+            "ExecutionView"
+        ],
+        "visualizerOverrides": {
+            "": "ForwardViz",
+            "MyArtifacts": "ArtifactIndex",
+            "MyArchitectures": "ArchIndex",
+            "MyExecutions": "ExecutionIndex",
+            "MyPipelines": "PipelineIndex"
+        }
+    },
+    "PipelineEditor": {
+        "itemName": "operation"
+    },
+    "ExecutionView": {
+        "itemName": "job"
+    },
+    "ArchEditor": {
+        "hotkeys": "none",
+        "itemName": "layer",
+        "LayerColors": {}
+    },
+    "BreadcrumbHeader": {
+        "pathRule": "history",
+        "disableUserProfile": false,
+        "cachePrefix": "deepforge-header"
+    },
+    "FloatingActionButton": {
+        "hideOnEmpty": true,
+        "pluginUIConfigs": {
+            "GenerateArchitecture": {
+                "icon": "description",
+                "hotkey": "shift enter",
+                "priority": -1
+            },
+            "ExecutePipeline": {
+                "icon": "play_arrow",
+                "hotkey": "shift enter",
+                "color": "green",
+                "priority": 1
+            },
+            "ImportTorch": {
+                "icon": "import_export",
+                "priority": -1
+            }
+        }
+    },
+    "GenericUIProjectNavigatorController": {
+        "rootMenuClass": "deepforge-logo",
+        "rootDisplayName": "DeepForge"
+    },
+    "GenericUIWebGMEStart": {
+        "pageTitle": "DeepForge",
+        "layout": "SidebarLayout",
+        "byProjectKind": {
+            "layout": {
+                "deepforge": "SidebarLayout"
+            }
+        }
+    },
+    "SidebarLayout": {
+        "panels": [
+            {
+                "id": "WorkerHeader",
+                "panel": "WorkerHeader/WorkerHeaderPanel",
+                "container": "header",
+                "DEBUG_ONLY": false
+            },
+            {
+                "id": "Footer",
+                "panel": "Footer/FooterPanel",
+                "container": "footer",
+                "DEBUG_ONLY": false
+            },
+            {
+                "id": "MainPanel",
+                "panel": "AutoViz/AutoVizPanel",
+                "container": "center",
+                "DEBUG_ONLY": false
+            },
+            {
+                "id": "Sidebar",
+                "panel": "Sidebar/SidebarPanel",
+                "container": "sidebar",
+                "DEBUG_ONLY": false
+            },
+            {
+                "id": "ForgeActionButton",
+                "panel": "ForgeActionButton/ForgeActionButton",
+                "container": "float",
+                "DEBUG_ONLY": false
+            }
+            
+        ]
+    },
+    "RootViz": {
+        "nodes": [
+            {
+                "nodeName": "MyArchitectures",
+                "title": "Architectures",
+                "icon": "shuffle",
+                "rank": 1,
+                "description": "Neural network architectures are stored here and can be used in pipelines."
+            },
+            {
+                "nodeName": "MyPipelines",
+                "title": "Pipelines",
+                "color": "blue-grey",
+                "icon": "input",
+                "rank": 3,
+                "description": "Pipelines compose operations together to effectively train, test and/or ensemble models."
+            },
+            {
+                "nodeName": "MyArtifacts",
+                "title": "Artifacts",
+                "icon": "view_quilt",
+                "color": "blue-grey",
+                "rank": 5,
+                "description": "Artifacts from pipeline executions are stored here."
+            }
+        ]
+    },
+    "Compute": {
+        "backends": ["local", "gme", "sciserver-compute"]
+    },
+    "Storage": {
+        "backends": ["gme", "sciserver-files", "s3"]
+    }
+}

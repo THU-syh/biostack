@@ -1,0 +1,44 @@
+{
+    "name": "SciServer Files Service",
+    "configStructure": [
+        {
+            "name": "username",
+            "displayName": "Username",
+            "description": "SciServer username",
+            "value": "",
+            "valueType": "string",
+            "readOnly": false,
+            "isAuth": true
+        },
+        {
+            "name": "password",
+            "displayName": "Password",
+            "description": "SciServer password",
+            "value": "",
+            "valueType": "string",
+            "readOnly": false,
+            "isAuth": true,
+            "options": {
+                "isPassword": true
+            }
+        },
+        {
+            "name": "volume",
+            "displayName": "Volume",
+            "description": "Volume to use for upload.",
+            "value": "USERNAME/deepforge_data",
+            "valueType": "string",
+            "readOnly": false
+        },
+        {
+            "name": "volumePool",
+            "displayName": "Volume Pool",
+            "description": "Folders and files in User Volumes under “Storage” will be backed up and permanent, but there is a quota limit of 10GB. Folders and files in User Volumes under “Temporary” are not backed up, and will be deleted after a particular time period.",
+            "value": "Storage",
+            "valueItems": [
+                "Storage",
+                "Temporary"
+            ]
+        }
+    ]
+}

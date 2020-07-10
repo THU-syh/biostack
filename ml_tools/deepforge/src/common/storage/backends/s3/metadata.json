@@ -1,0 +1,37 @@
+{
+  "name": "S3 Storage",
+  "configStructure": [
+    {
+      "name": "endpoint",
+      "displayName": "S3 Server URL",
+      "description": "The URL of the S3 Server (eg, https://s3.amazonaws.com, https://play.min.io:9000).",
+      "value": "",
+      "valueType": "string",
+      "readOnly": false
+    },
+    {
+      "name": "accessKeyId",
+      "displayName": "Access Key",
+      "value": "",
+      "valueType": "string",
+      "readOnly": false,
+      "isAuth": true
+    },
+    {
+      "name": "secretAccessKey",
+      "displayName": "Secret Key",
+      "value": "",
+      "valueType": "string",
+      "readOnly": false,
+      "isAuth": true
+    },
+    {
+      "name": "bucketName",
+      "displayName": "Bucket Name",
+      "description": "Name of the bucket in which you want to upload artifacts. If the bucket doesn't exist, it will be created.",
+      "value": "deepforge",
+      "valueType": "string",
+      "readOnly": false
+    }
+  ]
+}

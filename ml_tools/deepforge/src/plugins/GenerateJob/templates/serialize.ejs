@@ -1,0 +1,17 @@
+# Serialization functions for: <%= types.map(function(type) {return type[0];}).join('\n--   ') %>
+
+serializer = {}
+<% types.forEach(function(pair) {
+var type = pair[0],
+    fn = pair[1],
+    safeType = type.replace(/[^a-zA-Z\d_]/g, '_');
+
+%>
+
+def <%= safeType %> (name, data):
+    path = 'outputs/' .. name
+    <%= fn.replace('\n', '\n    ') %>
+
+serializer['<%= type %>'] = <%= safeType %>
+
+<% }); %>

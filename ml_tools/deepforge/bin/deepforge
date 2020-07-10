@@ -1,0 +1,441 @@
+#!/usr/bin/env node
+const childProcess = require('child_process');
+const Conda = require('../utils/conda-utils');
+const {promisify} = require('util');
+const fs = require('fs');
+const writeFile = promisify(fs.writeFile);
+const os = require('os'),
+    IS_WINDOWS = os.type() === 'WINDOWS_NT',
+    SHELL = IS_WINDOWS ? true : '/bin/bash',
+    HOME_DIR = os.homedir(),
+    gmeConfig = require('../config');
+
+var Command = require('commander').Command,
+    tcpPortUsed = require('tcp-port-used'),
+    program = new Command(),
+    rawSpawn = childProcess.spawn,
+    Q = require('q'),
+    execSync = childProcess.execSync,
+    path = require('path'),
+    pkgJson = require('../package.json'),
+    version = pkgJson.version,
+    exists = require('exists-file'),
+    DEFAULT_CONFIG = require('./config.json'),
+    merge = require('lodash.merge'),
+    config,
+
+    configDir = path.join(HOME_DIR, '.deepforge'),
+    configPath = path.join(configDir, 'config.json'),
+    dataPath = path.join(configDir, 'data'),
+
+    localConfig,
+    rm_rf = require('rimraf'),
+    p = dir => {
+        if (typeof dir === 'string') {
+            return dir.replace(/^~/, HOME_DIR);  // resolve '~' to '$HOME'
+        }
+        return dir;
+    };
+
+const DEEPFORGE_CONDA_ENV = 'deepforge-server';
+const getDeepForgeServerCommand = function(useConda){
+    if(useConda){
+        return `${IS_WINDOWS ? 'conda': 'source'} activate ${DEEPFORGE_CONDA_ENV} && node`;
+    }
+    return 'node';
+};
+
+// Check for any commands
+if (process.argv.length === 2) {
+    process.argv.push('--help');
+}
+
+// Create the config if it doesn't exist
+if (!exists.sync(configDir)) {
+    fs.mkdirSync(configDir);
+}
+if (!exists.sync(dataPath)) {
+    fs.mkdirSync(dataPath);
+}
+if (!exists.sync(configPath)) {
+    fs.writeFileSync(configPath, '{\n}');
+}
+
+localConfig = require(configPath);
+config = merge({}, DEFAULT_CONFIG, localConfig);
+
+var getConfigValue = function (id, srcConfig) {
+    var keys = id.split('.'),
+        value = srcConfig || config;
+
+    for (var i = 0; i < keys.length; i++) {
+        if (!value.hasOwnProperty(keys[i])) {
+            return null;
+        }
+        value = value[keys[i]];
+    }
+    return value;
+};
+
+var storeConfig = function (id, value) {
+    // load the config
+    var keys = id.split('.').filter(k => k),
+        lastKey = keys.pop(),
+        currentObj = localConfig,
+        current = getConfigValue(id),
+        expType = typeof getConfigValue(id, DEFAULT_CONFIG);
+
+    // Check if it is a valid key
+    if (current === null) {
+        return false;
+    }
+
+    for (var i = 0; i < keys.length; i++) {
+        if (!currentObj[keys[i]]) {
+            currentObj[keys[i]] = {};
+        }
+        currentObj = currentObj[keys[i]];
+    }
+
+    if (expType !== 'string') {
+        try {  // try to downcast
+            value = JSON.parse(value);
+        } catch (e) {
+            console.log(`Invalid value: "${value}" (expected ${expType})`);
+            return;
+        }
+    }
+
+    currentObj[lastKey] = value;
+    fs.writeFileSync(configPath, JSON.stringify(localConfig, null, 2));
+    return true;
+};
+
+(function () {  // Load config to env
+    var envToConf = require('./envConfig.json');
+    Object.keys(envToConf).forEach(env => {
+        var cKey = envToConf[env];
+        process.env[env] = process.env[env] || p(getConfigValue(cKey));
+    });
+})();
+
+program
+    .version('v' + version)
+    .description('Command line interface for managing deepforge');
+
+var isLocalUri = function (protocol, uri) {
+    return uri.indexOf(protocol + '://localhost') === 0 ||
+        uri.indexOf(protocol + '://127.0.0.1') === 0;
+};
+
+var checkMongo = function (args, notSilent, mongoUri) {
+    // check the webgme config
+
+    mongoUri = mongoUri || gmeConfig.mongo.uri;
+
+    if (isLocalUri('mongodb', mongoUri)) {
+        var match = mongoUri.match(/:([0-9]+)/),
+            port = '80';
+
+        if (match) {
+            port = match[1];
+        }
+
+        // Make sure mongo is running locally (using pgrep)
+        try {
+            execSync('pgrep mongod').toString();
+            console.log('MongoDB is already running!');
+        } catch (e) {  // no pIds
+            console.log('Starting MongoDB...');
+            startMongo(args, port, !notSilent);
+        }
+        return tcpPortUsed.waitUntilUsed(+port, 100, 1000);
+    } else if (notSilent) {
+        console.log(`Cannot start remote mongo locally: ${mongoUri}`);
+    } else {
+        console.log(`Using remote mongo: ${mongoUri}`);
+    }
+    return Q();
+};
+
+var startMongo = function (args, port, silent) {
+    var opts = ['--dbpath', p(config.mongo.dir), '--port', port],
+        job = rawSpawn('mongod', opts, {cwd: HOME_DIR});
+
+    if (!silent) {
+        job.stdout.on('data',
+            data => process.stdout.write(data.toString()));
+    }
+    job.on('error', err => {
+        if (err.code === 'ENOENT') {
+            console.log('Could not find MongoDB. Is it installed?');
+            if (!args.mongo) {
+                console.log('Otherwise, set MONGO_URI to the desired mongo uri and try again:');
+                console.log('');
+                console.log('    MONGO_URI=mongodb://some.other.ip:27017' +
+                    `/deepforge deepforge ${process.argv.slice(2).join(' ')}`);
+                console.log('');
+            }
+        } else {
+            console.log('Error encountered while starting MongoDB');
+            throw err;
+        }
+    });
+    job.stderr.on('data', data => {
+        var msg = 'mongodb: ' + data;
+        process.stdout.write(msg);
+    });
+    job.on('exit', code => {
+        if (code) {
+            console.log('MongoDB closed w/ error code: ' + code);
+        }
+    });
+};
+
+var spawn = function (cmd, args, opts) {
+    var deferred = Q.defer(),
+        job,
+        spawnOpts = typeof opts === 'object' ? opts : null,
+        forwardStdin = opts === true,
+        isOpen = true,
+        stderr = '',
+        err;
+
+    args = args || [];
+    job = spawnOpts ? rawSpawn(cmd, args, spawnOpts) : rawSpawn(cmd, args);
+    job.stdout.on('data', data => process.stdout.write(data));
+    job.stderr.on('data', data => {
+        stderr += data;
+        process.stderr.write(data);
+    });
+
+    job.on('close', code => {
+        isOpen = false;
+        if (err || code !== 0) {
+            deferred.reject({
+                code: code,
+                stderr: stderr,
+                error: err
+            });
+        } else {
+            deferred.resolve(code);
+        }
+    });
+    job.on('error', e => {
+        err = e;
+    });
+
+    if (forwardStdin) {
+        process.stdin.on('data', data => {
+            if (isOpen) {
+                job.stdin.write(data);
+            }
+        });
+    }
+
+    return deferred.promise;
+};
+
+program.command('start')
+    .description('start deepforge locally (default) or specific components')
+    .option('-p, --port <port>', 'specify the port to use')
+    .option('-s, --server', 'start the server')
+    .option('-N, --no-conda', 'do not start deepforge server in a conda environment.')
+    .option('-m, --mongo', 'start MongoDB')
+    .action(async args => {
+        const serverCommand = getDeepForgeServerCommand(args.conda);
+        const startAll = !args.server && !args.mongo;
+        if (startAll) {
+            args.server = true;
+            args.mongo = true;
+        }
+
+        if (args.port) {
+            process.env.PORT = args.port;
+        }
+
+        if (args.mongo) {
+            await checkMongo(args, true);
+        }
+
+        if (args.server) {
+            await checkMongo(args);
+            const main = path.join(__dirname, '..', 'app.js');
+            await spawn(serverCommand, [main], {
+                shell: SHELL
+            });
+        }
+    });
+
+// update
+program
+    .command('update')
+    .description('upgrade deepforge to latest version')
+    .option('-g, --git', 'update tracking the git repo')
+    .action(args => {
+        var pkg = 'deepforge',
+            latestVersion;
+
+        // Install the project
+        if (args.git) {
+            pkg = pkgJson.repository.url;
+        } else {
+            // Check the version
+            try {
+                latestVersion = execSync('npm show deepforge version')
+                    .toString().replace(/\s+$/, '');
+
+                if (latestVersion === version) {
+                    console.log('Already up-to-date');
+                    return;
+                }
+            } catch (e) {
+                console.log('Could not retrieve the latest deepforge version');
+            }
+        }
+
+        spawn('npm', ['install', '-g', pkg])
+            .then(() => {
+                console.log('Upgrade successful!');
+            })
+            .catch(code => console.log('Upgrade failed w/ error code: ' + code));
+    });
+
+// uninstall command
+program
+    .command('uninstall')
+    .description('uninstall deepforge from the system')
+    .option('-c, --clean', 'uninstall deepforge and all associated data/config')
+    .action(opts => {
+        if (opts.clean) {  // remove the .deepforge directory
+            console.log('removing config and data files...');
+            rm_rf.sync(p(config.mongo.dir));
+            rm_rf.sync(p(configDir));
+        }
+
+        spawn('npm', ['uninstall', '-g', 'deepforge'])
+            .then(() => console.log('deepforge has been uninstalled!'))
+            .catch(() => console.log('uninstall failed'));
+    });
+
+// config
+program
+    .command('config [key] [value]')
+    .description('read or edit config options (omit "value" to see current value)')
+    .action(key => {
+        var value = program.args[1],
+            success;
+
+        if (value) {  // write a value
+            success = storeConfig(key, value);
+            if (success) {
+                console.log('Config has been updated!');
+            }
+        } else if (key) {  // read a single value
+            value = getConfigValue(key);
+            if (value === null) {
+                console.log(`Invalid config value: "${key}"`);
+                return;
+            }
+
+            if (typeof value === 'object') {
+                value = JSON.stringify(value, null, 2);
+            }
+
+            console.log(value);
+        } else {  // print entire config
+            console.log(JSON.stringify(config, null, 2));
+        }
+    });
+
+// extensions
+program
+    .command('extensions <command>', 'Manage deepforge extensions');
+
+program
+    .command('create-env')
+    .description('Create conda environment(s) with DeepForge python dependencies')
+    .option('-n, --name <name>', 'Name of environment to create')
+    .option('-s, --server', 'Create environment with server dependencies')
+    .option('-w, --worker', 'Create environment with worker dependencies')
+    .option('-f, --force', 'Overwrite any existing environments')
+    .action(async cmd => {
+        const createBoth = !cmd.server && !cmd.worker;
+        if (createBoth) {
+            cmd.server = cmd.worker = true;
+        }
+
+        const extender = require('../utils/extender');
+        const extensionData = extender.getExtensionsConfig();
+        const libraries = Object.values(extensionData.Library);
+        const dirs = libraries.map(lib => lib.project.root);
+        const isUpdatingDefault = typeof cmd.name !== 'string';
+        const name = isUpdatingDefault ? 'deepforge' : cmd.name;
+
+        try {
+            if (cmd.server) {
+                const serverEnvName = createBoth ? `${name}-server` : name;
+                await createEnvFromDirs(serverEnvName, dirs, 'server', cmd.force);
+            }
+            if (cmd.worker) {
+                await createEnvFromDirs(name, dirs, 'worker', cmd.force);
+                if (isUpdatingDefault) {
+                    await exportWorkerEnvForJobs(name);
+                }
+            }
+        } catch (errOrExitCode) {
+            const msg = '\n\nUnable to create environment.';
+            if (errOrExitCode instanceof Error) {
+                console.log(`${msg} An error occurred: ${errOrExitCode}`);
+            } else {
+                console.log(`${msg} Conda exited with exit code: ${errOrExitCode}`);
+            }
+        }
+    });
+
+async function createEnvFromDirs(name, dirs, type, force=false) {
+    const envFiles = getCondaEnvFiles(dirs, type);
+
+    const baseEnvFile = `environment.${type}.yml`;
+    const flags = `--name ${name} --file ${baseEnvFile}${force ? ' --force' : ''}`;
+    await Conda.spawn(`env create ${flags}`);
+    for (let i = 0; i < envFiles.length; i++) {
+        const envFile = envFiles[i];
+        await Conda.spawn(`env update -n ${name} --file ${envFile}`);
+    }
+}
+
+function getCondaEnvFiles(dirs, type) {
+    const validEnvFilenames = ['environment.yml', `environment.${type}.yml`];
+    const envFiles = dirs
+        .flatMap(dirname => validEnvFilenames.map(file => path.join(dirname, file)))
+        .filter(filepath => exists.sync(filepath));
+
+    return envFiles;
+}
+
+async function exportWorkerEnvForJobs(name) {
+    const contents = await Conda.export(name);
+    const filename = path.join(__dirname, '..', 'src', 'plugins', 'GenerateJob',
+        'templates', 'environment.worker.yml');
+    await writeFile(filename, contents);
+}
+
+// user-management
+program.command('users', 'Manage deepforge users.');
+
+module.exports = function (cmd) {
+    var cmds = cmd.split(/\s+/).filter(w => !!w);
+    cmds.unshift('./bin/deepforge');
+    cmds.unshift('node');
+    program.parse(cmds);
+};
+
+
+module.exports.checkMongo = checkMongo;
+module.exports.getDeepForgeServerCommand = getDeepForgeServerCommand;
+module.exports.SHELL = SHELL;
+
+if (require.main === module) {
+    program.parse(process.argv);
+}
