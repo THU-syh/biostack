@@ -1,0 +1,327 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% From a template maintained at https://github.com/jamesrobertlloyd/cbl-tikz-poster
+%
+% Code near the top should be fairly standard and not need to be changed
+%  - except for the document class
+% Code lower down is more likely to be customised
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\documentclass[landscape,a0b,final,a4resizeable]{include/a0poster}
+
+\usepackage{multicol}
+\usepackage{color}
+\usepackage{morefloats}
+\usepackage[pdftex]{graphicx}
+\usepackage{rotating}
+\usepackage{amsmath, amsthm, amssymb, bm}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{hyperref}
+
+
+\usepackage{include/picins}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric,arrows,chains,matrix,positioning,scopes,calc}
+\tikzstyle{mybox} = [draw=white, rectangle]
+\definecolor{darkblue}{rgb}{0,0.08,0.45}
+\definecolor{blue}{rgb}{0,0,1}
+
+\usepackage{dsfont}
+
+\input{include/jlposter.tex}
+
+\input{include/preamble.sty}
+\newcommand{\vv}{\mathbf{v}}
+
+\begin{document}
+\begin{poster} 
+
+% Potentially add some space at the top of the poster
+\vspace{0\baselineskip}
+
+
+%%% Header
+\begin{center}
+\begin{pcolumn}{0.99}
+
+\newcommand{\logowidth}{0.11\textwidth}
+
+\pbox{0.99\textwidth}{}{linewidth=2mm,framearc=0.3,linecolor=camdarkblue,fillstyle=gradient,gradangle=0,gradbegin=white,gradend=white,gradmidpoint=1.0,framesep=1em}{
+%
+%%% Cambridge Logo
+\begin{minipage}[c]{\logowidth}
+  \begin{center}
+    \includegraphics[width=20cm]{badges/hips-logo.png}
+  \end{center}
+\end{minipage}
+%
+%%% Title
+\begin{minipage}[c][9cm][c]{0.76\textwidth}
+  \begin{center}
+    {\sffamily \VeryHuge \textbf{Convolutional Networks on Graphs\\[4mm] for Learning Molecular Fingerprints}}\\[10mm]
+    {\huge\sffamily \Huge David Duvenaud*, Dougal Maclaurin*, Jorge Aguilera-Iparraguirre \\ Rafael G\'omez-Bombarelli, Timothy Hirzel, Al\'an Aspuru-Guzik, Ryan P. Adams\\[7.5mm]
+    %\texttt{\{ti242, dkd23, zoubin\}@cam.ac.uk}
+    }
+  \end{center}
+\end{minipage}
+%
+%
+% Harvard logo
+\begin{minipage}[c]{\logowidth}
+  \begin{flushright}
+    \includegraphics[width=9cm,trim=2em 0em 2em 2em, clip]{badges/harvard}
+  \end{flushright}
+\end{minipage}
+%
+}
+\end{pcolumn}
+\end{center}
+
+\vspace*{3cm}
+
+\Large
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Beginning of Document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{multicols}{3}
+
+\mysection{How to do regression on graphs?}
+
+%\vspace{-0.5in}
+
+\begin{tabular}{cc}
+\begin{minipage}[c]{0.45\columnwidth}
+\begin{itemize}
+  \item Input can be any size or shape
+  \item Hard to turn into fixed-length vector
+  \item In our case, graphs represent molecules
+  \item Applications to photovoltaics, organic LEDS, flow batteries and pharmaceuticals
+\end{itemize}
+\end{minipage} & 
+\begin{minipage}[c]{0.55\columnwidth}
+%\includegraphics[width=\columnwidth]{../talks/talkfigs/learning_curves_3.pdf}
+\centerline{\includegraphics[width=1.0\columnwidth, clip, trim=4mm 0mm 4mm 4mm]{figures/how-fingerprints.png}}
+\end{minipage}
+\end{tabular}
+
+%\vspace{-0.5in}
+
+\vspace{1.5in}
+
+\mysection{Circular fingerprints}
+
+%Also called Morgan fingerprints, or ECFP
+
+\vspace{0.5in}
+
+\begin{tabular}{cc}
+\begin{minipage}[c]{0.5\columnwidth}
+\begin{itemize}
+  \item Maps variable-sized molecular graph to fixed-length binary vector
+  %\item Does this by hashing self with neighbors iteratively
+  \item Binary features indicate presence of substructures
+\end{itemize}
+
+\vspace{0.5in}
+
+Can be efficiently computed using local operations:
+
+\begin{itemize}
+  \item At each layer, hash the features of each atom and its neighbors/bonds
+  \item More layers correspond to increasing radius of substructures
+  \item Interpret each hash as integer and set that entry to one
+\end{itemize}
+\end{minipage} & 
+\begin{minipage}[c]{0.5\columnwidth}
+%\includegraphics[width=\columnwidth]{../talks/talkfigs/learning_curves_3.pdf}
+\centerline{\includegraphics[width=0.9\columnwidth, clip, trim=4mm 12mm 4mm 4mm]{figures/fig_1}}
+\end{minipage}
+\end{tabular}
+
+\vspace{0.5in}
+
+Was state-of-the-art for large-scale regression and classification.
+
+
+
+\newpage %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\mysection{Convolutional neural nets on graphs}
+
+\vspace{0.5in}
+
+\begin{tabular}{ccc}
+\begin{minipage}[c]{0.45\columnwidth}
+
+How to make circular fingerprints differentiable?
+Replacing ops:
+\vspace{0.5in}
+
+\begin{center}
+\begin{tabular}{rcl}
+Hash  & $\rightarrow$ & Neural net \\
+Index & $\rightarrow$ & Softmax \\
+Write & $\rightarrow$ & Add
+\end{tabular}
+\end{center}
+
+\vspace{0.5in}
+
+Gives end-to-end differentiable convolutional network.
+
+\vspace{0.5in}
+
+Can be trained to adapt to particular tasks.
+
+\end{minipage}
+& \qquad &
+\begin{minipage}[c]{0.45\columnwidth}
+\begin{center}
+Information flow graph:
+\centerline{\includegraphics[width=\columnwidth, clip, trim=0mm 0mm 4mm 4mm]{figures/3d-nets/net1.png}}
+\end{center}
+
+Message passing between neighbors, then final pooling step
+
+\end{minipage}
+\end{tabular}
+
+\vspace{1.5in}
+
+\mysection{Neural fingerprints are interpretable}
+
+\newcommand{\mywidtha}{8cm}
+\newcommand{\mywidthb}{10.3cm}
+
+When fed into linear layer, can see how fragments affect prediction:
+
+\vspace{-0.5in}
+\begin{center}
+\begin{tabular}{>{\centering}m{\mywidthb} >{\centering}m{\mywidtha} >{\centering}m{\mywidtha} >{\centering\arraybackslash}m{\mywidtha}}
+Fragments predictive of solubility & 
+%\molfeature{15}{0}{3.3cm} & \molfeature{15}{3}{3.3cm} & \molfeature{15}{2}{2.5cm}\\
+\includegraphics[width=\mywidtha, clip, trim = 2mm 3mm 2mm 6mm]{figures/fig_5.pdf} &
+\includegraphics[width=\mywidtha, clip, trim = 2mm 3mm 2mm 6mm]{figures/fig_6.pdf} &
+\includegraphics[width=6cm, clip, trim = 2mm 3mm 2mm 6mm]{figures/fig_7.pdf} \\
+\midrule
+Fragments predictive of insolubility & 
+%\molfeature{18}{4}{3.3cm} & \molfeature{18}{1}{3.3cm} & \molfeature{18}{2}{3.3cm}
+\includegraphics[width=\mywidtha, clip, trim = 2mm 3mm 2mm 6mm]{figures/fig_8.pdf} &
+\includegraphics[width=\mywidtha, clip, trim = 2mm 3mm 2mm 6mm]{figures/fig_9.pdf} &
+\includegraphics[width=\mywidtha, clip, trim = 2mm 3mm 2mm 6mm]{figures/fig_10.pdf} \\
+%\end{tabular}
+%\end{center}
+\midrule
+%\subsection{Toxicity features}
+%We trained the same model architecture to predict toxicity in two different datasets.
+%Shows fragments which maximally activate the feature most predictive of toxicity, in two separate datasets.
+%\newcommand{\molfeaturetox}[2]{\includegraphics[width=3.4cm, clip, trim = 1mm 3mm 1mm 3mm]{fig_11.pdf}}%
+%\begin{figure}[h]
+%\begin{center}
+%\begin{tabular}{>{\centering}m{\mywidthb} >{\centering}m{\mywidtha} >{\centering}m{\mywidtha} >{\centering\arraybackslash}m{\mywidtha}}
+%\vspace{0.5}
+\vspace{0.5in}Fragments predictive of toxicity on SR-MMP dataset\vspace{0.5in}
+& \includegraphics[width=7cm]{figures/jorge-figures/7.png} 
+& \includegraphics[width=\mywidtha]{figures/jorge-figures/8.png}
+& \includegraphics[width=\mywidtha]{figures/jorge-figures/9.png}\\
+\midrule
+\vspace{0.5in}
+Fragments predictive of toxicity on NR-AHR dataset
+\vspace{0.5in}
+%& \molfeaturetox{7}{14} & \molfeaturetox{7}{6} & \molfeaturetox{7}{5}
+& \includegraphics[width=6.5cm]{figures/jorge-figures/10.png} 
+& \includegraphics[width=\mywidtha]{figures/jorge-figures/11.png}
+& \includegraphics[width=7cm]{figures/jorge-figures/12.png}\\
+\end{tabular}
+%\caption{
+\end{center}
+
+%Visualizing fingerprints optimized for predicting toxicity.
+%Shown here are representative samples of molecular fragments (highlighted in red) which most activate the feature most predictive of toxicity.
+
+%\emph{Top row:} the most predictive feature identifies groups containing a sulphur atom attached to an aromatic ring.
+%\emph{Bottom row:} the most predictive feature identifies fused aromatic rings, also known as polycyclic aromatic hydrocarbons, a well-known carcinogen.
+
+
+
+
+\newpage %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\mysection{Neural graph fingerprints\\generalize circular fingerprints}
+
+Large random weights give similar behavior to circular fingeprints:
+\vspace{0.5em}
+
+\begin{tabular}{cc}
+\begin{minipage}[c]{0.48\columnwidth}
+\includegraphics[width=\columnwidth]{figures/fig_2.pdf}
+\end{minipage} & 
+\begin{minipage}[c]{0.48\columnwidth}
+\begin{center}
+\vspace{0.5cm}\includegraphics[width=\columnwidth]{figures/fig_3.pdf}
+\end{center}
+\end{minipage}
+\end{tabular}
+
+\vspace{0.5em}
+
+Small random weights already much better than circular fingerprints!
+
+Can do even better by optimizing for given task.
+
+\vspace{1in}
+
+\mysection{Predictive accuracy}
+
+Neural graph fingerprints fed to neural net generalizes state of the art:%, we can't not win:
+
+\vspace{0.5em}
+
+\begin{center}
+\begin{tabular}{r|lll}
+Dataset                      &   Solubility  & Drug efficacy & Photovoltaic \\
+ & & & efficiency \\
+\midrule
+Units                        &   log Mol/L                            & EC$_{50}$ in nM                        & percent \\
+\midrule
+Predict mean                 & 2.07 $\pm$ 0.10        & 1.21 $\pm$ 0.03         & 2.53 $\pm$ 0.02 \\
+Circular FPs + linear layer  & 1.31 $\pm$ 0.05        & \bf{1.06} $\pm$ 0.01    & 1.62 $\pm$ 0.03 \\
+Circular FPs + neural net    & 1.18 $\pm$ 0.05        & 1.16 $\pm$ 0.04         & 1.41 $\pm$ 0.03 \\ 
+Neural FPs + linear layer    & 0.87 $\pm$ 0.06        & \bf{1.07} $\pm$ 0.01    & 1.61 $\pm$ 0.06 \\  
+Neural FPs + neural net      & \bf{0.72} $\pm$ 0.05   & \bf{1.08} $\pm$ 0.01    & \bf{1.20} $\pm$ 0.04
+\end{tabular}
+
+\vspace{0.5em}
+
+
+%RMSE Mean predictive accuracy of neural fingerprints compared to standard circular fingerprints.
+\end{center}
+
+\vspace{0.5em}
+
+\mysection{Conclusion}
+
+\begin{itemize}
+\item Can learn graph features end-to-end!
+\item Works on other types of graphs too 
+\item Code at \url{github.com/HIPS/neural-fingerprint}
+\item Autodiff package that works on standard Numpy code:\\ \url{github.com/HIPS/autograd}
+\end{itemize}
+
+
+
+\end{multicols}
+\end{poster}
+
+\end{document}
+
