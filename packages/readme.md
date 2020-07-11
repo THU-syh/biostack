@@ -1,1 +1,1 @@
-CNN packages built using Keras for serving models.
+CNN packages built with the KerasClassifier for model deployment.
