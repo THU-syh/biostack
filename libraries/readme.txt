@@ -1,1 +1,1 @@
-A compilation of open source libraries referenced towards building the framework.
+A compilation of open source libraries built by developers to aid in research.

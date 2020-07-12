@@ -1,1 +1,1 @@
-CNN packages built with the KerasClassifier for model deployment.
+CNN packages built with using KerasClassifier for rapid prototyping endeavors.
