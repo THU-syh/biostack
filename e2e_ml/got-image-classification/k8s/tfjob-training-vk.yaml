@@ -1,0 +1,46 @@
+apiVersion: kubeflow.org/v1beta2
+kind: TFJob
+metadata:
+  name: got-image-training-vk
+  namespace: default
+spec:
+  tfReplicaSpecs:
+    Worker:
+      replicas: 1
+      template:
+        spec:
+          containers:
+          - name: tensorflow
+            image: chzbrgr71/got-image-training:2.00
+            command: ["python","retrain.py"]
+            args:
+              - "--bottleneck_dir=/tmp/tensorflow/bottlenecks"
+              - "--model_dir=/tmp/tensorflow/inception"
+              - "--summaries_dir=/tf-output"
+              - "--output_graph=/tf-output"
+              - "--output_labels=/tf-output"
+              - "--image_dir=/images"
+              - "--saved_model_dir=/tf-output"       
+            volumeMounts:
+            - mountPath: /tf-output
+              name: azure-files
+            env:
+            - name: KUBE_POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name             
+          volumes:
+            - name: azure-files
+              azureFile:
+                secretName: azure-file-secret
+                shareName: aksshare2
+                readOnly: false
+          nodeSelector: # for VK
+            kubernetes.io/role: agent
+            beta.kubernetes.io/os: linux
+            type: virtual-kubelet
+          tolerations: # for VK
+          - key: virtual-kubelet.io/provider
+            operator: Exists
+          - key: azure.com/aci
+            effect: NoSchedule                 

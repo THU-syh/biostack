@@ -1,0 +1,29 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: got-image-preprocess-job
+spec:
+  template:
+    metadata:
+    spec:
+      containers:
+      - name: got-image-preprocess-job
+        image: briaracr.azurecr.io/chzbrgr71/got-image-preprocess:1.63
+        args:                
+          - "--bottleneck_dir=/tf-output/bottlenecks"
+          - "--image_dir=/images"
+        volumeMounts:
+        - mountPath: /tf-output
+          name: azure-files
+        env:
+        - name: KUBE_POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name               
+      restartPolicy: Never     
+      volumes:
+        - name: azure-files
+          azureFile:
+            secretName: azure-file-secret
+            shareName: aksshare
+            readOnly: false 
