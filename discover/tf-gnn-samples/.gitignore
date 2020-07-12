@@ -101,6 +101,4 @@ ENV/
 .mypy_cache/
 
 molecules_*.json
-data/
-logs/
-.idea/
+data/*
