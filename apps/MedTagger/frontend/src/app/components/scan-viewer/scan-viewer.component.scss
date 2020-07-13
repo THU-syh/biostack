@@ -1,0 +1,66 @@
+@import '../../styles/app-theme';
+@import '../../styles/mixins';
+
+$canvas-size: 100%;
+
+.marker {
+    &--container {
+        position: relative;
+        height: 100%;
+    }
+    &--scan {
+        position: absolute;
+        max-width: $canvas-size;
+        max-height: $canvas-size;
+        user-select: none;
+        background-color: color('black');
+    }
+    &--canvas {
+        position: absolute;
+        user-select: none;
+    }
+    &--slider {
+        position: absolute;
+        right: 0;
+        height: $canvas-size;
+
+        &.zoom {
+            right: 18px;
+            top: 3px;
+            bottom: 18px;
+            height: auto;
+        }
+    }
+    &--spinner {
+        &-box {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+}
+
+// pretty neat workaround to always show slider thumb and modified styles
+::ng-deep {
+    .mat-slider-thumb-label {
+        transform: rotate(-45deg) !important;
+        border-radius: 50% 50% 0 !important;
+    }
+
+    .mat-slider-thumb {
+        transform: scale(0) !important;
+    }
+
+    .mat-slider-thumb-label-text {
+        opacity: 1 !important;
+    }
+
+    .mat-slider-track-background {
+      background-color: whitesmoke !important;
+    }
+}

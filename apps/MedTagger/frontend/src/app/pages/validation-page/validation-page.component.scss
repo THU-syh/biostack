@@ -1,0 +1,28 @@
+@import '../../components/scan-viewer/scan-viewer.component.scss';
+
+button {
+    position: relative;
+    margin: 1%;
+}
+
+.validation-page {
+    margin: 10px auto;
+}
+
+.canvasInterface {
+    position: relative;
+    margin: 0 auto;
+    width: $canvas-size;
+}
+
+.button-row {
+    position: relative;
+    top: $canvas-size;
+    text-align: center;
+}
+
+.labeling-time-info {
+    top: calc($canvas-size + 10px);
+    position: relative;
+    text-align: center;
+}

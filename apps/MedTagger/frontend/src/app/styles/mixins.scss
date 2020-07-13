@@ -1,0 +1,123 @@
+@import '~@angular/material/theming';
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+@import "variables";
+
+@mixin size($width, $height: $width) {
+    width: $width;
+    height: $height;
+}
+
+@mixin keyframes($name) {
+    @-webkit-keyframes #{$name}{
+        @content
+    }
+    @-moz-keyframes #{$name}{
+        @content
+    }
+    @-ms-keyframes #{$name}{
+        @content
+    }
+    @keyframes #{$name}{
+        @content
+    }
+}
+
+@mixin position($position, $args) {
+    position: $position;
+    @each $o in top, right, bottom, left {
+        $i: index($args, $o);
+        @if $i and $i + 1 <= length($args) and type-of(nth($args, $i + 1)) == number {
+            #{$o}: nth($args, $i + 1)
+        }
+    }
+}
+
+@mixin absolute($args) {
+    @include position(absolute, $args);
+}
+
+@mixin fixed($args) {
+    @include position(fixed, $args);
+}
+
+@mixin relative($args) {
+    @include position(relative, $args);
+}
+
+$breakpoints: ('small': (min-width: 320px), 'medium': (min-width: 768px), 'large': (min-width: 1440px));
+
+@mixin respond-to($breakpoint) {
+    $raw-query: map-get($breakpoints, $breakpoint);
+    @if $raw-query {
+        $query: if(type-of($raw-query) == 'string', unquote($raw-query), inspect($raw-query)) ;
+        @media #{$query}{
+            @content
+        }
+    } @else {
+        @error 'No value found for `#{$breakpoint}`. ';
+    }
+}
+
+@mixin prefix($property, $value, $vendors: webkit moz ms o) {
+    @if $vendors {
+        @each $vendor in $vendors {
+            #{"-" + $vendor + "-" + $property}: #{$value};
+            #{$property}: #{$value};
+        }
+    }
+}
+
+@mixin transition($values...){
+    @include  prefix(transition, $values)
+}
+
+@mixin transform($value) {
+    @include prefix(transform, $value);
+}
+
+@mixin animation($value) {
+    @include prefix(animation, $value);
+}
+
+@function strip-unit($value) {
+    @return $value / ($value * 0 + 1);
+}
+
+@mixin fluid-type($min-vw, $max-vw, $min-font-size, $max-font-size) {
+    $u1: unit($min-vw);
+    $u2: unit($max-vw);
+    $u3: unit($min-font-size);
+    $u4: unit($max-font-size);
+
+    @if $u1 == $u2 and $u1 == $u3 and $u1 == $u4 {
+        & {
+
+            font-size: $min-font-size;
+            @media screen and (min-width: $min-vw) {
+                font-size: calc(#{$min-font-size} + #{strip-unit($max-font-size - $min-font-size)} * ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}));
+            }
+
+            @media screen and (min-width: $max-vw) {
+                font-size: $max-font-size;
+            }
+        }
+    }
+}
+
+// Hack to remove yellow background from autofill in Chrome
+@mixin remove-autofill(){
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+        transition: background-color 5000s ease-in-out 0s;
+    }
+}
+
+@mixin text-ellipsis(){
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

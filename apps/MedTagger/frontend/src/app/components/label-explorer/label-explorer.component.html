@@ -1,0 +1,68 @@
+<mat-list dense class="label-box">
+    <ng-container *ngIf="!selections.isEmpty()">
+        <ng-container *ngFor="let tag of getTags()">
+            <h4 matSubheader
+                (click)="toggleTagVisibility(tag)"
+                class="label-tag__header">
+                {{ tag.name }}
+                <mat-icon
+                    [class.visible]="!isTagHidden(tag)"
+                    class="label-tag__header-icon">
+                    arrow_drop_down
+                </mat-icon>
+            </h4>
+            <ng-container *ngIf="!isTagHidden(tag)">
+                <h5
+                    *ngIf="getSelectionsForTag(tag).length == 0"
+                    class="label-empty">
+                    {{ 'COMPONENT.LABEL_EXPLORER.NO_LABELS_FOR_TAG' | translate }}
+                </h5>
+                <mat-list-item
+                    *ngFor="let selection of getSelectionsForTag(tag)"
+                    (mouseenter)="selection.hovered=true"
+                    (mouseleave)="selection.hovered=false"
+                    class="label-item__box">
+                    <mat-icon mat-list-icon
+                        class="label-item__tool-icon"
+                        [svgIcon]="getToolIconName(selection.toolName)">
+                    </mat-icon>
+                    <p class="label-item__header" matLine>
+                        {{ 'COMPONENT.LABEL_EXPLORER.SLICE' | translate }} #{{ selection.sliceIndex }}
+                    </p>
+                    <p class="label-item__subheader" matLine>
+                        {{ 'COMPONENT.LABEL_EXPLORER.SELECTION' | translate }} #{{ selection.getId() }}
+                    </p>
+                    <button mat-icon-button
+                        (click)="removeSelection(selection)"
+                        class="hidden-btn"
+                        matTooltip="{{ 'COMPONENT.LABEL_EXPLORER.TOOLTIPS.BTN_REMOVE' | translate }}"
+                        [matTooltipShowDelay]="tooltipShowDelay.value">
+                        <mat-icon class="small-size">delete</mat-icon>
+                    </button>
+                    <button mat-icon-button
+                        [style.visibility]="selection.pinned ? 'visible' : undefined"
+                        (click)="toggleSelectionPinning(selection)"
+                        class="hidden-btn"
+                        matTooltip="{{ 'COMPONENT.LABEL_EXPLORER.TOOLTIPS.BTN_PIN' | translate }}"
+                        [matTooltipShowDelay]="tooltipShowDelay.value">
+                        <mat-icon class="small-svg-size" svgIcon="{{selection.pinned ? 'pin' : 'pin-off'}}"></mat-icon>
+                    </button>
+                    <button mat-icon-button
+                        (click)="toggleSelectionVisibility(selection)"
+                        matTooltip="{{ 'COMPONENT.LABEL_EXPLORER.TOOLTIPS.BTN_VISIBLE' | translate }}"
+                        [matTooltipShowDelay]="tooltipShowDelay.value">
+                        <mat-icon class="small-size">{{selection.hidden ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                </mat-list-item>
+            </ng-container>
+            <mat-divider></mat-divider>
+        </ng-container>
+    </ng-container>
+    <h5
+        *ngIf="selections.isEmpty()"
+        class="label-empty"
+        data-cy="no-labels-added">
+        {{ 'COMPONENT.LABEL_EXPLORER.NO_LABELS_ADDED' | translate }}<br/>
+        {{ 'COMPONENT.LABEL_EXPLORER.ADD_LABELS' | translate }}
+    </h5>
+</mat-list>

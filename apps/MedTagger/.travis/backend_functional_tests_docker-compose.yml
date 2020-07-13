@@ -1,0 +1,31 @@
+version: '3'
+services:
+  cassandra:
+    image: cassandra
+    ports:
+      - 52001:9042
+
+  rabbitmq:
+    image: rabbitmq:management
+
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_DB: medtagger
+      POSTGRES_USER: medtagger_user
+      POSTGRES_PASSWORD: MedTa99er!
+    ports:
+      - 52002:5432
+
+  medtagger_backend_functional_tests:
+    image: medtagger/backend_functional_tests
+    env_file:
+      - ../backend/docker/backend.env
+    build:
+      context: ../backend
+      dockerfile: docker/Dockerfile_rest
+      args:
+        - CASS_DRIVER_NO_CYTHON=1
+        - CASS_DRIVER_NO_EXTENSIONS=1
+    command: /bin/bash -c "make install_dev_packages && make functional_tests_docker"
+

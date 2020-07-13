@@ -1,0 +1,103 @@
+@import "src/app/styles/mixins";
+
+.menu {
+    text-align: center;
+}
+
+.button-row {
+    margin-top: 13em;
+    display: inline-block;
+}
+
+.account {
+    &-button {
+        min-width: 140px;
+        position: relative;
+        border-radius: 5px;
+        transition: background-color 0.2s ease-in, border-radius 0.2s;
+        &.mat-primary {
+            background-color: mat-color($primary, 600);
+        }
+        &__options {
+            display: none;
+            transition: all 0.2s ease-in;
+        }
+        &.active {
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            background-color: mat-color($primary, 500);
+            .account-button {
+                &__options {
+                    @include mat-elevation(6);
+                    position: absolute;
+                    top: 100%;
+                    right: 0;
+                    display: flex;
+                    flex-direction: column;
+                    width: 100%;
+                    padding: 1em 0;
+                    border-bottom-left-radius: 5px;
+                    border-bottom-right-radius: 5px;
+                    background-color: color('white');
+                    color: color('black');
+                }
+                &__link{
+                    display: flex;
+                    align-items: center;
+                    padding: 0.5em 2em;
+                    color: color('black');
+                    text-decoration: none;
+                    &:hover {
+                        background-color: gray("200");
+                    }
+                }
+            }
+        }
+    }
+}
+
+.home {
+    &-upload, &-tasks {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        margin: 1em 0;
+        &__desc {
+            flex-basis: 100%;
+            padding-bottom: 1em;
+            color: color('black');
+            text-transform: uppercase;
+        }
+    }
+    &-welcome {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        &__main {
+            flex-basis: 100%;
+            color: color('black', high);
+            font-weight: 400;
+        }
+        &__desc {
+            color: color('black', medium);
+            font-weight: 300;
+        }
+        &__divider {
+            display: block;
+            flex: 1;
+        }
+    }
+    &-upload {
+        &__button.mat-accent {
+            @include mat-elevation-transition();
+            color: color('white');
+            &:hover {
+                @include mat-elevation(3);
+            }
+        }
+        &__icon {
+            color: color('white');
+        }
+    }
+}

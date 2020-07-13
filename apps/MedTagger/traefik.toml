@@ -1,0 +1,24 @@
+defaultEntryPoints = ["http", "https", "ws", "wss"]
+
+[traefikLog]
+filePath = "/var/traefik/traefik.log"
+
+[accessLog]
+logLevel = "INFO"
+
+[api]
+dashboard = true
+debug = true
+address = ":7128"
+
+[docker]
+endpoint = "unix:///var/run/docker.sock"
+domain = "docker.localhost"
+watch = true
+
+[entryPoints]
+  [entryPoints.http]
+  address = ":80"
+
+  [entryPoints.https]
+  address = ":443"

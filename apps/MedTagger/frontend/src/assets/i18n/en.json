@@ -1,0 +1,328 @@
+{
+    "APP_NAME": "MedTagger",
+    "HOME": {
+        "DROPDOWN": {
+            "SETTINGS": "Settings",
+            "LOGOUT": "Log out"
+        },
+        "HEADER": {
+            "GREETING": "Hello",
+            "DESCRIPTION": "MedTagger Home Page"
+        },
+        "ACTIONS": {
+            "UPLOAD": {
+                "LABEL": "Upload new scans",
+                "BUTTON": "Start uploading new scans"
+            },
+            "LABELING": "Start labeling"
+        }
+    },
+    "LOGIN": {
+        "HEADER": {
+            "TITLE": "MedTagger",
+            "DESCRIPTION": "Open Source platform for aggregation and annotation of medical images powered by crowdsourcing."
+        },
+        "ACTIONS": {
+            "SIGN_IN": "Sign in",
+            "SIGN_UP": "Sign up"
+        },
+        "FORM": {
+            "GREETING": "Hello!",
+            "EMAIL": "Email",
+            "PASSWORD": "Password",
+            "CONFIRM_PASSWORD": "Confirm password",
+            "FIRST_NAME": "First name",
+            "LAST_NAME": "Last name",
+            "DESCRIPTION": {
+                "SIGN_IN": "Good to see you back! Log in and continue your work.",
+                "SIGN_UP": "Start labeling with MedTagger today. It is easy! Just take your time and fill this registration form and you are ready to go. "
+            }
+        },
+        "PLACEHOLDER": {
+            "EMAIL": "Insert your email.",
+            "PASSWORD": "Insert your password.",
+            "CONFIRM_PASSWORD": "Re-enter your password.",
+            "FIRST_NAME": "Insert your name.",
+            "LAST_NAME": "Insert your surname."
+        }
+    },
+    "MARKER": {
+        "SCREEN_INFO": "Please use bigger screen to start labeling.",
+        "ZOOM_INFO": "Use mouse wheel button click to drag zoomed image.",
+        "LABEL_SEND_INFO": "Label has been sent!",
+        "SCAN_LOADED_INFO": "New scan has been loaded!",
+        "ACTIVE_TAG_PLACEHOLDER": "Active tag",
+        "STATUS_BAR": {
+            "SCAN": "Scan",
+            "LABELLING_TIME": "Labelling time",
+            "STATUS": "Status"
+        },
+        "DIALOG": {
+            "NO_TAGS": {
+                "TITLE": "There are no tags assigned to this task!",
+                "CONTENT": "Please try another task!",
+                "BUTTON": "Go back"
+            },
+            "NO_TASK": {
+                "TITLE": "You did not choose task properly!",
+                "CONTENT": "Please choose it again!",
+                "BUTTON": "Go back"
+            },
+            "NO_SCANS": {
+                "TITLE": "Nothing to do here!",
+                "CONTENT": "No more Scans available for you in this dataset!",
+                "BUTTON": "Go back"
+            },
+            "SEND_ERROR": {
+                "TITLE": "Error",
+                "CONTENT": "Cannot send selection",
+                "BUTTON": "Ok"
+            },
+            "EMPTY_LABEL": {
+                "TITLE": "You are trying to send empty label",
+                "CONTENT": "Are you sure that there are no interesting objects to tag in the whole scan?",
+                "BUTTON_CONFIRM": "Yes, send empty label.",
+                "BUTTON_CANCEL": "No, take me back to labeling."
+            },
+            "SINGLE_SELECTION": {
+                "TITLE": "You are trying to send single selection",
+                "CONTENT": "Remember you should create 3D selection. Use scroll wheel or arrow buttons to change slices and select objects there.",
+                "BUTTON_CONFIRM": "Send single selection.",
+                "BUTTON_CANCEL": "Take me back to labeling."
+            },
+            "SINGLE_TAG": {
+                "TITLE": "You are trying to send incomplete selections",
+                "CONTENT": "There are no selections for some of the tags. Are you sure that there are no interesting objects to select for other tags?",
+                "BUTTON_CONFIRM": "Send current selections.",
+                "BUTTON_CANCEL": "Take me back to labeling."
+            },
+            "LABEL_COMMENT": {
+                "TITLE": "Add comment to your label (optional)",
+                "BUTTON_SAVE": "Save comment",
+                "BUTTON_ADD": "Add comment"
+            }
+        },
+        "HEADER": {
+            "TOOLS": "Tools",
+            "TOOL_ACTIONS": "Tool actions",
+            "LABELS": "Labels"
+        },
+        "TOOL_ACTIONS": {
+            "BRUSH": {
+                "BRUSH": "Brush",
+                "ERASER": "Eraser"
+            }
+        },
+        "NAVBAR": {
+            "ZOOM": {
+                "TITLE": "Image Window",
+                "SUBTITLE": "Correct image brightness and contrast by tuning parameters below",
+                "WINDOW_WIDTH": "Window width",
+                "WINDOW_CENTER": "Window center",
+                "DEFAULT": "Reset to default"
+            },
+            "COMMENT": {
+                "ADD": "Add comment",
+                "MODIFY": "Modify existing comment"
+            },
+            "BUTTON": {
+                "SKIP": "Skip scan",
+                "SEND": "Send label",
+                "NO_TAG": "Nothing to tag",
+                "TASK_DESCRIPTION": "Task description"
+            },
+            "DESCRIPTION": {
+                "TITLE": "Task description",
+                "SUBTITLE": "Information about the task and selections",
+                "CLOSE": "Close"
+            }
+        },
+        "TOOLTIPS": {
+            "RECT_TOOL": "Rectangle tool. Use it to select rectangular region of interest by dragging mouse over given image part.",
+            "BRUSH_TOOL": "Brush tool. Mark interesting objects on image using freehand technique.",
+            "POINT_TOOL": "Point tool. Add point selection by clicking on displayed image.",
+            "CHAIN_TOOL": "Polyline tool. Add another vertices to image and form polygon or polyline.",
+            "IMG_WINDOW": "Contrast window. Manipulate window parameters to brighten/darken image or add contrast.",
+            "ZOOM_IN": "Zoom in by a factor x2. Navigate on the zoomed image using mouse scroll button drag.",
+            "ZOOM_OUT": "Zoom out by a factor x2. Navigate on the zoomed image using mouse scroll button drag.",
+            "COMMENT": "Add text label to created selection. Your text will be send to platform along the graphic selection.",
+            "SKIP_SCAN": "Request another image to tag, leaving current for future analysis.",
+            "NO_TAG": "Send empty selection. Use this button where there are no task bound objects to tag on all slices of scan.",
+            "SEND_SCAN": "Send selections from all slices of current scan."
+        }
+    },
+    "SETTINGS": {
+        "ACCOUNT": {
+            "TITLE": "Account settings",
+            "SUBTITLE": "Change your account data",
+            "SAVE": "Save"
+        },
+        "USERS": {
+            "TITLE": "Users",
+            "SUBTITLE": "Browse users and change their's privilages",
+            "DOCTOR_ROLE": "Doctor role"
+        },
+        "PLACEHOLDER": {
+            "EMAIL": "E-mail",
+            "FIRST_NAME": "First name",
+            "LAST_NAME": "Last name"
+        },
+        "INFO": {
+            "DISMISS": "Dismiss",
+            "USER_DATA_UPDATED": "User data has been updated.",
+            "USER_VALIDATION_FAILED": "User data has not been updated due to a validation failure.",
+            "INCORRECT_DATA": "Incorrect form data!"
+        },
+        "VALIDATION": {
+            "FIRST_NAME": "First name is required!",
+            "LAST_NAME": "Last name is required!",
+            "EMAIL_REQUIRED": "E-mail address is required!",
+            "INCORRECt_EMAIL": "Incorrect e-mail address",
+            "PASSWORD": "Password is required!",
+            "PASSWORD_CONFIRM": "Password confirmation is required!"
+        }
+    },
+    "TUTORIAL": {
+        "PROCEED": "Proceed to home page",
+        "DONT_SHOW_AGAIN": "Do not show this tutorial again"
+    },
+    "UPLOAD": {
+        "TIP": "Tip!",
+        "PREFEDINED_LABELS": "Predefined Labels",
+        "BUTTON": {
+            "SELECT": "Select",
+            "UPLOAD": "Upload!"
+        },
+        "DATASET": {
+            "LABEL": "Select Dataset",
+            "TITLE": "Select Dataset",
+            "PLACEHOLDER": "Dataset"
+        },
+        "UPLOAD_MODE": {
+            "LABEL": "Select Upload Mode",
+            "SINGLE": {
+                "TITLE": "Single 3D Scan",
+                "DESCRIPTION": "Select this option if you want to upload a single 3D Scan."
+            },
+            "MULTIPLE": {
+                "TITLE": "Multiple 3D Scans",
+                "DESCRIPTION": "Select this option if you want to upload multiple 3D Scans."
+            }
+        },
+        "SELECT_SCAN": {
+            "SINGLE": {
+                "LABEL": "Select Scan",
+                "BEFORE_SELECTION": {
+                    "TITLE": "Single 3D Scan",
+                    "DESCRIPTION": "Go to the directory containing CT Scan and select all DICOM files (*.dcm).",
+                    "SIZE_LIMIT": "Single file size limit",
+                    "WARNING": "Not all of your files will be uploaded!\nSome of them may be corrupted or incompatible with MedTagger."
+                },
+                "AFTER_SELECTION": {
+                    "TITLE": "Selected Scans",
+                    "DESCRIPTION": "You can also specify Predefined Label which will be shown initially\non the Labeling Page. To do so, send \"TASK_KEY.json\" file together with your DICOM files."
+                }
+            },
+            "MULTIPLE": {
+                "LABEL": "Select Scans",
+                "BEFORE_SELECTION": {
+                    "TITLE": "Multiple 3D Scans",
+                    "DESCRIPTION": "Select parent directory that contains subdirectories with CT Scans.",
+                    "SIZE_LIMIT": "Single file size limit",
+                    "WARNING": "Not all of your files will be uploaded!\nSome of them may be corrupted or incompatible with MedTagger."
+                },
+                "AFTER_SELECTION": {
+                    "TITLE": "Selected Scans",
+                    "DESCRIPTION": "You can also specify Predefined Label which will be shown initially\non the Labeling Page. To do so, send \"TASK_KEY.json\" file together with your DICOM files.",
+                    "PREFEDINED_LABELS": "Predefined Labels"
+                }
+            }
+        },
+        "UPLOAD_STEP": {
+            "LABEL": "Upload",
+            "TITLE": {
+                "SINGLE": "Uploading Scan in progress",
+                "MULTIPLE": "Uploading Scans in progress"
+            },
+            "DICOMS": "DICOMs",
+            "STATUS": {
+                "UPLOADING": "UPLOADING",
+                "WAITING": "WAITING FOR PROCESSING",
+                "PROCESSING": "PROCESSING",
+                "ERROR": "ERROR",
+                "AVAILABLE": "AVAILABLE",
+                "QUEUED": "QUEUED"
+            }
+        },
+        "SUMMARY": {
+            "LABEL": "Summary",
+            "TITLE": "Upload Summary",
+            "DESCRITPION": "Upload completed sucessfully!\nAll of your scans are now available for labeling.",
+            "WARNING": "There were some issues with uploading your scans!\nYour files may be corrupted or incompatible with MedTagger.",
+            "ERROR": "None of your scans were uploaded properly!\nYour files may be corrupted or incompatible with MedTagger.",
+            "SCANS_ISSUES": "Scans with issues",
+            "ACTION": {
+                "SELECT_ALL": "Select all",
+                "DESELECT_ALL": "Deselect all",
+                "UPLOAD_MORE": "Upload more Scans",
+                "UPLOAD_SELECTED": "Upload selected Scans again"
+            }
+        }
+    },
+    "VALIDATION": {
+        "LABELING_TIME": "Labeling time",
+        "BUTTON": {
+            "VALID": "Valid",
+            "INVALID": "Invalid"
+        }
+    },
+    "COMPONENT": {
+        "LABEL_EXPLORER": {
+            "NO_LABELS_FOR_TAG" : "There are no labels for this tag.",
+            "NO_LABELS_ADDED": "No labels have been added so far.",
+            "ADD_LABELS": "Add new labels using available tools.",
+            "SLICE": "Slice",
+            "SELECTION": "Selection",
+            "TOOLTIPS": {
+                "BTN_REMOVE": "Remove this selection. This operation will permamently delete selection, use carefully.",
+                "BTN_PIN": "Pin selection to have it on view when changing slices of scan.",
+                "BTN_VISIBLE": "Toggle visibility of this selection on current slice."
+            }
+        },
+        "MARKER": {
+            "MESSAGE": {
+                "SELECT_TAG": "Please select Tag and Tool to start labeling.",
+                "SELECT_TOOL": "Please select Tool to start labeling."
+            }
+        },
+        "TASK_EXPLORER": {
+            "ERROR_MESSAGE": "There was an error while downloading tasks",
+            "CLOSE_BUTTON": "Close"
+        },
+        "UPLOAD_SELECTOR": {
+            "SELECT_IMAGES": "Select DICOM images",
+            "SELECT_DIR": "Select directory with Scans",
+            "SELECTED": "Selected",
+            "SCANS": "Scans",
+            "DICOM_IMAGES": "DICOM images"
+        }
+    },
+    "SERVICE": {
+        "DIALOG": {
+            "OK": "Ok",
+            "SUBMIT": "Submit"
+        }
+    },
+    "OPERATION": {
+        "SENDING_SELECTION": "Sending selection...",
+        "LABELLING": "Selecting...",
+        "DOWNLOADING_SLICES": "Downloading slices...",
+        "DOWNLOADING_SCAN": "Downloading scan...",
+        "WAITING": "Waiting for user",
+        "DOWNLOADING_ERROR": "Downloading error!",
+        "DRAG_TO_SELECT": "Use mouse drag to create labels",
+        "CLICK_TO_SELECT": "Use left mouse click to create labels",
+        "CHOOSE_TAG": "Choose tag.",
+        "CHOOSE_TOOL": "Choose tool." 
+    }
+}

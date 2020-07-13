@@ -1,0 +1,10 @@
+requirements:
+  - backend/requirements.txt:
+      update: all
+      pin: True
+  - backend/requirements.dev.txt:
+      update: all
+      pin: True
+
+pr_prefix: "[Backend Dependencies Update]"
+label_prs: "Under Review ❗️"

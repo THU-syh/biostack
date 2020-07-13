@@ -1,0 +1,79 @@
+@import "../../styles/mixins";
+
+// Workaround for fixing dense icons
+.mat-list[dense] .mat-list-item .mat-list-icon {
+  @include size(24px);
+  display: flex;
+  font-size: 24px;
+}
+
+.mat-icon{
+  &.small-size {
+    @include size(20px);
+    font-size: 20px;
+    line-height: 20px;
+  }
+  &.small-svg-size{
+    transform: scale(0.7);
+    vertical-align: middle !important;
+  }
+}
+
+.label {
+  &-box {
+    max-height: 100%;
+    overflow-y: auto;
+  }
+
+  &-empty {
+    padding: 0.5em;
+    color: color('black', high);
+    font-weight: lighter;
+    text-align: center;
+  }
+
+  &-tag__header {
+    cursor: pointer;
+    user-select: none;
+
+    &-icon {
+      transition: all 0.2s;
+
+      &.visible {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  &-item {
+    &__box {
+      user-select: none;
+
+      .hidden-btn {
+        visibility: hidden;
+      }
+
+      &:hover {
+        background-color: color('black', low);
+
+        .hidden-btn {
+            visibility: visible;
+        }
+      }
+    }
+
+    &__header {
+      font-size: 1.2em;
+      color: color('black', high);
+    }
+
+    &__subheader {
+      font-size: 0.8em;
+      color: color('black', medium);
+    }
+
+    &__tool-icon {
+      color: color('black', medium);
+    }
+  }
+}

@@ -1,0 +1,77 @@
+*.py[cod]
+
+# C extensions
+*.so
+
+# Packages
+*.egg
+*.egg-info
+eggs
+parts
+bin
+var
+sdist
+develop-eggs
+.installed.cfg
+lib
+lib64
+dist/
+
+# Installer logs
+pip-log.txt
+
+# Mac OSX
+.DS_Store
+
+# Unit test / coverage reports
+.coverage
+.tox
+nosetests.xml
+.cache/
+.pytest_cache/
+pytest.ini
+
+# si
+
+# Mr Developer
+.mr.developer.cfg
+.project
+.pydevproject
+*.sublime-*
+dev/
+.vagrant/
+htmlcov/
+provision/roles/
+.env
+*.ipynb
+.vscode/
+
+# Complexity
+output/*.html
+output/*/index.html
+
+# Sphinx/MkDocs
+docs/_build/
+site/
+
+# Flask
+instance
+
+# Node.js
+node_modules/
+_book/
+
+# Textmate
+.tm_properties
+
+# Linters
+pylintrc
+
+# Other
+/local
+scripts/local
+*sqlite
+
+# Emacs (Just so I don't have to see them green in Atom ;-)
+*~
+*#

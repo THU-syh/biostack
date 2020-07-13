@@ -1,0 +1,33 @@
+<!-- TEMPLATE TO ALLOW USER TO INPUT GENOME DATA IN FRONT PAGE FOR ANALYSIS -->
+
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/main.css') }}">
+
+<form method="POST">
+    <label for="proc01">Count Nucleotides in DNA.</label>
+    <input id="proc01" type="text" placeholder="Enter DNA sequence here (ACGT)." class="user-input-box" name="proc01">
+    <input type="submit" name="proc" value="Get Nucleotide Count">
+</form>
+
+<form method="POST">
+    <label for="proc02">Transcribe DNA into RNA.</label>
+    <input id="proc02" type="text" placeholder="Enter DNA sequence here (ACGT)." class="user-input-box" name="proc02">
+    <input type="submit" name="proc" value="Convert to RNA">
+</form>
+
+<form method="POST">
+    <label for="proc03">Produce DNA Reverse Complement.</label>
+    <input id="proc03" type="text" placeholder="Enter DNA sequence here (ACGT)." class="user-input-box" name="proc03">
+    <input type="submit" name="proc" value="Generate Reverse Complement">
+</form>
+
+<form method="POST">
+    <label for="proc04">Calculate GC-Content of DNA.</label>
+    <input id="proc04" type="text" placeholder="Enter DNA sequence here (ACGT)." class="user-input-box" name="proc04">
+    <input type="submit" name="proc" value="Determine GC Content">
+</form>
+
+<form method="POST">
+    <label for="proc05">Translate DNA into Protein Chain.</label>
+    <input id="proc05" type="text" placeholder="Enter DNA sequence here (ACGT)." class="user-input-box" name="proc05">
+    <input type="submit" name="proc" value="Translate to Protein Chain">
+</form>

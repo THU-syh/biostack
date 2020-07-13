@@ -1,0 +1,1 @@
+"""Module defining whole application."""

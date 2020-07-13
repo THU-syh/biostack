@@ -1,0 +1,121 @@
+<div class="container-fluid">
+    <div class="row">
+        <header class="header col-sm-12 col-lg-4">
+            <div class="header-logo">
+                <img src="assets/icon/medtagger_logo.svg"/>
+                <h1>{{ 'LOGIN.HEADER.TITLE' | translate }}</h1>
+            </div>
+            <h3 class="header-desc">{{ 'LOGIN.HEADER.DESCRIPTION' | translate }}</h3>
+        </header>
+        <!-- This is a helper for fixed header-description-->
+        <div class="d-none d-lg-block col-lg-4"></div>
+        <div class="col-sm-12 col-lg-8 action">
+            <div class="action-buttons">
+                <h4 [ngClass]="{active: loginPageMode == LoginPageMode.LOG_IN}"
+                    (click)="changePageMode(LoginPageMode.LOG_IN)">
+                    <a routerLink="/login" data-cy="login-toggle">{{ 'LOGIN.ACTIONS.SIGN_IN' | translate }}</a>
+                </h4>
+                <h4 [ngClass]="{active: loginPageMode == LoginPageMode.REGISTER}"
+                    (click)="changePageMode(LoginPageMode.REGISTER)">
+                    <a routerLink="/login">{{ 'LOGIN.ACTIONS.SIGN_UP' | translate }}</a>
+                </h4>
+            </div>
+            <main *ngIf="loginPageMode == LoginPageMode.LOG_IN" class="action-content mx-auto">
+                <div class="action-welcoming">
+                    <h3 class="action-welcoming__header">{{ 'LOGIN.FORM.GREETING' | translate }}</h3>
+                    <h4 class="action-welcoming__description">{{ 'LOGIN.FORM.DESCRIPTION.SIGN_IN' | translate }}</h4>
+                </div>
+                <form class="action-form" [formGroup]="loginForm">
+                    <mat-form-field appearance="fill">
+                        <mat-label>{{ 'LOGIN.FORM.EMAIL' | translate }}</mat-label>
+                        <input matInput type="text" placeholder="{{ 'LOGIN.PLACEHOLDER.EMAIL' | translate }}"
+                               id="email" formControlName="email" required data-cy="login-email">
+                        <mat-error *ngIf="loginForm.get('email').invalid">{{ getEmailErrorMessage() }}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="fill">
+                        <mat-label>{{ 'LOGIN.FORM.PASSWORD' | translate }}</mat-label>
+                        <input matInput type="{{loginPasswordVisible && 'text' || 'password'}}"
+                               placeholder="{{ 'LOGIN.PLACEHOLDER.PASSWORD' | translate }}"
+                               id="password" formControlName="password" required data-cy="login-password">
+                        <mat-error *ngIf="loginForm.get('password').invalid">{{ getPasswordErrorMessage() }}</mat-error>
+                        <mat-icon matSuffix (click)="changeVisibility()">visibility</mat-icon>
+                    </mat-form-field>
+                    <div class="action-form__submit">
+                        <button *ngIf="!loggingInProgress" mat-raised-button color="primary" (click)="logIn()"
+                                [disabled]="loginForm.invalid" data-cy="submit">
+                            {{ 'LOGIN.ACTIONS.SIGN_IN' | translate }}
+                        </button>
+                        <mat-progress-spinner *ngIf="loggingInProgress" class="login-spinner" mode="indeterminate"
+                                              [diameter]="36" strokeWidth="2"></mat-progress-spinner>
+                    </div>
+                    <div *ngIf="loggingInError !== undefined" class="action-form__error">
+                        <mat-icon color="warn">error</mat-icon>
+                        <mat-error>{{ loggingInError }}</mat-error>
+                    </div>
+                </form>
+            </main>
+
+
+            <main *ngIf="loginPageMode == LoginPageMode.REGISTER" class="action-content mx-auto">
+                <div class="action-welcoming">
+                    <h3 class="action-welcoming__header">{{ 'LOGIN.FORM.GREETING' | translate }}</h3>
+                    <h4 class="action-welcoming__description">{{ 'LOGIN.FORM.DESCRIPTION.SIGN_UP' | translate }}</h4>
+                </div>
+                <form class="action-form" [formGroup]="registerForm">
+                    <div class="row">
+                        <mat-form-field appearance="fill" class="col-12 col-lg-6">
+                            <mat-label>{{ 'LOGIN.FORM.FIRST_NAME' | translate }}</mat-label>
+                            <input matInput type="text" placeholder="{{ 'LOGIN.PLACEHOLDER.FIRST_NAME' | translate }}"
+                                   id="firstName" formControlName="firstName" required>
+                            <mat-error *ngIf="registerForm.get('firstName').invalid">{{ getFirstNameErrorMessage() }}
+                            </mat-error>
+                        </mat-form-field>
+                        <mat-form-field appearance="fill" class="col-12 col-lg-6">
+                            <mat-label>{{ 'LOGIN.FORM.LAST_NAME' | translate }}</mat-label>
+                            <input matInput type="text" placeholder="{{ 'LOGIN.PLACEHOLDER.LAST_NAME' | translate }}"
+                                   id="lastName" formControlName="lastName" required>
+                            <mat-error *ngIf="registerForm.get('lastName').invalid">{{ getLastNameErrorMessage() }}
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <mat-form-field appearance="fill">
+                        <mat-label>{{ 'LOGIN.FORM.EMAIL' | translate }}</mat-label>
+                        <input matInput type="text" placeholder="{{ 'LOGIN.PLACEHOLDER.EMAIL' | translate }}"
+                               id="email" formControlName="email" required>
+                        <mat-error *ngIf="registerForm.get('email').invalid">{{ getEmailErrorMessage() }}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="fill">
+                        <mat-label>{{ 'LOGIN.FORM.PASSWORD' | translate }}</mat-label>
+                        <input matInput type="{{registerPasswordVisible && 'text' || 'password'}}"
+                               placeholder="{{ 'LOGIN.PLACEHOLDER.PASSWORD' | translate }}"
+                               id="password" formControlName="password" required>
+                        <mat-error *ngIf="registerForm.get('password').invalid">{{ getPasswordErrorMessage() }}
+                        </mat-error>
+                        <mat-icon matSuffix (click)="changeVisibility()">visibility</mat-icon>
+                    </mat-form-field>
+                    <mat-form-field appearance="fill">
+                        <mat-label>{{ 'LOGIN.FORM.CONFIRM_PASSWORD' | translate }}</mat-label>
+                        <input matInput type="{{registerPasswordVisible && 'text' || 'password'}}"
+                               placeholder="{{ 'LOGIN.PLACEHOLDER.CONFIRM_PASSWORD' | translate }}"
+                               id="confirmPassword" formControlName="confirmPassword" required>
+                        <mat-error *ngIf="registerForm.get('password').invalid">{{ getConfirmPasswordErrorMessage() }}
+                        </mat-error>
+                        <mat-icon matSuffix (click)="changeVisibility()">visibility</mat-icon>
+                    </mat-form-field>
+                    <div class="action-form__submit">
+                        <button *ngIf="!registrationInProgress" mat-raised-button color="primary" (click)="register()"
+                                [disabled]="registerForm.invalid">
+                                {{ 'LOGIN.ACTIONS.SIGN_UP' | translate }}
+                        </button>
+                        <mat-progress-spinner *ngIf="registrationInProgress" class="login-spinner" mode="indeterminate"
+                                              [diameter]="36" strokeWidth="2"></mat-progress-spinner>
+                    </div>
+                    <div *ngIf="registrationError !== undefined" class="action-form__error">
+                        <mat-icon color="warn">error</mat-icon>
+                        <mat-error>{{ registrationError }}</mat-error>
+                    </div>
+                </form>
+            </main>
+        </div>
+    </div>
+</div>

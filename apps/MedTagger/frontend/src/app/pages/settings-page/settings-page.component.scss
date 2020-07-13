@@ -1,0 +1,29 @@
+@import "src/app/styles/mixins";
+
+.tab-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 2em 0;
+
+    &__card {
+        @include media-breakpoint-up(md) {
+            width: 70%;
+        }
+        width: 90%;
+        margin-bottom: 3em;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    mat-form-field {
+        @include media-breakpoint-up(md) {
+            width: 50%;
+        }
+        display: block;
+        width: 100%;
+    }
+}

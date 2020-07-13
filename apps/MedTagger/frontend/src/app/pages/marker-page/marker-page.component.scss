@@ -1,0 +1,215 @@
+@import "styles/mixins";
+
+$toolbox-width: 300px;
+
+.mat-icon {
+    display: flex;
+}
+
+.mat-chip {
+    cursor: pointer;
+}
+
+::ng-deep .mat-tooltip {
+    font-size: 14px;
+}
+
+.color-window-panel {
+    display: block;
+    position: fixed;
+    z-index: 1;
+    transform:translateY(60%);
+
+    &--card {
+        width: 400px;
+        
+        &__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+
+            .mat-card-header-text {
+                margin: 0 0 0 0;
+            }
+        }
+
+        &__content {
+            display: flex;
+            flex-direction: column;
+
+            mat-slider {
+                width: 300px;
+            }
+
+            mat-divider {
+                margin-top: 10px;
+                margin-bottom: 20px;
+            }
+        }
+
+        &__actions {
+            display: flex;
+            flex-direction: column;
+
+            button {
+                color: white;
+            }
+        }
+    }
+}
+
+
+.task-description-panel {
+    display: block;
+    position: fixed;
+    z-index: 1;
+    transform:translateY(60%);
+    right: 250px;
+    height: 30px;
+
+    &--button {
+        margin-right: 10px;
+    }
+
+    &--card {
+        width: 700px;
+        
+        &__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+
+            .mat-card-header-text {
+                margin: 0 0 0 0;
+            }
+        }
+
+        &__content {
+            display: flex;
+            flex-direction: column;
+
+            &__info {
+                padding-bottom: 20px;
+            }
+
+            &__image_group {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+
+            &__image {
+                width: 320px;
+                padding: 5px 5px 5px 5px;
+            }
+        }
+    }
+}
+
+.marker {
+    @include media-breakpoint-up(md){
+        display: flex;
+    }
+    display: none;
+    width: 100vw;
+    height: calc(100vh - #{$size-height-nav});
+    overflow: hidden;
+
+    &-nav {
+        display: flex;
+        align-items: center;
+        height: 100%;
+
+        &--task-bar {
+            margin-left: 10px;
+            border-right: 1px solid color('white', medium) ;
+        }
+
+        &--actions {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            border-right: 1px solid color('white', medium) ;
+            > * {
+                margin-right: 0.7em;
+            }
+        }
+
+        &--finish {
+            > * {
+                margin: 0 0.5em;
+            }
+        }
+
+        .mat-primary:not([disabled]) {
+            background-color: mat-color($primary, 500);
+        }
+    }
+    &-toolbox {
+        display: flex;
+        width: $toolbox-width;
+        height: inherit;
+        flex-direction: column;
+        background-color: color('card');
+
+        &--status_bar {
+            display: flex;
+            flex-direction: column;
+            background-color: whitesmoke;
+
+            b {
+                padding-right: 5px;
+            }
+        }
+
+        &--header {
+            padding: 0.6em 0.8em;
+            font-size: 1em;
+            font-weight: 500;
+            text-transform: uppercase;
+            color: white;
+            margin: 0px;
+            background-color: mat-color($primary, 800);
+        }
+
+        &--content {
+            padding: 1em 0.3em;
+            flex-shrink: 0;
+            overflow-y: auto;
+
+            &.label-explorer {
+                flex: 1;
+            }
+        }
+
+        &--select {
+            width: 90%;
+        }
+
+        &--buttons {
+            flex-wrap: wrap;
+            display: flex;
+            padding: 0.5em 0.6em;
+            button {
+                margin: 0.3em;
+            }
+        }
+    }
+
+    &-content {
+        background-color: black;
+        display: inline-grid;
+        flex-grow: 1;
+    }
+
+    &-info {
+        @include media-breakpoint-up(md){
+            display: none;
+        }
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100vw;
+        height: calc(100vh - #{$size-height-nav});
+    }
+}
