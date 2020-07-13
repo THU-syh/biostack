@@ -1,1 +1,1 @@
-A series of mini projects and apps collected from developers as a source of inspiration for building original work.
+A series of mini projects meant to offer a source of inspiration for building novel medical applications.
