@@ -1,1 +1,1 @@
-Submit your own apps, projects, libraries, and tools here to offer motivating examples and / or inital startup products.
+Submit apps, projects, libraries, and tools to this worksplace to offer motivating examples for research and / or startup ideas.
