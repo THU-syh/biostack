@@ -1,1 +1,1 @@
-Place your own original apps, projects, libraries, and tools in this directory to serve as motivating examples or inital startup projects.
+Place your own apps, projects, libraries, and tools into this directory to offer motivating examples and / or inital startup products.
