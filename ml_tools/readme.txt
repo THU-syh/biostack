@@ -1,1 +1,1 @@
-Helpful tools for the purpose of scraping data, performing annotations / labeling, and offering GUI services.
+Essential tools for the purposes of data scraping, annotating / labelling, and / or serving GUI-level interfaces.
