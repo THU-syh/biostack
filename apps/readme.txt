@@ -1,1 +1,1 @@
-A series of mini projects and apps built as showcases via Flask, Docker, and / or Streamlit.
+A series of mini projects and apps collected from developers as a source of inspiration for building original work.
