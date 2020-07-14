@@ -1,0 +1,15 @@
+Sphinx>=1.6
+simpleitk
+sphinx-nameko-theme
+sphinx-markdown-tables==0.0.9
+recommonmark==0.4.0
+
+six>=1.10
+nibabel>=2.1.0
+numpy>=1.13.3
+scipy>=0.18
+configparser
+tensorflow==1.15.*
+pandas
+pillow
+blinker

@@ -1,0 +1,18 @@
+{
+ "model": "resnet18",
+ "use_crf": false,
+ "batch_size": 10,
+ "image_size": 768,
+ "patch_size": 256,
+ "crop_size": 224,
+ "lr": 0.001,
+ "momentum": 0.9,
+ "data_path_tumor_train": "/PATCHES_TUMOR_TRAIN/",
+ "data_path_normal_train": "/PATCHES_NORMAL_TRAIN/",
+ "data_path_tumor_valid": "/PATCHES_TUMOR_VALID/",
+ "data_path_normal_valid": "/PATCHES_NORMAL_VALID/",
+ "json_path_train": "NCRF/jsons/train",
+ "json_path_valid": "NCRF/jsons/valid",
+ "epoch": 20,
+ "log_every": 100
+}
