@@ -1,0 +1,19 @@
+[paths]
+source =
+   src/janggu
+   */site-packages/janggu
+
+[run]
+branch = true
+source =
+    janggu
+parallel = true
+
+[report]
+show_missing = true
+precision = 2
+omit =
+    *migrations*
+    src/janggu/cli.py
+    src/janggu/__main__.py
+    src/janggu/janggutrim.py
